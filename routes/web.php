@@ -29,12 +29,4 @@ Route::get('/pacientes', function () {
     return view('pacientes');
 })->middleware(['auth', 'verified'])->name('pacientes');
 
-Route::get('/padecimientos', function () {
-    return view('padecimientos');
-})->middleware(['auth', 'verified'])->name('padecimientos');
-
-Route::get('/sintomas', function () {
-    return view('sintomas');
-})->middleware(['auth', 'verified'])->name('sintomas');
-
 require __DIR__.'/auth.php';
