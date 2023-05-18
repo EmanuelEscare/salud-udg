@@ -1,0 +1,135 @@
+.body{
+    background-color:#347a14fd;
+}
+.body3{
+    background-color:#d7eeccfd;
+}
+.body2{
+    background-color:rgb(177, 230, 142);
+}
+.fondo{
+image-resolution: url("../assents/img/fon.jpeg");
+height: 390px;
+
+
+    background: url("../assents/img/fon.jpeg");
+    background-size: cover;
+    
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+}
+.loginbody 
+{
+    background-image: url("../assents/img/fondo.jpeg");
+
+}
+.letra2{
+font-family: "Coperplate", fantasy;
+
+  }
+  .letra{
+    font-family: Lucida Handwriting, cursive, sans-serif;
+    color:rgb(55, 172, 55)
+  }
+  .letra3{
+    font-family: Lucida Handwriting, cursive, sans-serif;
+    color:rgb(55, 172, 55)
+  }
+.btn1{
+    background-color: rgb(13, 114, 21);
+    color:white;
+    border: 10xp blue;
+
+}
+  .row-container-full{
+    max-width: inherit;
+    width:100%;
+  }
+  .fon-aves{
+    image-resolution: url("../assents/img/aves.jpeg");
+    height:280px;
+    width:auto;
+    
+    
+        background: url("../assents/img/aves.jpeg");
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    .btn-margen{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .popup {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+  }
+  
+  /* pop-up actual */
+  .popup .popuptext {
+      visibility: hidden;
+      width: 160px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -80px;
+  }
+  
+  
+  .boton {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    background-color: rgb(110, 230, 54);
+    padding-left: 20px;
+    padding-right: 25px;
+    padding-bottom: 11px;
+}
+.boton .botontext {
+    visibility: hidden;
+    width: 160px;
+
+
+background-color: rgb(243, 253, 104);
+color: rgb(150, 140, 140);
+text-align: center;
+border-radius: 6px;
+padding: 8px 0;
+position: absolute;
+z-index: 1;
+bottom: 125%;
+left: 50%;
+margin-left: -80px;
+}
+
+.boton .botontext::after {
+content: "";
+position: absolute;
+top: 100%;
+left: 50%;
+margin-left: -5px;
+border-width: 5px;
+border-style: solid;
+border-color: rgb(65, 211, 21);
+}
+.boton:focus > .botontext {
+visibility: visible;
+-webkit-animation: fadeIn 1s;
+animation: fadeIn 1s
+}
+@-webkit-keyframes fadeIn {
+from {opacity: 0;} 
+to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+from {opacity: 0;}
+to {opacity:1 ;}
+}

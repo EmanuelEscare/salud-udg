@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn-space{
+    margin-right: 15px;
+}
+
+.loader {
+    background-color: #082f56;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.loader.hidden {
+    opacity: 0;
+}
+
+.loader-text {
+    font-size: 5rem;
+}
+
+.logo {
+    width: 50px;
+}
+
+.logo-cucea {
+    width: 100px;
+}
+
+.logo-loader {
+    width: 200px;
+}
