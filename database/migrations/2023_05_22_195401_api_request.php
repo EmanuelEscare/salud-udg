@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pruebas', function (Blueprint $table) {
+        Schema::create('api_requests', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->timestamps();
+            $table->json('object');
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pruebas');
+        Schema::dropIfExists('api_requests');
     }
 };

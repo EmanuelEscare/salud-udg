@@ -25,8 +25,13 @@ Route::get('/usuarios', function () {
     return view('usuarios');
 })->middleware(['auth', 'verified'])->name('usuarios');
 
-Route::get('/pacientes', function () {
-    return view('pacientes');
-})->middleware(['auth', 'verified'])->name('pacientes');
+Route::get('/patients', function () {
+    return view('patients');
+})->middleware(['auth', 'verified'])->name('patients');
+
+Route::get('/react/{id}', function ($id) {
+    return view('react')->with('id',$id);
+})->middleware(['auth', 'verified'])->name('react');
+
 
 require __DIR__.'/auth.php';

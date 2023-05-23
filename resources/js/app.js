@@ -11,3 +11,6 @@ import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 
 Alpine.start();
+
+// import './components/Example';
+import './components/Test/index';

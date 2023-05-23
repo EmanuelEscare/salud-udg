@@ -9,7 +9,7 @@ class Usuarios extends Component
 {
     public $usersData;
     public $nowPage = 1;
-    public $pages = 2;
+    public $pages = 10;
     public $confirming;
     public $mesage_notification;
     public $query;

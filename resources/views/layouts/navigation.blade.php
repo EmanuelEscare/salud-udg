@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-decoration-none">
-                    <x-nav-link :href="route('pacientes')" :active="request()->routeIs('pacientes')">
+                    <x-nav-link :href="route('patients')" :active="request()->routeIs('patients')">
                         {{ __('Pacientes') }}
                     </x-nav-link>
                 </div>
