@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { tests } from '../utils/index'
 import ReactDOM from 'react-dom/client'
 import styles from './Test.module.scss'
+import { differenceInYears, parse } from 'date-fns';
 import { resultsService } from '../services/index'
 
 export const Test = (props) => {
@@ -18,6 +19,13 @@ export const Test = (props) => {
 
   const id = Number(props.id)
   const test = tests.find(test => test.id === id)
+
+  const dateString = props.user.birth_date;
+  const date = parse(dateString, 'yyyy-MM-dd', new Date());
+  const currentDate = new Date();
+  const yearsOld = differenceInYears(currentDate, date);
+
+  console.log(props.user)
 
   const handleName = (e) => {
     if (!e.target.value) {
@@ -83,15 +91,16 @@ export const Test = (props) => {
 
     const newResult = {
       data: {
-        name: patientName.value,
-        email: patientEmail.value,
-        age: patientAge.value,
+        user_id: props.user.id,
         score: score,
         testResults: testResults,
         appliedTest: id,
         status: status
       }
     }
+    console.log(newResult)
+    setCanSubmit(false)
+    setEnviado(true)
 
     resultsService.createResult(newResult).then((res) => {
       console.log(res)
@@ -99,8 +108,9 @@ export const Test = (props) => {
       console.error(err)
     })
 
-    setCanSubmit(false)
-    setEnviado(true);
+    setTimeout(() => {
+      window.location.href = props.user ? `/patients/${props.user.id}` : '/patients';
+    }, 1000);
 
     var notificationEvent = new Event('notification');
     window.dispatchEvent(notificationEvent);
@@ -110,13 +120,14 @@ export const Test = (props) => {
   return (
     <section className={styles.test}>
       <h1 className={styles.test_title}>Calificador: {test.name}</h1>
-
+      <br />
       <form className={styles.test_form} onSubmit={handleSubmit}>
         <div className={styles.test_form_input}>
           <label htmlFor='patientName'>Nombre del paciente: </label>
-          <input
+          <input disabled
+            className='form-control form-control-lg'
             type='text'
-            value={patientName.value}
+            value={props.user.name}
             required
             onChange={handleName}
             name='patientName'
@@ -128,9 +139,10 @@ export const Test = (props) => {
         </div>
         <div className={styles.test_form_input}>
           <label htmlFor='patientEmail'>Correo electrónico del paciente: </label>
-          <input
+          <input disabled
+            className='form-control form-control-lg'
             type='text'
-            value={patientEmail.value}
+            value={props.user.email}
             required
             onChange={handleEmail}
             name='patientEmail'
@@ -142,9 +154,10 @@ export const Test = (props) => {
         </div>
         <div className={styles.test_form_input}>
           <label htmlFor='patientAge'>Edad del paciente: </label>
-          <input
+          <input disabled
+            className='form-control form-control-lg'
             type='text'
-            value={patientAge.value}
+            value={yearsOld}
             required onChange={handleAge}
             name='patientAge'
             id='patientAge'
@@ -190,10 +203,11 @@ if (document.getElementById('test')) {
   const elementReact = document.getElementById('test');
   const Index = ReactDOM.createRoot(document.getElementById("test"));
   const idValue = elementReact.getAttribute('data-id');
+  const User = user_data;
 
   Index.render(
     <React.StrictMode>
-      <Test id={idValue} />
+      <Test id={idValue} user={User} />
     </React.StrictMode>
   )
 }

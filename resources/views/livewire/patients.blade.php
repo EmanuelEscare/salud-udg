@@ -15,74 +15,127 @@
                 </span>
             </div>
         </div>
-        <table class="table table-bordered table-hover table-striped mt-5">
-            <thead class="border">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Edad</th>
-                    <th scope="col">Sexo</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Acción</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                @foreach ($patients as $patient)
+        <div class="table-responsive table-padding">
+            <table class="table table-bordered table-hover table-striped mt-5">
+                <thead class="border">
                     <tr>
-                        <th scope="row">{{ $patient->id }}</th>
-                        <td>
-                            {{ $patient->name }}
-                        </td>
-                        <td>
-                            @php
-                                $birth = new DateTime($patient->birth_date);
-                            @endphp
-                            {{ $date->diff($birth)->y }}
-                        </td>
-                        <td class="text-center fs-4">
-                            @if ($patient->sex == 'female')
-                                <i class="fa-solid fa-mars text-info"></i>
-                            @endif
-                            @if ($patient->sex == 'male')
-                                <i class="fa-solid fa-venus text-pink"></i>
-                            @endif
-                            @if ($patient->sex == 'other')
-                                <i class="fa-solid fa-venus-mars text-secondary"></i>
-                            @endif
-                        </td>
-                        <td>
-                            {{ $patient->email }}
-                        </td>
-                        <td>
-                            {{ $patient->phone }}
-                        </td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-lg btn-primary"> Prueba - SCL-90-R
-                                 <i class="fa-solid fa-file-pen"></i></button>
-
-                            <button type="button" class="btn btn-lg btn-warning"> Editar <i
-                                    class="fa-solid fa-pen-to-square"></i></button>
-
-                            @if ($confirming === $patient->id)
-                                <button type="button" wire:click="delete({{ $patient->id }})"
-                                    class="btn btn-lg btn-danger fa-fade">¿Seguro?</button>
-                            @else
-                                <button type="button" wire:click="confirmDelete({{ $patient->id }})"
-                                    class="btn btn-lg btn-danger">Eliminar <i class="fa-solid fa-trash"></i></button>
-                            @endif
-
-                        </td>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Sexo</th>
+                        <th scope="col">Contacto</th>
+                        <th scope="col">Acción</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="table-group-divider">
+                    @foreach ($patients as $patient)
+                        <tr>
+                            <th class="align-middle text-center" scope="row">{{ $patient->id }}</th>
+                            <td class="align-middle text-center">
+                                {{ $patient->name }}
+                            </td>
+                            <td class="align-middle text-center">
+                                @php
+                                    $birth = new DateTime($patient->birth_date);
+                                @endphp
+                                {{ $date->diff($birth)->y }}
+                            </td>
+                            <td class="fs-4 align-middle text-center">
+                                @if ($patient->sex == 'female')
+                                    <i class="fa-solid fa-mars text-info"></i>
+                                @endif
+                                @if ($patient->sex == 'male')
+                                    <i class="fa-solid fa-venus text-pink"></i>
+                                @endif
+                                @if ($patient->sex == 'other')
+                                    <i class="fa-solid fa-venus-mars text-secondary"></i>
+                                @endif
+                            </td>
+                            <td class="align-middle text-center">
+                                <a class="text-decoration-none fw-bold link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="mailto: {{ $patient->email }}">{{ $patient->email }}</a>
+                                <br>
+                                <br>
+                                <a class="text-decoration-none fw-bold link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="tel:+ {{ $patient->phone }}">{{ $patient->phone }}</a>
+                            </td>
+                            <td class="text-center">
+                                <div class="dropdown">
+                                    <button class="btn my-1 btn-primary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Aplicar prueba
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item"
+                                                wire:click="test('1','{{ $patient->id }}')">SCL-90-R</a></li>
+                                        <li><a class="dropdown-item"
+                                                wire:click="test('1','{{ $patient->id }}')">Inventario de Depresión de
+                                                Beck (BDI-2)</a></li>
+                                        <li><a class="dropdown-item" wire:click="test('1','{{ $patient->id }}')">Escala
+                                                de ansiedad de Hamilton</a></li>
+
+                                    </ul>
+                                </div>
+
+                                <button type="button" wire:click="testsPatient({{ $patient->id }})"
+                                    class="btn my-1 btn-secondary"> Pruebas <i class="fa-solid fa-file"></i>
+                                </button>
+
+                                <button type="button" class="btn my-1 btn-warning"> Editar <i
+                                        class="fa-solid fa-pen-to-square"></i></button>
+
+                                @if ($confirming === $patient->id)
+                                    <button type="button" wire:click="delete({{ $patient->id }})"
+                                        class="btn my-1 btn-danger fa-fade">¿Seguro?</button>
+                                @else
+                                    <button type="button" wire:click="confirmDelete({{ $patient->id }})"
+                                        class="btn my-1 btn-danger">Eliminar <i class="fa-solid fa-trash"></i></button>
+                                @endif
+
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
 
         <div class="btn-group mt-3 border" role="group" aria-label="Basic example">
             <button type="button" wire:click="afterPage" class="btn border-end"><i
                     class="fa-solid fa-arrow-left"></i></button>
             <button type="button" wire:click="nextPage" class="btn border-start"><i
                     class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" wire:ignore.self id="openModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            @if ($now_patient)
+                <div class="modal-content border-0 shadow">
+                    <div class="modal-header">
+                        <h3 class="">Pruebas - {{$now_patient->name}}</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-lg-9 m-auto mb-5">
+                            <div class="row border-secondary">
+                                <div class="col-lg-6 py-2 text-center text-nowrap">
+                                    Inventario de Depresión de Beck (BDI-2)
+                                </div>
+                                <div class="col-lg-3 py-2 text-center">
+                                    29/05/2023
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="d-grid gap-2">
+                                    <a class="btn btn-secondary" href=""> Resultados <i class="fa-solid fa-file"></i></a>
+                                    </div>
+                                </div>
+                                <hr class="my-2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -103,6 +156,10 @@
     <script>
         window.addEventListener('notification', event => {
             $("#notification").toast('show');
+        })
+
+        window.addEventListener('openModal', event => {
+            $("#openModal").modal('show');
         })
     </script>
 </div>

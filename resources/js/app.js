@@ -12,5 +12,4 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-// import './components/Example';
-import './components/Test/index';
+import 'components/Test/index';

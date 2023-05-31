@@ -34,7 +34,7 @@
 
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation')
-
+        <div class="py-5"></div>
         <!-- Page Heading -->
         @if (isset($header))
             <header class="bg-white shadow">
@@ -51,6 +51,7 @@
     </div>
     @livewireScripts
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
         window.addEventListener("DOMContentLoaded", function() {

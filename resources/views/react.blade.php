@@ -4,7 +4,11 @@
             <br>
             <div class="border-0 container">
                 <div>
-                    <div id="test" data-id="{{ $id }}"></div>
+                    <div id="test" data-id="{{ $id }}">
+                        <script>
+                            const user_data = @json($user);
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>

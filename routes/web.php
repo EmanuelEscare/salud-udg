@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Patient;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,12 +26,13 @@ Route::get('/usuarios', function () {
     return view('usuarios');
 })->middleware(['auth', 'verified'])->name('usuarios');
 
-Route::get('/patients', function () {
-    return view('patients');
+Route::get('/patients/{patient_id?}', function ($patient_id = null) {
+    return view('patients', ['patient_id' => $patient_id]);
 })->middleware(['auth', 'verified'])->name('patients');
 
-Route::get('/react/{id}', function ($id) {
-    return view('react')->with('id',$id);
+Route::get('/react/{id}/{user_id}', function ($id, $user_id) {
+    $user = Patient::find($user_id);
+    return view('react')->with(['id' => $id, 'user' => $user]);
 })->middleware(['auth', 'verified'])->name('react');
 
 

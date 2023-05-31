@@ -11,51 +11,55 @@
                 </span>
             </div>
         </div>
-        <table class="table table-bordered table-hover table-striped mt-5">
-            <thead class="border">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Rol</th>
-                    <th scope="col">Acción</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                @foreach ($users as $user)
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped mt-5">
+                <thead class="border">
                     <tr>
-                        <th scope="row">{{ $user->id }}</th>
-                        <td>
-                            {{ $user->name }}
-                        </td>
-                        <td>
-                            {{ $user->email }}
-                        </td>
-                        <td class="dropdown text-center">
-                            <button class="btn btn-lg btn-secondary dropdown-toggle text-capitalize" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ __($user->getRoleNames()->first()) }}
-                            </button>
-                            <ul class="dropdown-menu text-center">
-                                <li><a class="dropdown-item" wire:click="changeRole('{{$user->id}}','{{$user->getRoleNames()->first()}}', 'admin')">{{__("Administrador")}}</a></li>
-                                <li><a class="dropdown-item" wire:click="changeRole('{{$user->id}}','{{$user->getRoleNames()->first()}}', 'usuario')">{{__("Usuario")}}</a></li>
-                            </ul>
-                        </td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-lg btn-warning"> Editar <i
-                                    class="fa-solid fa-pen-to-square"></i></button>
-                                    
-                                        @if ($confirming === $user->id)
-                                            <button type="button" wire:click="delete({{ $user->id }})" class="btn btn-lg btn-danger fa-fade">¿Seguro?</button>
-                                        @else
-                                            <button type="button" wire:click="confirmDelete({{ $user->id }})" class="btn btn-lg btn-danger">Eliminar <i class="fa-solid fa-trash"></i></button>
-                                        @endif
-                                    
-                        </td>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Acción</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="table-group-divider">
+                    @foreach ($users as $user)
+                        <tr>
+                            <th class="align-middle" scope="row">{{ $user->id }}</th>
+                            <td class="align-middle">
+                                {{ $user->name }}
+                            </td>
+                            <td class="align-middle">
+                                {{ $user->email }}
+                            </td>
+                            <td class="dropdown text-center">
+                                <button class="btn my-1 btn-secondary dropdown-toggle text-capitalize" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ __($user->getRoleNames()->first()) }}
+                                </button>
+                                <ul class="dropdown-menu text-center">
+                                    <li><a class="dropdown-item" wire:click="changeRole('{{$user->id}}','{{$user->getRoleNames()->first()}}', 'admin')">{{__("Administrador")}}</a></li>
+                                    <li><a class="dropdown-item" wire:click="changeRole('{{$user->id}}','{{$user->getRoleNames()->first()}}', 'usuario')">{{__("Usuario")}}</a></li>
+                                </ul>
+                            </td>
+                            <td class="text-center">
+                                <button type="button" class="btn my-1 btn-warning"> Editar <i
+                                        class="fa-solid fa-pen-to-square"></i></button>
+                                        
+                                            @if ($confirming === $user->id)
+                                                <button type="button" wire:click="delete({{ $user->id }})" class="btn my-1 btn-danger fa-fade">¿Seguro?</button>
+                                            @else
+                                                <button type="button" wire:click="confirmDelete({{ $user->id }})" class="btn my-1 btn-danger">Eliminar <i class="fa-solid fa-trash"></i></button>
+                                            @endif
+                                        
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
 
         <div class="btn-group mt-3 border" role="group" aria-label="Basic example">
             <button type="button" wire:click="afterPage" class="btn border-end"><i class="fa-solid fa-arrow-left"></i></button>
