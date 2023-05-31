@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Patient extends Model
+class Test extends Model
 {
     use HasFactory;
 
-    public function tests()
+    public function patient()
     {
-        return $this->hasMany(Test::class);
+        return $this->hasOne(Patient::class);
     }
 }

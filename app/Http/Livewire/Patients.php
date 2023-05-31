@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Patient;
+use App\Models\Test;
 use Livewire\Component;
 
 class Patients extends Component
@@ -14,6 +15,8 @@ class Patients extends Component
     public $message_notification;
     public $query;
     public $patient_id;
+    public $tests;
+
 
     public function render()
     {
@@ -23,7 +26,6 @@ class Patients extends Component
 
     public function mount($patient_id)
     {   
-        // dd($patient_id);
         if($this->patient_id != null){
             $this->patientsData = Patient::orWhere('id', $this->patient_id)->get();
         }else{
@@ -46,7 +48,14 @@ class Patients extends Component
     public function testsPatient($id)
     {
         $this->now_patient = Patient::find($id);
-
+        
         $this->dispatchBrowserEvent('openModal');
+    }
+
+    public function editPatient($id)
+    {
+        $this->now_patient = Patient::find($id);
+        
+        $this->dispatchBrowserEvent('openModalEdit');
     }
 }
