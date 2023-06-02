@@ -7,12 +7,21 @@
             $date = new DateTime();
         @endphp
         <div class="py-2">
-            <div class="input-group mb-3">
-                <input class="form-control form-control-lg" wire:model="query" wire:keyup="search" type="text"
-                    placeholder="">
-                <span class="input-group-text">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </span>
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="input-group mb-3">
+                        <input class="form-control form-control-lg" wire:model="query" wire:keyup="search" type="text"
+                            placeholder="">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <button wire:click="formNewPatient" class="btn btn-lg btn-success">
+                        Registrar paciente
+                    </button>
+                </div>
             </div>
         </div>
         <div class="table-responsive table-padding">
@@ -82,7 +91,8 @@
                                     class="btn my-1 btn-secondary"> Pruebas <i class="fa-solid fa-file"></i>
                                 </button>
 
-                                <button type="button" wire:click="editPatient({{ $patient->id }})" class="btn my-1 btn-warning"> Editar <i
+                                <button type="button" wire:click="editPatient({{ $patient->id }})"
+                                    class="btn my-1 btn-warning"> Editar <i
                                         class="fa-solid fa-pen-to-square"></i></button>
 
                                 @if ($confirming === $patient->id)
@@ -149,16 +159,45 @@
         <div class="modal-dialog modal-xl">
             @if ($now_patient)
                 <div class="modal-content border-0 shadow">
-                    <div class="modal-header">
-                        <h3 class="">Editar - {{ $now_patient->name }}</h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row border-secondary">
-
+                    <form wire:submit.prevent="formEditPatient">
+                        <div class="modal-header">
+                            <h3 class="">Editar - {{ $now_patient->name }}</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
-                    </div>
+                        <div class="modal-body">
+                            <div class="col-lg-9 m-auto">
+                                <p class="m-1">Nombre</p>
+                                <input wire:model="patient.name" class="form-control form-control-lg" type="text">
+                                <br>
+                                <p class="m-1">Fecha de nacimiento</p>
+                                <input wire:model="patient.birth_date" class="form-control form-control-lg"
+                                    type="text">
+                                <br>
+                                <p class="m-1">Código</p>
+                                <input wire:model="patient.code" class="form-control form-control-lg" type="text">
+                                <br>
+                                <p class="m-1">Sexo</p>
+                                <select wire:model="patient.sex" class="form-control form-control-lg">
+                                    <option {{ $patient->sex == "female" ? 'selected' : '' }} value="female">Mujer</option>
+                                    <option {{ $patient->sex == "male" ? 'selected' : '' }} value="male">Hombre</option>
+                                    <option {{ $patient->sex == "other" ? 'selected' : '' }} value="other">Otro</option>
+                                </select>
+                                <br>
+                                <p class="m-1">Email</p>
+                                <input wire:model="patient.email" class="form-control form-control-lg"
+                                    type="text">
+                                <br>
+                                <p class="m-1">Teléfono</p>
+                                <input wire:model="patient.phone" class="form-control form-control-lg"
+                                    type="text">
+                                <br>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-lg btn-primary">Guardar cambios</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             @endif
         </div>
@@ -182,7 +221,7 @@
         window.addEventListener('notification', event => {
             $("#notification").toast('show');
         })
-  
+
         window.addEventListener('openModal', event => {
             $("#openModal").modal('show');
         })
@@ -191,5 +230,8 @@
             $("#openModalEdit").modal('show');
         })
         
+        window.addEventListener('closeModalEdit', event => {
+            $("#openModalEdit").modal('hide');
+        })
     </script>
 </div>

@@ -35,10 +35,18 @@ class SocialSeeder extends Seeder
             'name' => 'Emanuel Esc',
             'birth_date' => '2000-02-01',
             'code' => '2162381722',
-            'secret_code' => '2162381722',
-            'sex' => 'other',
+            'sex' => 'male',
             'email' => 'emanuel.escareno@alumnos.udg.mx',
             'phone' => '3317009646',
+        ]);
+
+        $patient = Patient::create([
+            'name' => 'Paty',
+            'birth_date' => '2001-02-01',
+            'code' => '2162382722',
+            'sex' => 'female',
+            'email' => 'patricia@alumnos.udg.mx',
+            'phone' => '3317009346',
         ]);
     }
 }

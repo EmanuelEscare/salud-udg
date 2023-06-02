@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('birth_date');
-            $table->string('code')->unique();
-            $table->string('secret_code');
+            $table->string('code');
             $table->enum('sex', ['female', 'male', 'other']);
             $table->string('email');
             $table->string('phone');
