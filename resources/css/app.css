@@ -45,3 +45,8 @@
 .text-pink {
     color: rgb(255, 148, 166);
 }
+
+
+.ps-none{
+    position: inherit!important;
+}

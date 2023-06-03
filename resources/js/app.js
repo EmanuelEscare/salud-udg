@@ -12,4 +12,5 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-import 'components/Test/index';
+import './components/Test/index';
+// import '../../calificador-pruebas/src/components/Test/index';

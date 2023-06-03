@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Patient;
+use App\Models\Test;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -40,13 +41,58 @@ class SocialSeeder extends Seeder
             'phone' => '3317009646',
         ]);
 
+        Test::create([
+            'test' => 'SCL-90-R',
+            'patient_id' => $patient->id,
+            'result' => '{}',
+        ]);
+
+        Test::create([
+            'test' => 'Inventario de Depresión de Beck (BDI-2)',
+            'patient_id' => $patient->id,
+            'result' => '{}',
+        ]);
+
+        Test::create([
+            'test' => 'Escala de ansiedad de Hamilton',
+            'patient_id' => $patient->id,
+            'result' => '{}',
+        ]);
+
         $patient = Patient::create([
-            'name' => 'Paty',
+            'name' => 'Ana',
             'birth_date' => '2001-02-01',
             'code' => '2162382722',
             'sex' => 'female',
-            'email' => 'patricia@alumnos.udg.mx',
+            'email' => 'ana@alumnos.udg.mx',
             'phone' => '3317009346',
+        ]);
+
+        Test::create([
+            'test' => 'Inventario de Depresión de Beck (BDI-2)',
+            'patient_id' => $patient->id,
+            'result' => '{}',
+        ]);
+
+        Test::create([
+            'test' => 'Escala de ansiedad de Hamilton',
+            'patient_id' => $patient->id,
+            'result' => '{}',
+        ]);
+
+        $patient = Patient::create([
+            'name' => 'Pedro',
+            'birth_date' => '2001-02-01',
+            'code' => '2111382722',
+            'sex' => 'other',
+            'email' => 'pedro@alumnos.udg.mx',
+            'phone' => '3317109346',
+        ]);
+
+        Test::create([
+            'test' => 'SCL-90-R',
+            'patient_id' => $patient->id,
+            'result' => '{}',
         ]);
     }
 }

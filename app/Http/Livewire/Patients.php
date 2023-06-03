@@ -60,6 +60,7 @@ class Patients extends Component
     {
         $this->patientsData = Patient::where('name', 'like', '%' . $this->query . '%')
             ->orWhere('email', 'like', '%' . $this->query . '%')
+            ->orWhere('code', 'like', '%' . $this->query . '%')
             ->get()->take($this->pages);
     }
 
@@ -87,7 +88,7 @@ class Patients extends Component
         $this->validate();
         DB::beginTransaction();
         try {
-            $patient = new Patient;
+            $patient = Patient::find($this->patient->id);
             $patient->name = $this->patient['name'];
             $patient->birth_date = $this->patient['birth_date'];
             $patient->email = $this->patient['email'];
@@ -118,7 +119,7 @@ class Patients extends Component
     public function formNewPatient()
     {
         $this->clean();
-        $this->dispatchBrowserEvent('openModal');
+        $this->dispatchBrowserEvent('modalAdd');
     }
 
     public function saveNewPatient()
@@ -141,7 +142,7 @@ class Patients extends Component
 
             $this->message_notification = "El paciente ha sido creado";
             $this->dispatchBrowserEvent('notification');
-            $this->dispatchBrowserEvent('closeModalCreate');
+            $this->dispatchBrowserEvent('closeModalAdd');
             $this->clean();
             $this->mount(null);
             return;
@@ -150,9 +151,32 @@ class Patients extends Component
 
             $this->message_notification = "Error: " . $e;
             $this->dispatchBrowserEvent('notification');
-            $this->dispatchBrowserEvent('closeModalCreate');
+            $this->dispatchBrowserEvent('closeModalAdd');
             $this->mount(null);
             return;
         }
+    }
+
+    public function clean()
+    {
+        $this->patient['name'] = null;
+        $this->patient['code'] = null;
+        $this->patient['email'] = null;
+        $this->patient['phone'] = null;
+        $this->patient['sex'] = null;
+        return;
+    }
+
+    public function delete($id)
+    {
+        $this->patientsData->find($id)->delete();
+        $this->message_notification = "El paciente ha sido eliminado";
+        $this->dispatchBrowserEvent('notification');
+        $this->mount(null);
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->confirming = $id;
     }
 }

@@ -9,8 +9,8 @@
         <div class="py-2">
             <div class="row">
                 <div class="col-lg-9">
-                    <div class="input-group mb-3">
-                        <input class="form-control form-control-lg" wire:model="query" wire:keyup="search" type="text"
+                    <div class="input-group mb-3 ps-none">
+                        <input class="form-control form-control-lg ps-none" wire:model="query" wire:keyup="search" type="text"
                             placeholder="">
                         <span class="input-group-text">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -41,7 +41,12 @@
                         <tr>
                             <th class="align-middle text-center" scope="row">{{ $patient->id }}</th>
                             <td class="align-middle text-center">
-                                {{ $patient->name }}
+                                <p>
+                                    {{ $patient->name }}
+                                </p>
+                                <p>
+                                    {{ $patient->code }}
+                                </p>
                             </td>
                             <td class="align-middle text-center">
                                 @php
@@ -61,27 +66,29 @@
                                 @endif
                             </td>
                             <td class="align-middle text-center">
-                                <a class="text-decoration-none fw-bold link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                                    href="mailto: {{ $patient->email }}">{{ $patient->email }}</a>
+                                <a class="text-nowrap text-decoration-none fw-bold link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                    href="mailto: {{ $patient->email }}">{{ $patient->email }} <i
+                                        class="fa-solid fa-envelope"></i></a>
                                 <br>
                                 <br>
-                                <a class="text-decoration-none fw-bold link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                                    href="tel:+ {{ $patient->phone }}">{{ $patient->phone }}</a>
+                                <a class="text-nowrap text-decoration-none fw-bold link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                    href="tel:+ {{ $patient->phone }}">{{ $patient->phone }} <i
+                                        class="fa-solid fa-phone-flip"></i></a>
                             </td>
                             <td class="text-center">
-                                <div class="dropdown">
+                                <div class="dropdown" style="display: inline-block;">
                                     <button class="btn my-1 btn-primary dropdown-toggle" type="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         Aplicar prueba
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item"
-                                                wire:click="test('1','{{ $patient->id }}')">SCL-90-R</a></li>
+                                            wire:click="test('1','{{ $patient->id }}')">Inventario de Depresión de
+                                            Beck (BDI-2)</a></li>
                                         <li><a class="dropdown-item"
-                                                wire:click="test('1','{{ $patient->id }}')">Inventario de Depresión de
-                                                Beck (BDI-2)</a></li>
+                                                wire:click="test('2','{{ $patient->id }}')">SCL-90-R</a></li>
                                         <li><a class="dropdown-item"
-                                                wire:click="test('1','{{ $patient->id }}')">Escala
+                                                wire:click="test('3','{{ $patient->id }}')">Escala
                                                 de ansiedad de Hamilton</a></li>
 
                                     </ul>
@@ -153,6 +160,55 @@
         </div>
     </div>
 
+    <!-- Modal New Patient-->
+    <div class="modal fade" wire:ignore.self id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 shadow">
+                <form wire:submit.prevent="saveNewPatient">
+                <div class="modal-header">
+                    <h3 class="">Nuevo paciente</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="col-lg-9 m-auto">
+                        <p class="m-1">Nombre</p>
+                        <input wire:model="patient.name" class="form-control form-control-lg" type="text">
+                        <br>
+                        <p class="m-1">Fecha de nacimiento</p>
+                        <input wire:model="patient.birth_date" type="date" class="form-control form-control-lg"
+                            type="text">
+                        <br>
+                        <p class="m-1">Código</p>
+                        <input wire:model="patient.code" class="form-control form-control-lg" type="text">
+                        <br>
+                        <p class="m-1">Sexo</p>
+                        <select wire:model="patient.sex" class="form-control form-control-lg">
+                            <option {{ $patient->sex == 'female' ? 'selected' : '' }} value="female">Mujer
+                            </option>
+                            <option {{ $patient->sex == 'male' ? 'selected' : '' }} value="male">Hombre
+                            </option>
+                            <option {{ $patient->sex == 'other' ? 'selected' : '' }} value="other">Otro
+                            </option>
+                        </select>
+                        <br>
+                        <p class="m-1">Email</p>
+                        <input wire:model="patient.email" class="form-control form-control-lg" type="text">
+                        <br>
+                        <p class="m-1">Teléfono</p>
+                        <input wire:model="patient.phone" class="form-control form-control-lg" type="text">
+                        <br>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-lg btn-primary">Guardar paciente</button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Edit Patient -->
     <div class="modal fade" wire:ignore.self id="openModalEdit" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -171,17 +227,20 @@
                                 <input wire:model="patient.name" class="form-control form-control-lg" type="text">
                                 <br>
                                 <p class="m-1">Fecha de nacimiento</p>
-                                <input wire:model="patient.birth_date" class="form-control form-control-lg"
-                                    type="text">
+                                <input wire:model="patient.birth_date" type="date"
+                                    class="form-control form-control-lg" type="text">
                                 <br>
                                 <p class="m-1">Código</p>
                                 <input wire:model="patient.code" class="form-control form-control-lg" type="text">
                                 <br>
                                 <p class="m-1">Sexo</p>
                                 <select wire:model="patient.sex" class="form-control form-control-lg">
-                                    <option {{ $patient->sex == "female" ? 'selected' : '' }} value="female">Mujer</option>
-                                    <option {{ $patient->sex == "male" ? 'selected' : '' }} value="male">Hombre</option>
-                                    <option {{ $patient->sex == "other" ? 'selected' : '' }} value="other">Otro</option>
+                                    <option {{ $patient->sex == 'female' ? 'selected' : '' }} value="female">Mujer
+                                    </option>
+                                    <option {{ $patient->sex == 'male' ? 'selected' : '' }} value="male">Hombre
+                                    </option>
+                                    <option {{ $patient->sex == 'other' ? 'selected' : '' }} value="other">Otro
+                                    </option>
                                 </select>
                                 <br>
                                 <p class="m-1">Email</p>
@@ -226,12 +285,24 @@
             $("#openModal").modal('show');
         })
 
+        window.addEventListener('closeModal', event => {
+            $("#openModal").modal('show');
+        })
+
         window.addEventListener('openModalEdit', event => {
             $("#openModalEdit").modal('show');
         })
-        
+
         window.addEventListener('closeModalEdit', event => {
             $("#openModalEdit").modal('hide');
+        })
+
+        window.addEventListener('modalAdd', event => {
+            $("#modalAdd").modal('show');
+        })
+
+        window.addEventListener('closeModalAdd', event => {
+            $("#modalAdd").modal('hide');
         })
     </script>
 </div>

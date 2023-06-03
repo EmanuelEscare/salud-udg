@@ -33,4 +33,19 @@
             $("#notification").toast('show');
         })
     </script>
+
+    {{-- <script>
+        if (document.getElementById('test')) {
+                const elementReact = document.getElementById('test');
+      const Index = ReactDOM.createRoot(document.getElementById("test"));
+      const idValue = elementReact.getAttribute('data-id');
+    //   const User = user_data;
+
+    Index.render(
+        <React.StrictMode>
+          <Test id={idValue} />
+        </React.StrictMode>
+      )
+            }
+        </script> --}}
 </x-app-layout>

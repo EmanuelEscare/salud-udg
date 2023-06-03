@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -43,6 +44,10 @@ class TestController extends Controller
         DB::table('api_requests')->insert([
             'object' => json_encode($data)
         ]);
+
+        // Test::create([
+        //     'test' => $
+        // ]);
 
         return response()->json(['message' => 'Datos recibidos correctamente'], 200);
         

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { tests } from '../utils/index'
+import { tests } from '../utils/index.js'
 import ReactDOM from 'react-dom/client'
 import styles from './Test.module.scss'
 import { differenceInYears, parse } from 'date-fns';
@@ -16,7 +16,7 @@ export const Test = (props) => {
   const [enviado, setEnviado] = useState(false);
 
   const [canSubmit, setCanSubmit] = useState(false)
-
+  console.log(props.id)
   const id = Number(props.id)
   const test = tests.find(test => test.id === id)
 
