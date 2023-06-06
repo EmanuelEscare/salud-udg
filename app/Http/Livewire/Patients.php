@@ -64,6 +64,18 @@ class Patients extends Component
             ->get()->take($this->pages);
     }
 
+    public function nextPage()
+    {
+        $this->nowPage++;
+        $this->render();
+    }
+
+    public function afterPage()
+    {
+        $this->nowPage--;
+        $this->render();
+    }
+
     public function test($id, $user_id)
     {
         return redirect()->route('react', ['id' => $id, 'user_id' => $user_id]);
@@ -74,6 +86,13 @@ class Patients extends Component
         $this->now_patient = Patient::find($id);
 
         $this->dispatchBrowserEvent('openModal');
+    }
+
+    public function infoPatient($id)
+    {
+        $this->now_patient = Patient::find($id);
+
+        $this->dispatchBrowserEvent('modalDetails');
     }
 
     public function editPatient($id)

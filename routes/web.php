@@ -22,6 +22,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/result', function () {
+    return view('result');
+})->middleware(['auth', 'verified'])->name('result');
+
 Route::get('/usuarios', function () {
     return view('usuarios');
 })->middleware(['auth', 'verified'])->name('usuarios');

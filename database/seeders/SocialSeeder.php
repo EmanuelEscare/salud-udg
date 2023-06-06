@@ -39,6 +39,9 @@ class SocialSeeder extends Seeder
             'sex' => 'male',
             'email' => 'emanuel.escareno@alumnos.udg.mx',
             'phone' => '3317009646',
+            'civil_status' => 'Soltero/a',
+            'education' => 'Secundaria',
+            'occupation' => 'Profesor'
         ]);
 
         Test::create([
@@ -66,6 +69,9 @@ class SocialSeeder extends Seeder
             'sex' => 'female',
             'email' => 'ana@alumnos.udg.mx',
             'phone' => '3317009346',
+            'civil_status' => 'Soltero/a',
+            'education' => 'Secundaria',
+            'occupation' => 'Profesor'
         ]);
 
         Test::create([
@@ -87,6 +93,9 @@ class SocialSeeder extends Seeder
             'sex' => 'other',
             'email' => 'pedro@alumnos.udg.mx',
             'phone' => '3317109346',
+            'civil_status' => 'Soltero/a',
+            'education' => 'Secundaria',
+            'occupation' => 'Profesor'
         ]);
 
         Test::create([

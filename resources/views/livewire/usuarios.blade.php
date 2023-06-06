@@ -6,8 +6,8 @@
         <div class="py-2">
             <div class="row">
                 <div class="col-lg-9">
-                    <div class="input-group mb-3">
-                        <input class="form-control form-control-lg" wire:model="query" wire:keyup="search" type="text"
+                    <div class="input-group mb-3 ps-none">
+                        <input class="form-control form-control-lg ps-none" wire:model="query" wire:keyup="search" type="text"
                             placeholder="">
                         <span class="input-group-text">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -15,9 +15,11 @@
                     </div>
                 </div>
                 <div class="col-lg-3">
+                    <div class="d-grid gap-2">
                     <button wire:click="formNewUser" class="btn btn-lg btn-success">
                         Registrar usuario
                     </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,7 +45,7 @@
                             <td class="align-middle">
                                 {{ $user->email }}
                             </td>
-                            <td class="dropdown text-center">
+                            <td class="dropdown text-center ps-none">
                                 <button class="btn my-1 btn-secondary dropdown-toggle text-capitalize" type="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ __($user->getRoleNames()->first()) }}

@@ -10,17 +10,19 @@
             <div class="row">
                 <div class="col-lg-9">
                     <div class="input-group mb-3 ps-none">
-                        <input class="form-control form-control-lg ps-none" wire:model="query" wire:keyup="search" type="text"
-                            placeholder="">
+                        <input class="form-control form-control-lg ps-none" wire:model="query" wire:keyup="search"
+                            type="text" placeholder="">
                         <span class="input-group-text">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <button wire:click="formNewPatient" class="btn btn-lg btn-success">
-                        Registrar paciente
-                    </button>
+                    <div class="d-grid gap-2">
+                        <button wire:click="formNewPatient" class="btn btn-lg btn-success">
+                            Registrar paciente
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -28,32 +30,30 @@
             <table class="table table-bordered table-hover table-striped mt-5">
                 <thead class="border">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Edad</th>
-                        <th scope="col">Sexo</th>
-                        <th scope="col">Contacto</th>
-                        <th scope="col">Acción</th>
+                        <th class="text-center" scope="col">#</th>
+                        <th class="text-center" scope="col">Nombre</th>
+                        <th class="text-center" scope="col">Sexo</th>
+                        <th class="text-center" scope="col">Información</th>
+                        <th class="text-center" scope="col">Acción</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     @foreach ($patients as $patient)
                         <tr>
-                            <th class="align-middle text-center" scope="row">{{ $patient->id }}</th>
+                            <th class="align-middle text-center" scope="row">
+                                <p>
+                                    {{ $patient->code }}
+                                </p>
+                            </th>
                             <td class="align-middle text-center">
                                 <p>
                                     {{ $patient->name }}
                                 </p>
-                                <p>
-                                    {{ $patient->code }}
-                                </p>
                             </td>
-                            <td class="align-middle text-center">
-                                @php
+                            {{-- @php
                                     $birth = new DateTime($patient->birth_date);
                                 @endphp
-                                {{ $date->diff($birth)->y }}
-                            </td>
+                                {{ $date->diff($birth)->y }} --}}
                             <td class="fs-4 align-middle text-center">
                                 @if ($patient->sex == 'male')
                                     <i class="fa-solid fa-mars text-info"></i>
@@ -66,29 +66,31 @@
                                 @endif
                             </td>
                             <td class="align-middle text-center">
-                                <a class="text-nowrap text-decoration-none fw-bold link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                <button type="button" wire:click="infoPatient({{ $patient->id }})"
+                                    class="btn my-1 btn-light border"> Ver detalle
+                                </button>
+                                {{-- <a class="text-nowrap text-decoration-none fw-bold link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
                                     href="mailto: {{ $patient->email }}">{{ $patient->email }} <i
                                         class="fa-solid fa-envelope"></i></a>
                                 <br>
                                 <br>
                                 <a class="text-nowrap text-decoration-none fw-bold link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
                                     href="tel:+ {{ $patient->phone }}">{{ $patient->phone }} <i
-                                        class="fa-solid fa-phone-flip"></i></a>
+                                        class="fa-solid fa-phone-flip"></i></a> --}}
                             </td>
                             <td class="text-center">
-                                <div class="dropdown" style="display: inline-block;">
+                                <div class="dropdown ps-none" style="display: inline-block;">
                                     <button class="btn my-1 btn-primary dropdown-toggle" type="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         Aplicar prueba
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item"
-                                            wire:click="test('1','{{ $patient->id }}')">Inventario de Depresión de
-                                            Beck (BDI-2)</a></li>
+                                                wire:click="test('1','{{ $patient->id }}')">Inventario de Depresión de
+                                                Beck (BDI-2)</a></li>
                                         <li><a class="dropdown-item"
                                                 wire:click="test('2','{{ $patient->id }}')">SCL-90-R</a></li>
-                                        <li><a class="dropdown-item"
-                                                wire:click="test('3','{{ $patient->id }}')">Escala
+                                        <li><a class="dropdown-item" wire:click="test('3','{{ $patient->id }}')">Escala
                                                 de ansiedad de Hamilton</a></li>
 
                                     </ul>
@@ -126,6 +128,46 @@
         </div>
     </div>
 
+    <!-- Modal View Info-->
+    <div class="modal fade" wire:ignore.self id="modalDetails" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            @if ($now_patient)
+                <div class="modal-content border-0 shadow">
+                    <div class="modal-header">
+                        <h3 class="">Información - {{ $now_patient->name }}</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row border-secondary">
+                            <p><span class="fw-bold">Nombre</span>: {{ $now_patient->name }}</p>
+                            <p><span class="fw-bold">Código</span>: {{ $now_patient->code }}</p>
+                            <p><span class="fw-bold">Edad</span>: @php
+                                $birth = new DateTime($patient->birth_date);
+                            @endphp
+                                {{ $date->diff($birth)->y }} años</p>
+                            <p><span class="fw-bold">Sexo</span>: @if ($now_patient->sex == 'male')
+                                    <i class="fa-solid fa-mars text-info"></i>
+                                @endif
+                                @if ($now_patient->sex == 'female')
+                                    <i class="fa-solid fa-venus text-pink"></i>
+                                @endif
+                                @if ($now_patient->sex == 'other')
+                                    <i class="fa-solid fa-venus-mars text-secondary"></i>
+                                @endif
+                            </p>
+                            <p><span class="fw-bold">Email</span>: {{ $now_patient->email }}</p>
+                            <p><span class="fw-bold">Teléfono</span>: {{ $now_patient->phone }}</p>
+                            <p><span class="fw-bold">Estado civil</span>: {{$now_patient->civil_status}}</p>
+                            <p><span class="fw-bold">Educación</span>: {{$now_patient->education}}</p>
+                            <p><span class="fw-bold">Ocupación</span>: {{$now_patient->occupation}}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
+    </div>
+
     <!-- Modal View Tests-->
     <div class="modal fade" wire:ignore.self id="openModal" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -134,7 +176,8 @@
                 <div class="modal-content border-0 shadow">
                     <div class="modal-header">
                         <h3 class="">Pruebas - {{ $now_patient->name }}</h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row border-secondary">
@@ -147,7 +190,7 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="d-grid gap-2">
-                                        <a class="btn btn-secondary" href=""> Resultados <i
+                                        <a class="btn btn-secondary" href="https://social.test/result"> Resultado <i
                                                 class="fa-solid fa-file"></i></a>
                                     </div>
                                 </div>
@@ -166,44 +209,45 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content border-0 shadow">
                 <form wire:submit.prevent="saveNewPatient">
-                <div class="modal-header">
-                    <h3 class="">Nuevo paciente</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                    <div class="modal-header">
+                        <h3 class="">Nuevo paciente</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
 
-                <div class="modal-body">
-                    <div class="col-lg-9 m-auto">
-                        <p class="m-1">Nombre</p>
-                        <input wire:model="patient.name" class="form-control form-control-lg" type="text">
-                        <br>
-                        <p class="m-1">Fecha de nacimiento</p>
-                        <input wire:model="patient.birth_date" type="date" class="form-control form-control-lg"
-                            type="text">
-                        <br>
-                        <p class="m-1">Código</p>
-                        <input wire:model="patient.code" class="form-control form-control-lg" type="text">
-                        <br>
-                        <p class="m-1">Sexo</p>
-                        <select wire:model="patient.sex" class="form-control form-control-lg">
-                            <option {{ $patient->sex == 'female' ? 'selected' : '' }} value="female">Mujer
-                            </option>
-                            <option {{ $patient->sex == 'male' ? 'selected' : '' }} value="male">Hombre
-                            </option>
-                            <option {{ $patient->sex == 'other' ? 'selected' : '' }} value="other">Otro
-                            </option>
-                        </select>
-                        <br>
-                        <p class="m-1">Email</p>
-                        <input wire:model="patient.email" class="form-control form-control-lg" type="text">
-                        <br>
-                        <p class="m-1">Teléfono</p>
-                        <input wire:model="patient.phone" class="form-control form-control-lg" type="text">
-                        <br>
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-lg btn-primary">Guardar paciente</button>
+                    <div class="modal-body">
+                        <div class="col-lg-9 m-auto">
+                            <p class="m-1">Nombre</p>
+                            <input wire:model="patient.name" class="form-control form-control-lg" type="text">
+                            <br>
+                            <p class="m-1">Fecha de nacimiento</p>
+                            <input wire:model="patient.birth_date" type="date"
+                                class="form-control form-control-lg" type="text">
+                            <br>
+                            <p class="m-1">Código</p>
+                            <input wire:model="patient.code" class="form-control form-control-lg" type="text">
+                            <br>
+                            <p class="m-1">Sexo</p>
+                            <select wire:model="patient.sex" class="form-control form-control-lg">
+                                <option value="female">Mujer
+                                </option>
+                                <option value="male">Hombre
+                                </option>
+                                <option value="other">Otro
+                                </option>
+                            </select>
+                            <br>
+                            <p class="m-1">Email</p>
+                            <input wire:model="patient.email" class="form-control form-control-lg" type="text">
+                            <br>
+                            <p class="m-1">Teléfono</p>
+                            <input wire:model="patient.phone" class="form-control form-control-lg" type="text">
+                            <br>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-lg btn-primary">Guardar paciente</button>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </form>
             </div>
         </div>
@@ -303,6 +347,14 @@
 
         window.addEventListener('closeModalAdd', event => {
             $("#modalAdd").modal('hide');
+        })
+
+        window.addEventListener('modalDetails', event => {
+            $("#modalDetails").modal('show');
+        })
+
+        window.addEventListener('closeModalDetails', event => {
+            $("#modalDetails").modal('hide');
         })
     </script>
 </div>

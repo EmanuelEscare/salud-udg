@@ -4,7 +4,7 @@ import { tests } from '../utils/index.js'
 import ReactDOM from 'react-dom/client'
 import styles from './Test.module.scss'
 import { differenceInYears, parse } from 'date-fns';
-import { resultsService } from '../services/index'
+import { resultsService, qualificatorsService } from '../services_new/index'
 
 export const Test = (props) => {
   const [patientName, setPatientName] = useState({ value: '', error: '' })
@@ -75,19 +75,6 @@ export const Test = (props) => {
     e.preventDefault()
     const score = answers.reduce((acc, curr) => acc + curr.value, 0)
     const testResults = answers.sort((a, b) => a.index - b.index)
-    let status = ''
-    if (id === 1) {
-      if (score <= 13) status = 'Depresión mínima'
-      if (score > 13 && score <= 19) status = 'Depresión leve'
-      if (score > 19 && score <= 28) status = 'Depresión moderada'
-      if (score > 28 && score <= 63) status = 'Depresión grave'
-    }
-    if (id === 2) {
-      console.log('2')
-    }
-    if (id === 3) {
-      console.log('3')
-    }
 
     const newResult = {
       data: {
@@ -95,9 +82,23 @@ export const Test = (props) => {
         score: score,
         testResults: testResults,
         appliedTest: id,
-        status: status
       }
     }
+
+    if (id === 1) {
+      const status = qualificatorsService.beckDepressionInventory({ score })
+      newResult.data.status = status
+    }
+    if (id === 2) {
+      const indicators = qualificatorsService.derogatisSymptomsInventory({ score, testResults })
+      newResult.data.indicators = indicators
+    }
+    if (id === 3) {
+      const status = qualificatorsService.beckAnxietyInventory({ score })
+      newResult.data.status = status
+    }
+
+
     console.log(newResult)
     setCanSubmit(false)
     setEnviado(true)

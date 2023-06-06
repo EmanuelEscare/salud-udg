@@ -19,6 +19,9 @@ return new class extends Migration
             $table->date('birth_date');
             $table->string('code');
             $table->enum('sex', ['female', 'male', 'other']);
+            $table->enum('education', ['Primaria', 'Secundaria', 'Superior'])->nullable();
+            $table->enum('civil_status', ['Soltero/a', 'Casado/a'])->nullable();
+            $table->string('occupation')->nullable();
             $table->string('email');
             $table->string('phone');
             $table->timestamps();
