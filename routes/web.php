@@ -34,6 +34,10 @@ Route::get('/patients/{patient_id?}', function ($patient_id = null) {
     return view('patients', ['patient_id' => $patient_id]);
 })->middleware(['auth', 'verified'])->name('patients');
 
+Route::get('/config', function () {
+    return view('config');
+})->middleware(['auth', 'verified'])->name('config');
+
 Route::get('/react/{id}/{user_id}', function ($id, $user_id) {
     $user = Patient::find($user_id);
     return view('react')->with(['id' => $id, 'user' => $user]);

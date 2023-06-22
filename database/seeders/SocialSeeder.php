@@ -19,8 +19,30 @@ class SocialSeeder extends Seeder
      */
     public function run()
     {
+
         $admin = Role::create(['name' => 'admin']);
-        $doctor = Role::create(['name' => 'usuario']);
+
+        $user = Role::create(['name' => 'user']);
+
+        $user_create = Permission::create(['name' => 'user_create']);
+        $user_update = Permission::create(['name' => 'user_update']);
+        $user_delete = Permission::create(['name' => 'user_delete']);
+
+        $patient_create = Permission::create(['name' => 'patient_create']);
+        $patient_update = Permission::create(['name' => 'patient_update']);
+        $patient_delete = Permission::create(['name' => 'patient_delete']);
+        
+        $admin->givePermissionTo($user_create);
+        $admin->givePermissionTo($user_update);
+        $admin->givePermissionTo($user_delete);
+
+        $admin->givePermissionTo($patient_create);
+        $admin->givePermissionTo($patient_update);
+        $admin->givePermissionTo($patient_delete);
+
+        $user->givePermissionTo($patient_create);
+        $user->givePermissionTo($patient_update);
+        $user->givePermissionTo($patient_delete);
 
         // ADMIN USER
         $admin = User::create([

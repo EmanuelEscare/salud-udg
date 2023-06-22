@@ -19,9 +19,11 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="d-grid gap-2">
+                        @if (Auth::user()->hasPermissionTo('patient_update'))
                         <button wire:click="formNewPatient" class="btn btn-lg btn-success">
                             Registrar paciente
                         </button>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -100,16 +102,21 @@
                                     class="btn my-1 btn-secondary"> Pruebas <i class="fa-solid fa-file"></i>
                                 </button>
 
+                                @if (Auth::user()->hasPermissionTo('patient_update'))
                                 <button type="button" wire:click="editPatient({{ $patient->id }})"
                                     class="btn my-1 btn-warning"> Editar <i
                                         class="fa-solid fa-pen-to-square"></i></button>
+                                @endif
 
-                                @if ($confirming === $patient->id)
-                                    <button type="button" wire:click="delete({{ $patient->id }})"
-                                        class="btn my-1 btn-danger fa-fade">¿Seguro?</button>
-                                @else
-                                    <button type="button" wire:click="confirmDelete({{ $patient->id }})"
-                                        class="btn my-1 btn-danger">Eliminar <i class="fa-solid fa-trash"></i></button>
+                                @if (Auth::user()->hasPermissionTo('patient_delete'))
+                                    @if ($confirming === $patient->id)
+                                        <button type="button" wire:click="delete({{ $patient->id }})"
+                                            class="btn my-1 btn-danger fa-fade">¿Seguro?</button>
+                                    @else
+                                        <button type="button" wire:click="confirmDelete({{ $patient->id }})"
+                                            class="btn my-1 btn-danger">Eliminar <i
+                                                class="fa-solid fa-trash"></i></button>
+                                    @endif
                                 @endif
 
                             </td>
@@ -158,9 +165,9 @@
                             </p>
                             <p><span class="fw-bold">Email</span>: {{ $now_patient->email }}</p>
                             <p><span class="fw-bold">Teléfono</span>: {{ $now_patient->phone }}</p>
-                            <p><span class="fw-bold">Estado civil</span>: {{$now_patient->civil_status}}</p>
-                            <p><span class="fw-bold">Educación</span>: {{$now_patient->education}}</p>
-                            <p><span class="fw-bold">Ocupación</span>: {{$now_patient->occupation}}</p>
+                            <p><span class="fw-bold">Estado civil</span>: {{ $now_patient->civil_status }}</p>
+                            <p><span class="fw-bold">Educación</span>: {{ $now_patient->education }}</p>
+                            <p><span class="fw-bold">Ocupación</span>: {{ $now_patient->occupation }}</p>
                         </div>
                     </div>
                 </div>

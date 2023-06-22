@@ -50,3 +50,9 @@
 .ps-none{
     position: inherit!important;
 }
+
+.box-danger{
+    border-radius: 1rem;
+    border: 1px solid #d1d1d1;
+    padding: 2rem;
+}

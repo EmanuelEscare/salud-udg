@@ -7,8 +7,8 @@
             <div class="row">
                 <div class="col-lg-9">
                     <div class="input-group mb-3 ps-none">
-                        <input class="form-control form-control-lg ps-none" wire:model="query" wire:keyup="search" type="text"
-                            placeholder="">
+                        <input class="form-control form-control-lg ps-none" wire:model="query" wire:keyup="search"
+                            type="text" placeholder="">
                         <span class="input-group-text">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
@@ -16,9 +16,11 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="d-grid gap-2">
-                    <button wire:click="formNewUser" class="btn btn-lg btn-success">
-                        Registrar usuario
-                    </button>
+                        @if (Auth::user()->hasPermissionTo('user_create'))
+                        <button wire:click="formNewUser" class="btn btn-lg btn-success">
+                            Registrar usuario
+                        </button>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -46,31 +48,41 @@
                                 {{ $user->email }}
                             </td>
                             <td class="dropdown text-center ps-none">
-                                <button class="btn my-1 btn-secondary dropdown-toggle text-capitalize" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ __($user->getRoleNames()->first()) }}
-                                </button>
-                                <ul class="dropdown-menu text-center">
-                                    <li><a class="dropdown-item"
-                                            wire:click="changeRole('{{ $user->id }}','{{ $user->getRoleNames()->first() }}', 'admin')">{{ __('Administrador') }}</a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                            wire:click="changeRole('{{ $user->id }}','{{ $user->getRoleNames()->first() }}', 'usuario')">{{ __('Usuario') }}</a>
-                                    </li>
-                                </ul>
+                                @if (Auth::user()->hasPermissionTo('user_update'))
+                                    <button class="btn my-1 btn-secondary dropdown-toggle text-capitalize"
+                                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @if ($user->getRoleNames()->first() == 'user')
+                                            Usuario
+                                        @else
+                                            Administrador
+                                        @endif
+                                    </button>
+                                    <ul class="dropdown-menu text-center">
+                                        <li><a class="dropdown-item"
+                                                wire:click="changeRole('{{ $user->id }}','{{ $user->getRoleNames()->first() }}', 'admin')">{{ __('Administrador') }}</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                wire:click="changeRole('{{ $user->id }}','{{ $user->getRoleNames()->first() }}', 'user')">{{ __('Usuario') }}</a>
+                                        </li>
+                                    </ul>
+                                @endif
                             </td>
                             <td class="text-center">
-                                <button type="button" wire:click="modalUpdateUser({{$user->id}})" class="btn my-1 btn-warning"> Editar <i
-                                        class="fa-solid fa-pen-to-square"></i></button>
-
-                                @if ($confirming === $user->id)
-                                    <button type="button" wire:click="delete({{ $user->id }})"
-                                        class="btn my-1 btn-danger fa-fade">¿Seguro?</button>
-                                @else
-                                    <button type="button" wire:click="confirmDelete({{ $user->id }})"
-                                        class="btn my-1 btn-danger">Eliminar <i class="fa-solid fa-trash"></i></button>
+                                @if (Auth::user()->hasPermissionTo('user_update'))
+                                    <button type="button" wire:click="modalUpdateUser({{ $user->id }})"
+                                        class="btn my-1 btn-warning"> Editar <i
+                                            class="fa-solid fa-pen-to-square"></i></button>
                                 @endif
-
+                                @if (Auth::user()->hasPermissionTo('user_delete'))
+                                    @if ($confirming === $user->id)
+                                        <button type="button" wire:click="delete({{ $user->id }})"
+                                            class="btn my-1 btn-danger fa-fade">¿Seguro?</button>
+                                    @else
+                                        <button type="button" wire:click="confirmDelete({{ $user->id }})"
+                                            class="btn my-1 btn-danger">Eliminar <i
+                                                class="fa-solid fa-trash"></i></button>
+                                    @endif
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -114,7 +126,7 @@
                                 aria-label=".form-select-lg example">
                                 <option selected>.......</option>
                                 <option value="admin">Administrador</option>
-                                <option value="usuario">Usuario</option>
+                                <option value="user">Usuario</option>
                             </select>
 
                             @if ($errors->any())
@@ -158,7 +170,8 @@
                                 <input wire:model="user.nombre" class="form-control form-control-lg" type="text">
                                 <br>
                                 <p class="m-1">Email</p>
-                                <input wire:model="user.email" disabled class="form-control form-control-lg" type="text">
+                                <input wire:model="user.email" disabled class="form-control form-control-lg"
+                                    type="text">
                                 <br>
                                 <p class="m-1">Contraseña</p>
                                 <input wire:model="user.contraseña" class="form-control form-control-lg"
@@ -177,7 +190,7 @@
                                 @endif
                                 <br>
                                 <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-lg btn-primary">Crear usuario</button>
+                                    <button type="submit" class="btn btn-lg btn-primary">Guardar cambios</button>
                                 </div>
                                 <br>
                             </div>
