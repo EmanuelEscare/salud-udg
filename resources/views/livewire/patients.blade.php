@@ -250,6 +250,17 @@
                             <p class="m-1">Teléfono</p>
                             <input wire:model="patient.phone" class="form-control form-control-lg" type="text">
                             <br>
+                            @if ($errors->any())
+                            <div class="my-3">
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        @endif
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-lg btn-primary">Guardar paciente</button>
                             </div>

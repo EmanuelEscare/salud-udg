@@ -31,6 +31,7 @@ class Patients extends Component
             'patient.phone' => 'required',
         ];
     }
+    
 
     protected $messages = [
         'patient.name' => 'El campo nombre es requerido',
@@ -105,6 +106,7 @@ class Patients extends Component
 
     public function formEditPatient(){
         $this->validate();
+
         DB::beginTransaction();
         try {
             $patient = Patient::find($this->patient->id);
@@ -152,7 +154,7 @@ class Patients extends Component
             $patient->code = $this->patient['code'];
             $patient->email = $this->patient['email'];
             $patient->phone = $this->patient['phone'];
-            $patient->phone = $this->patient['sex'];
+            $patient->sex = $this->patient['sex'];
             $patient->birth_date = $this->patient['birth_date'];
 
             $patient->save();
@@ -180,6 +182,7 @@ class Patients extends Component
     {
         $this->patient['name'] = null;
         $this->patient['code'] = null;
+        $this->patient['birth_date'] = null;
         $this->patient['email'] = null;
         $this->patient['phone'] = null;
         $this->patient['sex'] = null;
