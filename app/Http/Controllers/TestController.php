@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
-    public function getCount(Request $request){
+    public function getCount(Request $request)
+    {
         $data = json_decode($request);
 
         DB::table('api_requests')->insert([
@@ -16,9 +17,9 @@ class TestController extends Controller
         ]);
 
         return response()->json(['message' => 'Datos recibidos correctamente'], 200);
-
     }
-    public function getAll(Request $request){
+    public function getAll(Request $request)
+    {
         $data = json_decode($request);
 
         DB::table('api_requests')->insert([
@@ -26,9 +27,9 @@ class TestController extends Controller
         ]);
 
         return response()->json(['message' => 'Datos recibidos correctamente'], 200);
-        
     }
-    public function getFiltered(Request $request){
+    public function getFiltered(Request $request)
+    {
         $data = json_decode($request);
 
         DB::table('api_requests')->insert([
@@ -36,20 +37,19 @@ class TestController extends Controller
         ]);
 
         return response()->json(['message' => 'Datos recibidos correctamente'], 200);
-        
     }
-    public function newResult(Request $request){
+
+    public function newResult(Request $request)
+    {
         $data = $request->input("data");
 
-        DB::table('api_requests')->insert([
-            'object' => json_encode($data)
+        Test::create([
+            'test' => $data['appliedTest'],
+            'patient_id' => $data['patient_id'],
+            'diagnostic' => json_encode($data['diagnostic']),
+            'result' => json_encode($data['testResults']),
         ]);
 
-        // Test::create([
-        //     'test' => $
-        // ]);
-
         return response()->json(['message' => 'Datos recibidos correctamente'], 200);
-        
     }
 }

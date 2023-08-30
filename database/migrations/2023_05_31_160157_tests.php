@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('patient_id')
                 ->references('id')->on('patients')
                 ->onDelete('cascade');
+            $table->json('diagnostic')->nullable();
             $table->json('result');
             $table->timestamps();
         });

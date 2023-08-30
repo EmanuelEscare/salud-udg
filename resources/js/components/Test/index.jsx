@@ -78,7 +78,7 @@ export const Test = (props) => {
 
     const newResult = {
       data: {
-        user_id: props.user.id,
+        patient_id: props.user.id,
         score: score,
         testResults: testResults,
         appliedTest: id,
@@ -87,15 +87,15 @@ export const Test = (props) => {
 
     if (id === 1) {
       const status = qualificatorsService.beckDepressionInventory({ score })
-      newResult.data.status = status
+      newResult.data.diagnostic = status
     }
     if (id === 2) {
       const indicators = qualificatorsService.derogatisSymptomsInventory({ score, testResults })
-      newResult.data.indicators = indicators
+      newResult.data.diagnostic = indicators
     }
     if (id === 3) {
       const status = qualificatorsService.beckAnxietyInventory({ score })
-      newResult.data.status = status
+      newResult.data.diagnostic = status
     }
 
 

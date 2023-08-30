@@ -167,13 +167,35 @@ export const tests = [
   },
   {
     id: 4,
+    name: 'Escala de Estrés Percibido (PSS, Perceived Stress Scale)',
+    instructions: '',
+    questions: [
+      { question: 'En el último mes, ¿con qué frecuencia ha estado afectado por algo que ocurrió inesperadamente?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 1 },
+      { question: 'En el último mes, ¿con qué frecuencia se ha sentido incapaz de controlar las cosas importantes en su vida?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 2 },
+      { question: 'En el último mes, ¿con qué frecuencia se ha sentido nervioso o estresado?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 3 },
+      { question: 'En el último mes, ¿con qué frecuencia ha manejado con éxito los pequeños problemas irritantes de la vida?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 4 },
+      { question: 'En el último mes, ¿con qué frecuencia ha sentido que ha afrontado efectivamente los cambios importantes que han estado ocurriendo en su vida?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 5 },
+      { question: 'En el último mes, ¿con qué frecuencia ha estado seguro sobre su capacidad para manejar sus problemas personales?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 6 },
+      { question: 'En el último mes, ¿con qué frecuencia ha sentido que las cosas le salen bien?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 7 },
+      { question: 'En el último mes, ¿con qué frecuencia ha sentido que no podía afrontar todas las cosas que tenía que hacer?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 8 },
+      { question: 'En el último mes, ¿con qué frecuencia ha podido controlar las dificultades de su vida?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 9 },
+      { question: 'En el último mes, ¿con que frecuencia ha sentido que tenía todo bajo control?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 10 },
+      { question: 'En el último mes, ¿con qué frecuencia ha estado enojado o molesto porque las cosas que le ocurrieron estaban fuera de su control?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 11 },
+      { question: 'En el último mes, ¿con qué frecuencia ha pensado sobre las cosas que le quedan por hacer?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 12 },
+      { question: 'En el último mes, ¿con qué frecuencia ha podido controlar su tiempo?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 13 },
+      { question: ' En el último mes, ¿con qué frecuencia ha sentido que las dificultades se acumulan tanto que no puede superarlas?', answers: [{ value: 0, option: 'Nunca' }, { value: 1, option: 'Casi nunca' }, { value: 2, option: 'De vez en cuando' }, { value: 3, option: 'A menudo' }, { value: 4, option: 'Muy a menudo' }], index: 14 },
+    ],
+    inputs: []
+  },
+  {
+    id: 5,
     instructions: '',
     name: 'Medición de Adicción al Sexo',
     questions: [],
     inputs: []
   },
   {
-    id: 5,
+    id: 6,
     name: '',
     instructions: '',
     questions: [],

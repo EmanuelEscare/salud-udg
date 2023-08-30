@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Patient;
 use App\Models\Test;
 use Dotenv\Store\File\Paths;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -14,7 +15,7 @@ class Patients extends Component
     public $nowPage = 1;
     public $pages = 10;
     public $confirming;
-    public $message_notification;
+    public $message_notification;  
     public $query;
     public $patient_id;
     public $tests;
@@ -50,11 +51,20 @@ class Patients extends Component
 
     public function mount($patient_id)
     {
-        if ($this->patient_id != null) {
-            $this->patientsData = Patient::orWhere('id', $this->patient_id)->get();
-        } else {
-            $this->patientsData = Patient::get();
+        if (Auth::user()->hasRole('user')){
+            if ($this->patient_id != null) {
+                $this->patientsData = Patient::where('user_id', Auth::user()->id)->where('id', $this->patient_id)->get();
+            } else {
+                $this->patientsData = Patient::where('user_id', Auth::user()->id)->get();
+            }
+        }else{
+            if ($this->patient_id != null) {
+                $this->patientsData = Patient::orWhere('id', $this->patient_id)->get();
+            } else {
+                $this->patientsData = Patient::get();
+            }
         }
+
     }
 
     public function search()

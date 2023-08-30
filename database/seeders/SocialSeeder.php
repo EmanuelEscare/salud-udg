@@ -46,12 +46,21 @@ class SocialSeeder extends Seeder
 
         // ADMIN USER
         $admin = User::create([
-            'name' => 'Emanuel',
+            'name' => 'Emanuel Admin',
             'email' => 'emanuel.escareno@alumnos.udg.mx',
             'password' => bcrypt('asd123'),
         ]);
 
         $admin->assignRole('admin');
+
+        // USER 
+        $user = User::create([
+            'name' => 'Emanuel User',
+            'email' => 'emanuel.user@alumnos.udg.mx',
+            'password' => bcrypt('asd123'),
+        ]);
+
+        $user->assignRole('user');
 
 
         $patient = Patient::create([
@@ -63,7 +72,8 @@ class SocialSeeder extends Seeder
             'phone' => '3317009646',
             'civil_status' => 'Soltero/a',
             'education' => 'Secundaria',
-            'occupation' => 'Profesor'
+            'occupation' => 'Profesor',
+            'user_id' => $user->id
         ]);
 
         Test::create([
@@ -93,7 +103,8 @@ class SocialSeeder extends Seeder
             'phone' => '3317009346',
             'civil_status' => 'Soltero/a',
             'education' => 'Secundaria',
-            'occupation' => 'Profesor'
+            'occupation' => 'Profesor',
+            'user_id' => $user->id
         ]);
 
         Test::create([
@@ -117,7 +128,8 @@ class SocialSeeder extends Seeder
             'phone' => '3317109346',
             'civil_status' => 'Soltero/a',
             'education' => 'Secundaria',
-            'occupation' => 'Profesor'
+            'occupation' => 'Profesor',
+            'user_id' => $admin->id
         ]);
 
         Test::create([
