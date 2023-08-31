@@ -97,6 +97,15 @@ export const Test = (props) => {
       const status = qualificatorsService.beckAnxietyInventory({ score })
       newResult.data.diagnostic = status
     }
+    if (id === 4) {
+      const status = qualificatorsService.PerceivedStressScale({ score })
+      newResult.data.diagnostic = status
+    }
+    if (id === 5) {
+      const status = qualificatorsService.HamiltonAnxietyScale({ score })
+      newResult.data.diagnostic = status
+    }
+
 
 
     console.log(newResult)
@@ -120,7 +129,7 @@ export const Test = (props) => {
 
   return (
     <section className={styles.test}>
-      <h1 className={styles.test_title}>Calificador: {test.name}</h1>
+      <h1 className={styles.test_title}>Prueba: {test.name}</h1>
       <br />
       <form className={styles.test_form} onSubmit={handleSubmit}>
         <div className={styles.test_form_input}>
@@ -168,10 +177,13 @@ export const Test = (props) => {
           />
           {patientAge.error && <p className={styles.test_form_input_error}>{patientAge.error}</p>}
         </div>
+        <br />
+        <hr />
+        <br />
         {test.questions && test.questions.map((question) => {
           return (
             <div className={styles.test__form_question} key={question.question}>
-              <h3 className={styles.test_form_question_title}>{question.question}</h3>
+              <h3 className={styles.test_form_question_title} dangerouslySetInnerHTML={{__html: question.question}}></h3>
               <div className={styles.test_form_question_answers}>
                 {question.answers.map((answer) => {
                   return (

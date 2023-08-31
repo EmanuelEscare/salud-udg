@@ -162,6 +162,7 @@ class Patients extends Component
             $patient = new Patient;
             $patient->name = $this->patient['name'];
             $patient->code = $this->patient['code'];
+            $patient->user_id = Auth::user()->id;
             $patient->email = $this->patient['email'];
             $patient->phone = $this->patient['phone'];
             $patient->sex = $this->patient['sex'];

@@ -20,9 +20,9 @@
                 <div class="col-lg-3">
                     <div class="d-grid gap-2">
                         @if (Auth::user()->hasPermissionTo('patient_update'))
-                        <button wire:click="formNewPatient" class="btn btn-lg btn-success">
-                            Registrar paciente
-                        </button>
+                            <button wire:click="formNewPatient" class="btn btn-lg btn-success">
+                                Registrar paciente
+                            </button>
                         @endif
                     </div>
                 </div>
@@ -87,14 +87,31 @@
                                         Aplicar prueba
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item"
-                                                wire:click="test('1','{{ $patient->id }}')">Inventario de Depresión de
-                                                Beck (BDI-2)</a></li>
-                                        <li><a class="dropdown-item"
-                                                wire:click="test('2','{{ $patient->id }}')">SCL-90-R</a></li>
-                                        <li><a class="dropdown-item" wire:click="test('3','{{ $patient->id }}')">Escala
-                                                de ansiedad de Hamilton</a></li>
-
+                                        <li>
+                                            <a class="dropdown-item" wire:click="test('1','{{ $patient->id }}')">
+                                                Inventario de Depresión de Beck (BDI-2)
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" wire:click="test('2','{{ $patient->id }}')">
+                                                SCL-90-R
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" wire:click="test('3','{{ $patient->id }}')">
+                                                Inventario de Ansiedad de Beck
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" wire:click="test('4','{{ $patient->id }}')">
+                                            Escala de Estrés Percibido (PSS, Perceived Stress Scale)
+                                        </a>
+                                    </li>
+                                        <li>
+                                            <a class="dropdown-item" wire:click="test('5','{{ $patient->id }}')">
+                                            Escala de ansiedad de Hamilton
+                                        </a>
+                                    </li>
                                     </ul>
                                 </div>
 
@@ -103,9 +120,9 @@
                                 </button>
 
                                 @if (Auth::user()->hasPermissionTo('patient_update'))
-                                <button type="button" wire:click="editPatient({{ $patient->id }})"
-                                    class="btn my-1 btn-warning"> Editar <i
-                                        class="fa-solid fa-pen-to-square"></i></button>
+                                    <button type="button" wire:click="editPatient({{ $patient->id }})"
+                                        class="btn my-1 btn-warning"> Editar <i
+                                            class="fa-solid fa-pen-to-square"></i></button>
                                 @endif
 
                                 @if (Auth::user()->hasPermissionTo('patient_delete'))
@@ -251,16 +268,16 @@
                             <input wire:model="patient.phone" class="form-control form-control-lg" type="text">
                             <br>
                             @if ($errors->any())
-                            <div class="my-3">
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
+                                <div class="my-3">
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        @endif
+                            @endif
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-lg btn-primary">Guardar paciente</button>
                             </div>

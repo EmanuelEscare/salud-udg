@@ -43,6 +43,10 @@ class TestController extends Controller
     {
         $data = $request->input("data");
 
+        DB::table('api_requests')->insert([
+            'object' => json_encode($data)
+        ]);
+
         Test::create([
             'test' => $data['appliedTest'],
             'patient_id' => $data['patient_id'],
