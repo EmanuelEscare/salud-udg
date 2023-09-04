@@ -56,4 +56,31 @@ class TestController extends Controller
 
         return response()->json(['message' => 'Datos recibidos correctamente'], 200);
     }
+
+    public function result($id){
+        $months = [
+            'enero',
+            'febrero',
+            'marzo',
+            'abril',
+            'mayo',
+            'junio',
+            'julio',
+            'agosto',
+            'septiembre',
+            'octubre',
+            'noviembre',
+            'diciembre',
+        ];
+
+        $test = Test::where("id", $id)->first();
+
+        $num_month = $test->created_at->format('n');
+
+        $month = $months[$num_month-1];
+
+        $test->date = $test->created_at->format('d') . ' de ' . $month . ' de ' . $test->created_at->format('Y');
+
+        return;
+    }
 }

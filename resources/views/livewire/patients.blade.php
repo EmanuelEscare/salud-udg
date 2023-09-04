@@ -32,7 +32,7 @@
             <table class="table table-bordered table-hover table-striped mt-5">
                 <thead class="border">
                     <tr>
-                        <th class="text-center" scope="col">#</th>
+                        <th class="text-center" scope="col">Folio</th>
                         <th class="text-center" scope="col">Nombre</th>
                         <th class="text-center" scope="col">Sexo</th>
                         <th class="text-center" scope="col">Información</th>
@@ -44,7 +44,7 @@
                         <tr>
                             <th class="align-middle text-center" scope="row">
                                 <p>
-                                    {{ $patient->code }}
+                                    {{ $patient->invoice }}
                                 </p>
                             </th>
                             <td class="align-middle text-center">
@@ -214,7 +214,7 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="d-grid gap-2">
-                                        <a class="btn btn-secondary" href="https://social.test/result"> Resultado <i
+                                        <a class="btn btn-secondary" href="{{route('result', $test)}}"> Resultado <i
                                                 class="fa-solid fa-file"></i></a>
                                     </div>
                                 </div>

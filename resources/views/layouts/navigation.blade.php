@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-decoration-none">
-                    <x-nav-link :href="route('usuarios')" :active="request()->routeIs('usuarios')">
+                    <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
                         {{ __('Usuarios') }}
                     </x-nav-link>
                 </div>
@@ -94,7 +94,7 @@
                 {{ __('Inicio') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link class="text-decoration-none text-center" :href="route('usuarios')" :active="request()->routeIs('usuarios')">
+            <x-responsive-nav-link class="text-decoration-none text-center" :href="route('users')" :active="request()->routeIs('users')">
                 {{ __('Usuarios') }}
             </x-responsive-nav-link>
 

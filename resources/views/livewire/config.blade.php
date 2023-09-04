@@ -14,7 +14,8 @@
                             <input wire:model="folio" class="form-control form-control-lg" type="text">
 
                             <div class="d-grid gap-2 mt-2">
-                                <button wire:click="updateFolio" class="btn btn-lg btn-primary" type="button">Guardar</button>
+                                <button wire:click="updateFolio" class="btn btn-lg btn-primary"
+                                    type="button">Guardar</button>
                             </div>
 
                         </div>
@@ -32,8 +33,8 @@
                                 <div class="col-lg-2">
                                 </div>
                                 <div class="col-lg-2 text-center">
-                                    <button class="btn btn-danger my-2"
-                                        type="button">Restablecer</button>
+                                    <a href="{{ route('backup') }}" class="btn btn-danger my-2"
+                                        onclick="return confirm('¿Estás seguro de que deseas restablecer?')">Restablecer</a>
                                 </div>
                             </div>
                         </div>

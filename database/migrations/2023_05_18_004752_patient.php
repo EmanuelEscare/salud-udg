@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('birth_date');
+            $table->string('invoice')->nullable();
             $table->string('code');
             $table->enum('sex', ['female', 'male', 'other']);
             $table->enum('education', ['Primaria', 'Secundaria', 'Superior'])->nullable();
@@ -24,8 +25,7 @@ return new class extends Migration
             $table->string('occupation')->nullable();
             $table->string('email');
             $table->string('phone');
-            $table->foreignId('user_id')
-                ->references('id')->on('users');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('patients');
     }
 };

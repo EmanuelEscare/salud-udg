@@ -60,6 +60,9 @@ class SocialSeeder extends Seeder
             'password' => bcrypt('asd123'),
         ]);
 
+        // FOLIO 
+        $invoice = config('socialtest.folio');
+
         $user->assignRole('user');
 
 
@@ -75,6 +78,11 @@ class SocialSeeder extends Seeder
             'occupation' => 'Profesor',
             'user_id' => $user->id
         ]);
+
+        $patient_id = $patient->id;
+        $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
+        $patient->invoice = $invoice.$patientIdFormatted;
+        $patient->save();
 
         Test::create([
             'test' => 'SCL-90-R',
@@ -107,6 +115,11 @@ class SocialSeeder extends Seeder
             'user_id' => $user->id
         ]);
 
+        $patient_id = $patient->id;
+        $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
+        $patient->invoice = $invoice.$patientIdFormatted;
+        $patient->save();
+
         Test::create([
             'test' => 'Inventario de Depresión de Beck (BDI-2)',
             'patient_id' => $patient->id,
@@ -131,6 +144,11 @@ class SocialSeeder extends Seeder
             'occupation' => 'Profesor',
             'user_id' => $admin->id
         ]);
+
+        $patient_id = $patient->id;
+        $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
+        $patient->invoice = $invoice.$patientIdFormatted;
+        $patient->save();
 
         Test::create([
             'test' => 'SCL-90-R',

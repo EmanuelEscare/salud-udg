@@ -19,6 +19,8 @@ class Patients extends Component
     public $query;
     public $patient_id;
     public $tests;
+    public $invoice;
+
 
     public function rules()
     {
@@ -51,6 +53,9 @@ class Patients extends Component
 
     public function mount($patient_id)
     {
+        // Load invoice
+        $this->invoice = config('socialtest.folio');
+
         if (Auth::user()->hasRole('user')){
             if ($this->patient_id != null) {
                 $this->patientsData = Patient::where('user_id', Auth::user()->id)->where('id', $this->patient_id)->get();
@@ -71,7 +76,7 @@ class Patients extends Component
     {
         $this->patientsData = Patient::where('name', 'like', '%' . $this->query . '%')
             ->orWhere('email', 'like', '%' . $this->query . '%')
-            ->orWhere('code', 'like', '%' . $this->query . '%')
+            ->orWhere('invoice', 'like', '%' . $this->query . '%')
             ->get()->take($this->pages);
     }
 
@@ -170,6 +175,12 @@ class Patients extends Component
 
             $patient->save();
 
+            // Generate Invoice
+            $patient_id = $patient->id;
+            $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
+            $patient->invoice = $this->invoice.$patientIdFormatted;
+            $patient->save();
+            
             DB::commit();
 
             $this->message_notification = "El paciente ha sido creado";

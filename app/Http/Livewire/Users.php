@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Usuarios extends Component
+class Users extends Component
 {
     public $usersData;
     public $nowPage = 1;
@@ -47,7 +47,7 @@ class Usuarios extends Component
     public function render()
     {
         $users = $this->usersData->slice(($this->nowPage - 1) * $this->pages)->take($this->pages);
-        return view('livewire.usuarios', ['users' => $users]);
+        return view('livewire.users', ['users' => $users]);
     }
 
     public function mount()
