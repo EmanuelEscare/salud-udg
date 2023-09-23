@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TestController extends Controller
 {
@@ -73,14 +76,22 @@ class TestController extends Controller
             'diciembre',
         ];
 
-        $test = Test::where("id", $id)->first();
-
+        $test = Test::find($id);
+       
         $num_month = $test->created_at->format('n');
 
         $month = $months[$num_month-1];
 
+        // create the date of the document
         $test->date = $test->created_at->format('d') . ' de ' . $month . ' de ' . $test->created_at->format('Y');
 
-        return;
+        $pdf = Pdf::loadView('result', compact('test'));
+        
+        $pdf->setOption(['isRemoteEnabled' => true, 'fontDir' => public_path('/roboto')]);
+
+
+        $file_name = $test->patient->invoice.'_'.$test->test.'_'.$test->created_at->format('d_m_Y').'.pdf';
+
+        return $pdf->stream($file_name);
     }
 }
