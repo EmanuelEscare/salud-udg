@@ -11,6 +11,8 @@ export const Test = (props) => {
   const [patientEmail, setPatientEmail] = useState({ value: '', error: '' })
   const [patientAge, setPatientAge] = useState({ value: '', error: '' })
   const [answers, setAnswers] = useState([])
+  const [observations, setObservations] = useState('');
+
 
   //Boton disable
   const [enviado, setEnviado] = useState(false);
@@ -80,6 +82,7 @@ export const Test = (props) => {
       data: {
         patient_id: props.user.id,
         score: score,
+        observations: observations,
         testResults: testResults,
         appliedTest: id,
       }
@@ -204,6 +207,18 @@ export const Test = (props) => {
             </div>
           )
         })}
+        <br />
+        <h3 className={styles.test_form_question_title} dangerouslySetInnerHTML={{__html: 'Observaciones'}}></h3>
+        <textarea
+          className="form-control form-control-lg"
+          rows={4}
+          cols={50}
+          value={observations} // Enlaza el valor con el estado
+          onChange={(e) => setObservations(e.target.value)} // Maneja los cambios en el estado
+          name='observations'
+          id='observations'
+        />
+        <br />
         <button className="btn btn-lg btn-primary" disabled={!canSubmit}>
           {enviado ? 'Formulario enviado' : 'Calificar prueba'}
         </button>

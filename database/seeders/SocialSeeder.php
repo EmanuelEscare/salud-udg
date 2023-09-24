@@ -84,24 +84,6 @@ class SocialSeeder extends Seeder
         $patient->invoice = $invoice.$patientIdFormatted;
         $patient->save();
 
-        Test::create([
-            'test' => 'SCL-90-R',
-            'patient_id' => $patient->id,
-            'result' => '{}',
-        ]);
-
-        Test::create([
-            'test' => 'Inventario de Depresión de Beck (BDI-2)',
-            'patient_id' => $patient->id,
-            'result' => '{}',
-        ]);
-
-        Test::create([
-            'test' => 'Escala de ansiedad de Hamilton',
-            'patient_id' => $patient->id,
-            'result' => '{}',
-        ]);
-
         $patient = Patient::create([
             'name' => 'Ana',
             'birth_date' => '2001-02-01',
@@ -119,18 +101,6 @@ class SocialSeeder extends Seeder
         $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
         $patient->invoice = $invoice.$patientIdFormatted;
         $patient->save();
-
-        Test::create([
-            'test' => 'Inventario de Depresión de Beck (BDI-2)',
-            'patient_id' => $patient->id,
-            'result' => '{}',
-        ]);
-
-        Test::create([
-            'test' => 'Escala de ansiedad de Hamilton',
-            'patient_id' => $patient->id,
-            'result' => '{}',
-        ]);
 
         $patient = Patient::create([
             'name' => 'Pedro',
@@ -150,10 +120,5 @@ class SocialSeeder extends Seeder
         $patient->invoice = $invoice.$patientIdFormatted;
         $patient->save();
 
-        Test::create([
-            'test' => 'SCL-90-R',
-            'patient_id' => $patient->id,
-            'result' => '{}',
-        ]);
     }
 }

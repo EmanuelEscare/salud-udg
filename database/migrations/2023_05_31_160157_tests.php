@@ -25,6 +25,7 @@ return new class extends Migration
                 ->references('id')->on('patients')
                 ->onDelete('cascade');
             $table->json('diagnostic')->nullable();
+            $table->string('observations',300)->nullable();
             $table->json('result');
             $table->timestamps();
         });

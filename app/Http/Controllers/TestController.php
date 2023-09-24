@@ -53,6 +53,7 @@ class TestController extends Controller
         Test::create([
             'test' => $data['appliedTest'],
             'patient_id' => $data['patient_id'],
+            'observations' => $data['observations'],
             'diagnostic' => json_encode($data['diagnostic']),
             'result' => json_encode($data['testResults']),
         ]);
@@ -84,15 +85,15 @@ class TestController extends Controller
 
         $test->result = json_decode($test->result, true);
 
+        $file_name = $test->patient->invoice.'_'.$test->test.'_'.$test->created_at->format('d_m_Y').'.pdf';
+        $test->filename = $file_name;
+        
         // create the date of the document
         $test->date = $test->created_at->format('d') . ' de ' . $month . ' de ' . $test->created_at->format('Y');
 
         $pdf = Pdf::loadView('result', compact('test'));
         
         $pdf->setOption(['isRemoteEnabled' => true, 'fontDir' => public_path('/roboto')]);
-
-        $file_name = $test->patient->invoice.'_'.$test->test.'_'.$test->created_at->format('d_m_Y').'.pdf';
-        
 
         return $pdf->stream($file_name);
     }

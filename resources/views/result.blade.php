@@ -3,7 +3,7 @@
 
 <head>
     <!-- Required meta tags -->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
@@ -18,20 +18,20 @@
         @font-face {
             font-family: 'roboto';
             font-weight: 400;
-            font-style: normal; 
+            font-style: normal;
             src: url('./roboto/Roboto-Light.ttf') format("truetype");
         }
 
         @font-face {
             font-family: 'robotoBold';
             font-weight: bold;
-            font-style: normal; 
+            font-style: normal;
             src: url('./roboto/Roboto-Bold.ttf') format("truetype");
         }
 
         /** Defina ahora los márgenes reales de cada página en el PDF **/
         body {
-            font-family: 'robotoBold','roboto'!important;
+            font-family: 'robotoBold', 'roboto' !important;
             margin-top: 5cm;
             margin-left: 2cm;
             margin-right: 2cm;
@@ -78,13 +78,14 @@
             float: right;
             width: 50%;
         }
-        .img-header{
+
+        .img-header {
             /* background-image: url('./header.png'); */
-            width: 100%!important;
+            width: 100% !important;
         }
     </style>
 
-    <title>Test Report</title>
+    <title>{{$test->filename}}</title>
 </head>
 
 <body>
@@ -117,7 +118,9 @@
                 </span>
             </div>
         </div>
-        <x-test_escala_de_ansiedad_de_hamilton :test="$test"></x-test_escala_de_ansiedad_de_hamilton>
+        @if ($test->test == 'Escala de ansiedad de Hamilton')
+            <x-test_escala_de_ansiedad_de_hamilton :test="$test"></x-test_escala_de_ansiedad_de_hamilton>
+        @endif
     </main>
 </body>
 

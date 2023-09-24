@@ -113,11 +113,11 @@
                     @php
                         $parts = explode("<br>", $question['option']);
                     @endphp
-                    <b class="title-table">
+                    <b class="title-table text-justify">
                         {{strip_tags($parts[0])}}
                     </b>
                     <br>
-                    <p class="content-table">
+                    <p class="content-table text-justify">
                         {{$parts[1]}}
                     </p>
                 </td>
@@ -168,13 +168,8 @@
     <table>
         <tbody>
             <tr>
-                <td>
-                    Tenso, no relajado, agitación nerviosa:
-                    manos, dedos cogidos, apretados, tics,
-                    enrollar un pañuelo; inquietud; pasearse de
-                    un lado a otro, temblor de manos, ceño
-                    fruncido, cara tirante, aumento del tono
-                    muscular, suspiros, palidez facial.
+                <td class="text-justify">
+                    {!! $test->observations !!}
 
                 </td>
             </tr>
