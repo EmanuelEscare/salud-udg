@@ -118,10 +118,6 @@
             </div>
         </div>
         <x-test_escala_de_ansiedad_de_hamilton :test="$test"></x-test_escala_de_ansiedad_de_hamilton>
-
-        <footer>
-            <p>bbb</p>
-        </footer>
     </main>
 </body>
 

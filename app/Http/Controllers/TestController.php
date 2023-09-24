@@ -82,6 +82,8 @@ class TestController extends Controller
 
         $month = $months[$num_month-1];
 
+        $test->result = json_decode($test->result, true);
+
         // create the date of the document
         $test->date = $test->created_at->format('d') . ' de ' . $month . ' de ' . $test->created_at->format('Y');
 
@@ -89,8 +91,8 @@ class TestController extends Controller
         
         $pdf->setOption(['isRemoteEnabled' => true, 'fontDir' => public_path('/roboto')]);
 
-
         $file_name = $test->patient->invoice.'_'.$test->test.'_'.$test->created_at->format('d_m_Y').'.pdf';
+        
 
         return $pdf->stream($file_name);
     }
