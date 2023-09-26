@@ -17,7 +17,7 @@ class BackupController extends Controller
         // Clean and reset migrations
         Artisan::call('migrate:fresh --seed');
         
-        return redirect()->route('backup_notify');
+        return redirect()->route('backup_instructions');
     }
 
 }

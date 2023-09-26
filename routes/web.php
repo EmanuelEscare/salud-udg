@@ -45,8 +45,8 @@ Route::get('/react/{id}/{user_id}', function ($id, $user_id) {
 
 Route::get('/backup', [BackupController::class, 'backup'])->name('backup');
 
-Route::get('/backup_notify', function () {
-    return view('backup_notify');
-})->middleware(['auth', 'verified'])->name('backup_notify');
+Route::get('/backup_instructions', function () {
+    return view('backup_instructions');
+})->middleware(['auth', 'verified'])->name('backup_instructions');
 
 require __DIR__.'/auth.php';

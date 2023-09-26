@@ -31,7 +31,7 @@ class SocialSeeder extends Seeder
         $patient_create = Permission::create(['name' => 'patient_create']);
         $patient_update = Permission::create(['name' => 'patient_update']);
         $patient_delete = Permission::create(['name' => 'patient_delete']);
-        
+
         $admin->givePermissionTo($user_create);
         $admin->givePermissionTo($user_update);
         $admin->givePermissionTo($user_delete);
@@ -46,69 +46,42 @@ class SocialSeeder extends Seeder
 
         // ADMIN USER
         $admin = User::create([
-            'name' => 'Emanuel Admin',
-            'email' => 'emanuel.escareno@alumnos.udg.mx',
+            'name' => 'Desarrollo',
+            'email' => 'desarrollo@cucea.udg.mx',
             'password' => bcrypt('asd123'),
         ]);
 
         $admin->assignRole('admin');
 
-        // USER 
-        $user = User::create([
-            'name' => 'Emanuel User',
-            'email' => 'emanuel.user@alumnos.udg.mx',
+        // ADMIN USER
+        $admin = User::create([
+            'name' => 'Alfredo Orozco',
+            'email' => 'alfredo.orozco@cucea.udg.mx',
             'password' => bcrypt('asd123'),
         ]);
+
+        $admin->assignRole('admin');
+
+        // // USER 
+        // $user = User::create([
+        //     'name' => 'Emanuel User',
+        //     'email' => 'emanuel.user@alumnos.udg.mx',
+        //     'password' => bcrypt('asd123'),
+        // ]);
 
         // FOLIO 
         $invoice = config('socialtest.folio');
 
-        $user->assignRole('user');
+        // $user->assignRole('user');
 
 
         $patient = Patient::create([
-            'name' => 'Emanuel Esc',
+            'name' => 'Alumno Prueba',
             'birth_date' => '2000-02-01',
             'code' => '2162381722',
             'sex' => 'male',
-            'email' => 'emanuel.escareno@alumnos.udg.mx',
-            'phone' => '3317009646',
-            'civil_status' => 'Soltero/a',
-            'education' => 'Secundaria',
-            'occupation' => 'Profesor',
-            'user_id' => $user->id
-        ]);
-
-        $patient_id = $patient->id;
-        $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
-        $patient->invoice = $invoice.$patientIdFormatted;
-        $patient->save();
-
-        $patient = Patient::create([
-            'name' => 'Ana',
-            'birth_date' => '2001-02-01',
-            'code' => '2162382722',
-            'sex' => 'female',
-            'email' => 'ana@alumnos.udg.mx',
-            'phone' => '3317009346',
-            'civil_status' => 'Soltero/a',
-            'education' => 'Secundaria',
-            'occupation' => 'Profesor',
-            'user_id' => $user->id
-        ]);
-
-        $patient_id = $patient->id;
-        $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
-        $patient->invoice = $invoice.$patientIdFormatted;
-        $patient->save();
-
-        $patient = Patient::create([
-            'name' => 'Pedro',
-            'birth_date' => '2001-02-01',
-            'code' => '2111382722',
-            'sex' => 'other',
-            'email' => 'pedro@alumnos.udg.mx',
-            'phone' => '3317109346',
+            'email' => 'alumno@alumnos.udg.mx',
+            'phone' => '3317008886',
             'civil_status' => 'Soltero/a',
             'education' => 'Secundaria',
             'occupation' => 'Profesor',
@@ -117,8 +90,44 @@ class SocialSeeder extends Seeder
 
         $patient_id = $patient->id;
         $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
-        $patient->invoice = $invoice.$patientIdFormatted;
+        $patient->invoice = $invoice . $patientIdFormatted;
         $patient->save();
+
+        // $patient = Patient::create([
+        //     'name' => 'Ana',
+        //     'birth_date' => '2001-02-01',
+        //     'code' => '2162382722',
+        //     'sex' => 'female',
+        //     'email' => 'ana@alumnos.udg.mx',
+        //     'phone' => '3317009346',
+        //     'civil_status' => 'Soltero/a',
+        //     'education' => 'Secundaria',
+        //     'occupation' => 'Profesor',
+        //     'user_id' => $user->id
+        // ]);
+
+        // $patient_id = $patient->id;
+        // $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
+        // $patient->invoice = $invoice.$patientIdFormatted;
+        // $patient->save();
+
+        // $patient = Patient::create([
+        //     'name' => 'Pedro',
+        //     'birth_date' => '2001-02-01',
+        //     'code' => '2111382722',
+        //     'sex' => 'other',
+        //     'email' => 'pedro@alumnos.udg.mx',
+        //     'phone' => '3317109346',
+        //     'civil_status' => 'Soltero/a',
+        //     'education' => 'Secundaria',
+        //     'occupation' => 'Profesor',
+        //     'user_id' => $admin->id
+        // ]);
+
+        // $patient_id = $patient->id;
+        // $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
+        // $patient->invoice = $invoice.$patientIdFormatted;
+        // $patient->save();
 
     }
 }

@@ -118,6 +118,9 @@
                 </span>
             </div>
         </div>
+        @if ($test->test == 'Inventario de Depresión de Beck (BDI-2)')
+        <x-test_inventario_de_depresion_de_beck :test="$test"></x-test_inventario_de_depresion_de_beck>
+        @endif
         @if ($test->test == 'SCL-90-R')
         <x-test_inventario_de_sintomas_scl90 :test="$test"></x-test_inventario_de_sintomas_scl90>
         @endif

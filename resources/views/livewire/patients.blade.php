@@ -214,12 +214,17 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="d-grid gap-2">
-                                        <a class="btn btn-secondary" href="{{route('result', $test)}}"> Resultado <i
+                                        <a class="btn btn-secondary" target="__blank" href="{{route('result', $test)}}"> Resultado <i
                                                 class="fa-solid fa-file"></i></a>
                                     </div>
                                 </div>
                                 <hr class="my-2">
                             @endforeach
+                            @if($now_patient->tests->count() == 0)
+                                <h5 class="text-center">
+                                    No hay registros disponibles.
+                                </h1>
+                            @endif
                         </div>
                     </div>
                 </div>

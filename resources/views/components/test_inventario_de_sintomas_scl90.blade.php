@@ -64,17 +64,29 @@
             background-color: rgb(170, 170, 170) !important;
         }
     </style>
-    <h3 class="font-weight-normal"><b>INVENTARIO DE ANSIEDAD DE BECK (BAI)</b></h3>
+    <h3 class="font-weight-normal"><b>EL INVENTARIO DE SÍNTOMAS SCL-90-R de L. Derogatis</b></h3>
     <br>
     <p class="text-justify">
-        El BAI se construyó con la intención de disponer de una medida de ansiedad clínica que a su vez permitiera
-        discriminar la ansiedad de la depresión. Según el análisis de su validez de contenido realizado por Sanz y
-        Navarro (2003), el BAI se distingue, en cuanto a su contenido, por evaluar sobre todo síntomas fisiológicos: 14
-        de sus 21 ítems (el 67%) se refieren a síntomas fisiológicos, mientras que sólo 4 de sus ítems evalúan aspectos
-        cognitivos y 3 aspectos afectivos. Por otro lado, 19 de los 21 ítems del BAI (el 90%) se refieren a síntomas
-        característicos de las crisis de angustia o pánico.
+        Evaluar patrones de síntomas presentes psicológicos y psicopatológicos, tanto en población clínica como en
+        población normal, obteniendo el grado de malestar subjetivo.
+    </p>
+    <p>
+        En términos generales una persona que ha completado su escolaridad primaria lo puede
+responder sin mayores dificultades. En caso de que el sujeto evidencie dificultades lectoras es
+aconsejable que el examinador le lea cada uno de los ítems en voz alta.
+</p><p>
+En circunstancias normales su administración no requiere más de quince minutos. Se le pide a
+la persona que está siendo evaluada que responda en función de cómo se ha sentido durante
+los últimos siete días, incluyendo el día de hoy (el de la administración del inventario). Los
+pacientes con retraso mental, ideas delirantes o trastorno psicótico son malos candidatos para
+responder el SCL-90. Es aplicable a personas entre 13 y 65 años de edad.
     </p>
     <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -192,14 +204,16 @@
                             @endphp
                             @if ($indices['indicator'] == 'SOM')
                                 @if ($indice_value > 0 && $indice_value <= 1)
-                                    <span class="badge badge-success">Puntuación Baja</span><br> Indica que el individuo experimenta pocos síntomas somáticos
+                                    <span class="badge badge-success">Puntuación Baja</span><br> Indica que el individuo
+                                    experimenta pocos síntomas somáticos
                                     y es
                                     poco probable que haya una preocupación significativa en esta área.
                                 @endif
 
 
                                 @if ($indice_value > 1.8 && $indice_value <= 3)
-                                <span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una presencia moderada de síntomas somáticos.
+                                    <span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una
+                                    presencia moderada de síntomas somáticos.
                                     Puede
                                     ser útil explorar más a fondo para determinar si estos síntomas tienen una causa
                                     médica
@@ -207,7 +221,8 @@
                                 @endif
 
                                 @if ($indice_value > 3 && $indice_value <= 5)
-                                    <span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta presencia de síntomas somáticos. Esto puede ser
+                                    <span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta
+                                    presencia de síntomas somáticos. Esto puede ser
                                     una
                                     señal de que el individuo está experimentando una cantidad significativa de síntomas
                                     físicos que podrían estar relacionados con problemas emocionales o psicológicos. Se
@@ -216,16 +231,19 @@
                             @endif
                             @if ($indices['indicator'] == 'OBS')
                                 @if ($indice_value >= 0 && $indice_value <= 1.8)
-                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el individuo experimenta pocos síntomas
+                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el
+                                        individuo experimenta pocos síntomas
                                         obsesivos y compulsivos y es poco probable que haya una preocupación
                                         significativa en esta área.</p>
                                 @elseif ($indice_value > 1.8 && $indice_value <= 3)
-                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere la presencia de síntomas obsesivos y
+                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere la
+                                        presencia de síntomas obsesivos y
                                         compulsivos de intensidad moderada. Puede ser útil explorar más a fondo para
                                         determinar si estos síntomas tienen un impacto significativo en la vida del
                                         individuo.</p>
                                 @elseif ($indice_value >= 4)
-                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una presencia significativa de síntomas
+                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una presencia
+                                        significativa de síntomas
                                         obsesivos y compulsivos. Se recomienda una evaluación más detallada por parte de
                                         un profesional de la salud mental.</p>
                                 @else
@@ -234,15 +252,18 @@
                             @endif
                             @if ($indices['indicator'] == 'SI')
                                 @if ($indice_value >= 0 && $indice_value <= 1.8)
-                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el individuo experimenta poca sensibilidad
+                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el
+                                        individuo experimenta poca sensibilidad
                                         interpersonal y es poco probable que haya una preocupación significativa en esta
                                         área.</p>
                                 @elseif ($indice_value >= 1.8 && $indice_value <= 3)
-                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una presencia moderada de sensibilidad
+                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una
+                                        presencia moderada de sensibilidad
                                         interpersonal. Puede ser útil explorar más a fondo para determinar si esta
                                         sensibilidad afecta las relaciones del individuo.</p>
                                 @elseif ($indice_value >= 4)
-                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta sensibilidad interpersonal. Esto puede
+                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta
+                                        sensibilidad interpersonal. Esto puede
                                         ser una señal de que el individuo experimenta una cantidad significativa de
                                         sensibilidad en sus relaciones interpersonales y puede requerir apoyo adicional
                                         para manejar esta sensibilidad.</p>
@@ -252,15 +273,18 @@
                             @endif
                             @if ($indices['indicator'] == 'DEP')
                                 @if ($indice_value >= 0 && $indice_value <= 1.8)
-                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el individuo experimenta pocos síntomas de
+                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el
+                                        individuo experimenta pocos síntomas de
                                         depresión y es poco probable que haya una preocupación significativa en esta
                                         área.</p>
                                 @elseif ($indice_value >= 1.8 && $indice_value <= 3)
-                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una presencia moderada de síntomas de
+                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una
+                                        presencia moderada de síntomas de
                                         depresión. Puede ser útil explorar más a fondo para determinar si estos síntomas
                                         están afectando la calidad de vida del individuo.</p>
                                 @elseif ($indice_value >= 4)
-                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta presencia de síntomas de depresión.
+                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta
+                                        presencia de síntomas de depresión.
                                         Esto puede ser una señal de que el individuo está experimentando una cantidad
                                         significativa de síntomas depresivos y puede requerir una evaluación y apoyo
                                         adicionales por parte de un profesional de la salud mental.</p>
@@ -270,14 +294,17 @@
                             @endif
                             @if ($indices['indicator'] == 'ANS')
                                 @if ($indices['result'] >= 0 && $indices['result'] <= 1.8)
-                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el individuo experimenta pocos síntomas de ansiedad y
+                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el
+                                        individuo experimenta pocos síntomas de ansiedad y
                                         es poco probable que haya una preocupación significativa en esta área.</p>
                                 @elseif ($indices['result'] >= 1.8 && $indices['result'] <= 3)
-                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una presencia moderada de síntomas de ansiedad.
+                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una
+                                        presencia moderada de síntomas de ansiedad.
                                         Puede ser útil explorar más a fondo para determinar si estos síntomas están
                                         afectando la calidad de vida del individuo.</p>
                                 @elseif ($indices['result'] >= 4)
-                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta presencia de síntomas de ansiedad. Esto puede
+                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta
+                                        presencia de síntomas de ansiedad. Esto puede
                                         ser una señal de que el individuo está experimentando una cantidad significativa
                                         de síntomas de ansiedad y puede requerir una evaluación y apoyo adicionales por
                                         parte de un profesional de la salud mental.</p>
@@ -287,14 +314,17 @@
                             @endif
                             @if ($indices['indicator'] == 'HOS')
                                 @if ($indices['result'] >= 0 && $indices['result'] <= 1.8)
-                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el individuo experimenta pocos síntomas de hostilidad
+                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el
+                                        individuo experimenta pocos síntomas de hostilidad
                                         y es poco probable que haya una preocupación significativa en esta área.</p>
                                 @elseif ($indices['result'] > 1.8 && $indices['result'] <= 3)
-                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una presencia moderada de síntomas de hostilidad.
+                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una
+                                        presencia moderada de síntomas de hostilidad.
                                         Puede ser útil explorar más a fondo para determinar si estos síntomas están
                                         afectando la calidad de vida del individuo.</p>
                                 @elseif ($indices['result'] > 3)
-                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta presencia de síntomas de hostilidad. Esto puede
+                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta
+                                        presencia de síntomas de hostilidad. Esto puede
                                         ser una señal de que el individuo está experimentando una cantidad significativa
                                         de síntomas de hostilidad y puede requerir una evaluación y apoyo adicionales
                                         por parte de un profesional de la salud mental.</p>
@@ -304,14 +334,17 @@
                             @endif
                             @if ($indices['indicator'] == 'FOB')
                                 @if ($indices['result'] >= 0 && $indices['result'] <= 1.8)
-                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el individuo experimenta pocos síntomas de fobia y es
+                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el
+                                        individuo experimenta pocos síntomas de fobia y es
                                         poco probable que haya una preocupación significativa en esta área.</p>
                                 @elseif ($indices['result'] > 1.8 && $indices['result'] <= 3)
-                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una presencia moderada de síntomas de fobia. Puede
+                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una
+                                        presencia moderada de síntomas de fobia. Puede
                                         ser útil explorar más a fondo para determinar si estos síntomas están afectando
                                         la calidad de vida del individuo.</p>
                                 @elseif ($indices['result'] > 3)
-                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta presencia de síntomas de fobia. Esto puede ser
+                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta
+                                        presencia de síntomas de fobia. Esto puede ser
                                         una señal de que el individuo está experimentando una cantidad significativa de
                                         síntomas de fobia y puede requerir una evaluación y apoyo adicionales por parte
                                         de un profesional de la salud mental.</p>
@@ -321,14 +354,17 @@
                             @endif
                             @if ($indices['indicator'] == 'PAR')
                                 @if ($indices['result'] >= 0 && $indices['result'] <= 1.8)
-                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el individuo experimenta pocos síntomas de paranoia y
+                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el
+                                        individuo experimenta pocos síntomas de paranoia y
                                         es poco probable que haya una preocupación significativa en esta área.</p>
                                 @elseif ($indices['result'] > 1.8 && $indices['result'] <= 3)
-                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una presencia moderada de síntomas de paranoia.
+                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una
+                                        presencia moderada de síntomas de paranoia.
                                         Puede ser útil explorar más a fondo para determinar si estos síntomas están
                                         afectando la calidad de vida del individuo.</p>
                                 @elseif ($indices['result'] > 3)
-                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta presencia de síntomas de paranoia. Esto puede
+                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta
+                                        presencia de síntomas de paranoia. Esto puede
                                         ser una señal de que el individuo está experimentando una cantidad significativa
                                         de síntomas de paranoia y puede requerir una evaluación y apoyo adicionales por
                                         parte de un profesional de la salud mental.</p>
@@ -338,14 +374,17 @@
                             @endif
                             @if ($indices['indicator'] == 'PSIC')
                                 @if ($indices['result'] >= 0 && $indices['result'] <= 1.8)
-                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el individuo experimenta pocos síntomas psicóticos y
+                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el
+                                        individuo experimenta pocos síntomas psicóticos y
                                         es poco probable que haya una preocupación significativa en esta área.</p>
                                 @elseif ($indices['result'] > 1.8 && $indices['result'] <= 3)
-                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una presencia moderada de síntomas psicóticos. Puede
+                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una
+                                        presencia moderada de síntomas psicóticos. Puede
                                         ser útil explorar más a fondo para determinar si estos síntomas están afectando
                                         la calidad de vida del individuo.</p>
                                 @elseif ($indices['result'] > 3)
-                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta presencia de síntomas psicóticos. Esto puede ser
+                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta
+                                        presencia de síntomas psicóticos. Esto puede ser
                                         una señal de que el individuo está experimentando una cantidad significativa de
                                         síntomas psicóticos y puede requerir una evaluación y apoyo adicionales por
                                         parte de un profesional de la salud mental.</p>
@@ -355,15 +394,18 @@
                             @endif
                             @if ($indices['indicator'] == 'IGS')
                                 @if ($indices['result'] >= 0 && $indices['result'] <= 1.8)
-                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el individuo experimenta pocos síntomas de ideas de
+                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el
+                                        individuo experimenta pocos síntomas de ideas de
                                         grandeza (grandiosidad) y es poco probable que haya una preocupación
                                         significativa en esta área.</p>
                                 @elseif ($indices['result'] > 1.8 && $indices['result'] <= 3)
-                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una presencia moderada de síntomas de ideas de
+                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una
+                                        presencia moderada de síntomas de ideas de
                                         grandeza. Puede ser útil explorar más a fondo para determinar si estos síntomas
                                         están afectando la calidad de vida del individuo.</p>
                                 @elseif ($indices['result'] > 3)
-                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta presencia de síntomas de ideas de grandeza. Esto
+                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta
+                                        presencia de síntomas de ideas de grandeza. Esto
                                         puede ser una señal de que el individuo está experimentando una cantidad
                                         significativa de síntomas de ideas de grandeza y puede requerir una evaluación y
                                         apoyo adicionales por parte de un profesional de la salud mental.</p>
@@ -380,15 +422,18 @@
                             @endif
                             @if ($indices['indicator'] == 'IMSP')
                                 @if ($indices['result'] >= 0 && $indices['result'] <= 1.8)
-                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el individuo experimenta pocos síntomas de ítems
+                                    <p><span class="badge badge-success">Puntuación Baja</span><br> Indica que el
+                                        individuo experimenta pocos síntomas de ítems
                                         impropios (pensamientos extraños o inapropiados) y es poco probable que haya una
                                         preocupación significativa en esta área.</p>
                                 @elseif ($indices['result'] > 1.8 && $indices['result'] <= 3)
-                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una presencia moderada de síntomas de ítems
+                                    <p><span class="badge badge-warning">Puntuación Moderada</span><br> Sugiere una
+                                        presencia moderada de síntomas de ítems
                                         impropios. Puede ser útil explorar más a fondo para determinar si estos síntomas
                                         están afectando la calidad de vida del individuo.</p>
                                 @elseif ($indices['result'] > 3)
-                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta presencia de síntomas de ítems impropios. Esto
+                                    <p><span class="badge badge-danger">Puntuación Alta</span><br> Indica una alta
+                                        presencia de síntomas de ítems impropios. Esto
                                         puede ser una señal de que el individuo está experimentando una cantidad
                                         significativa de síntomas de ítems impropios y puede requerir una evaluación y
                                         apoyo adicionales por parte de un profesional de la salud mental.</p>
