@@ -187,7 +187,7 @@
                     </th>
                 @endif
                 @if ($test->diagnostic == '"Ansiedad Moderada"')
-                    <th class="text-center border-dark bg-light">
+                    <th class="text-center border-dark text-dark bg-light">
                         {{ preg_replace('/(^[\"\']|[\"\']$)/', '', $test->diagnostic) }}
                     </th>
                 @endif
@@ -236,24 +236,4 @@
         </tbody>
     </table>
     <br>
-
-    <h5><b>Bibliografía</b></h5>
-    <br>
-    <ul>
-        <li>
-            Hamilton, M. The assessment of anxiety states by rating. Brit J Med Psychol
-            1959; 32:50-55.
-        </li>
-
-        <li>
-            Hamilton MC. Diagnosis and rating of anxiety. Br j Psychiatry. 1969; 3: 76 -
-            79.
-        </li>
-
-        <li>
-            Lobo A, Camorro L, Luque A et al. Validación de las versiones en español de
-            la montgomery Anxiety Rating Scale para la evaluación de la depresión y de
-            la ansiedad. Medicina clínica 2002. 118(13): 493-9.
-        </li>
-    </ul>
 </div>

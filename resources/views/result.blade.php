@@ -118,6 +118,15 @@
                 </span>
             </div>
         </div>
+        @if ($test->test == 'SCL-90-R')
+        <x-test_inventario_de_sintomas_scl90 :test="$test"></x-test_inventario_de_sintomas_scl90>
+        @endif
+        @if ($test->test == 'Inventario de Ansiedad de Beck')
+        <x-test_inventario_de_ansiedad_de_beck :test="$test"></x-test_inventario_de_ansiedad_de_beck>
+        @endif
+        @if ($test->test == 'Escala de Estrés Percibido (PSS, Perceived Stress Scale)')
+            <x-test_escala_de_estres_percibido :test="$test"></x-test_escala_de_estres_percibido>
+        @endif
         @if ($test->test == 'Escala de ansiedad de Hamilton')
             <x-test_escala_de_ansiedad_de_hamilton :test="$test"></x-test_escala_de_ansiedad_de_hamilton>
         @endif

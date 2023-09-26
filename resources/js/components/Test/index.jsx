@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client'
 import styles from './Test.module.scss'
 import { differenceInYears, parse } from 'date-fns';
 import { resultsService, qualificatorsService } from '../services_new/index'
+import { Alert } from 'bootstrap'
 
 export const Test = (props) => {
   const [patientName, setPatientName] = useState({ value: '', error: '' })
@@ -75,7 +76,40 @@ export const Test = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const score = answers.reduce((acc, curr) => acc + curr.value, 0)
+    let score = answers.reduce((acc, curr) => acc + curr.value, 0)
+
+    if (id === 4) {
+    try {
+    // Filter responses for the "Perceived Stress" group (items 1, 2, 3, 8, 11, 12, and 14)
+      const perceivedStressItems = answers.filter((answer) =>
+      [1, 2, 3, 8, 11, 12, 14].includes(answer.index)
+    );
+
+    // Filter responses for the "Coping with Perceived Stress" group (items 4, 5, 6, 7, 9, 10, and 13)
+    const copingItems = answers.filter((answer) =>
+      [4, 5, 6, 7, 9, 10, 13].includes(answer.index)
+    );
+
+    // Calculate the score for the "Perceived Stress" group
+    const perceivedStressScore = perceivedStressItems.reduce(
+      (acc, curr) => acc + curr.value,
+      0
+    );
+
+    // Calculate the score for the "Coping with Perceived Stress" group
+    const copingScore = copingItems.reduce(
+      (acc, curr) => acc + (4-curr.value),
+      0
+    );
+
+    score = perceivedStressScore+copingScore
+    } catch (error) {
+      console.log(error)
+      alert(error)
+    }
+  }
+
+
     const testResults = answers.sort((a, b) => a.index - b.index)
 
     const newResult = {

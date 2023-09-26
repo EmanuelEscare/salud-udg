@@ -132,10 +132,10 @@ const derogatisSymptomsInventory = ({ score, testResults }) => {
 }
 
 export const beckAnxietyInventory = ({ score }) => {
-  if (score <= 5) return 'Ansiedad mínima'
-  if (score > 5 && score <= 15) return 'Ansiedad leve'
-  if (score > 15 && score <= 30) return 'Ansiedad moderada'
-  if (score > 30 && score <= 63) return 'Ansiedad severa'
+  if (score <= 12) return 'Ansiedad mínima'
+  if (score > 12 && score <= 21) return 'Ansiedad leve'
+  if (score > 21 && score <= 35) return 'Ansiedad moderada'
+  if (score > 35 && score <= 63) return 'Ansiedad severa'
 }
 
 export const PerceivedStressScale = ({ score }) => {
