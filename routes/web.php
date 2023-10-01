@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect()->route('patients');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/result/{id}', [TestController::class, 'result'])->middleware(['auth', 'verified'])->name('result');
