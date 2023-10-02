@@ -168,7 +168,7 @@ export const Test = (props) => {
     <section className={styles.test}>
       <h1 className={styles.test_title}>Prueba: {test.name}</h1>
       <br />
-      <form className={styles.test_form} onSubmit={handleSubmit}>
+      <form acceptCharset="UTF-8" className={styles.test_form} onSubmit={handleSubmit}>
         <div className={styles.test_form_input}>
           <label htmlFor='patientName'>Nombre del paciente: </label>
           <input disabled

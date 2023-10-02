@@ -20,7 +20,7 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-
+    <link rel="icon" href="{{ asset('paz-udg.png') }}" type="image/png">
     <!-- Scripts -->
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
     @livewireStyles
