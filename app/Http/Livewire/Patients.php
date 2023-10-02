@@ -213,6 +213,7 @@ class Patients extends Component
 
     public function delete($id)
     {
+        $this->now_patient = null;
         $this->patientsData->find($id)->delete();
         $this->message_notification = "El paciente ha sido eliminado";
         $this->dispatchBrowserEvent('notification');

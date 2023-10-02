@@ -160,6 +160,10 @@ responder el SCL-90. Es aplicable a personas entre 13 y 65 años de edad.
     </table>
     <br>
     <br>
+    <br>
+    <br>
+    <br>
+
     <h5><b>Observaciones</b></h5>
 
     <br>

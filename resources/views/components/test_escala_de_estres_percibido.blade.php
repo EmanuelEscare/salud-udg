@@ -1,7 +1,7 @@
 <div>
     <!-- Let all your things have their places; let each part of your business have its time. - Benjamin Franklin -->
     @php
-        
+        $test->diagnostic = json_decode($test->diagnostic);
         $copingWithStress = [4,5,6,7,8,10,13];
         $perceivedStress = [1,2,3,8,11,12,14];
         
@@ -138,6 +138,12 @@
     <br>
     <br>
     <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <h5><b>Observaciones</b></h5>
 
     <br>
@@ -152,58 +158,57 @@
         </tbody>
     </table>
     <br>
-    <br>
     <h5><b>Diagnóstico</b></h5>
     <br>
     <table class="table table-bordered">
         <thead>
             <tr>
-                @if ($test->diagnostic == '"Nivel de estrés: Bajo estrés percibido."')
+                @if ($test->diagnostic == 'Nivel de estrés: Bajo estrés percibido.')
                     <th class="text-center border-dark bg-success">
-                        {{ preg_replace('/(^[\"\']|[\"\']$)/', '', $test->diagnostic) }}
+                        {{ $test->diagnostic }}
                     </th>
                 @endif
-                @if ($test->diagnostic == '"Nivel de estrés: Estrés percibido moderado."')
+                @if ($test->diagnostic == 'Nivel de estrés: Estrés percibido moderado.')
                     <th class="text-center border-dark text-dark bg-light">
-                        {{ preg_replace('/(^[\"\']|[\"\']$)/', '', $test->diagnostic) }}
+                        {{ $test->diagnostic }}
                     </th>
                 @endif
-                @if ($test->diagnostic == '"Nivel de estrés: Estrés percibido alto."')
+                @if ($test->diagnostic == 'Nivel de estrés: Estrés percibido alto.')
                     <th class="text-center text-dark border-dark bg-warning">
-                        {{ preg_replace('/(^[\"\']|[\"\']$)/', '', $test->diagnostic) }}
+                        {{ $test->diagnostic }}
                     </th>
                 @endif
-                @if ($test->diagnostic == '"Nivel de estrés: Muy alto estrés percibido."')
+                @if ($test->diagnostic == 'Nivel de estrés: Muy alto estrés percibido.')
                     <th class="text-center border-dark bg-danger">
-                        {{ preg_replace('/(^[\"\']|[\"\']$)/', '', $test->diagnostic) }}
+                        {{ $test->diagnostic }}
                     </th>
                 @endif
             </tr>
         </thead>
         <tbody>
             <tr>
-                @if ($test->diagnostic == '"Nivel de estrés: Bajo estrés percibido."')
+                @if ($test->diagnostic == 'Nivel de estrés: Bajo estrés percibido.')
                     <td class="border-dark">
                         <p class="">Este diagnóstico indica que la ansiedad del paciente es leve y generalmente
                             manejable sin necesidad de tratamiento intensivo.</p>
                     </td>
                 @endif
 
-                @if ($test->diagnostic == '"Nivel de estrés: Estrés percibido moderado."')
+                @if ($test->diagnostic == 'Nivel de estrés: Estrés percibido moderado.')
                     <td class="border-dark">
                         <p class="">Este diagnóstico indica que la ansiedad del paciente es de intensidad
                             moderada y puede requerir intervención terapéutica o tratamiento.</p>
                     </td>
                 @endif
 
-                @if ($test->diagnostic == '"Nivel de estrés: Estrés percibido alto."')
+                @if ($test->diagnostic == 'Nivel de estrés: Estrés percibido alto.')
                     <td class="border-dark">
                         <p class="">Este diagnóstico indica que la ansiedad del paciente es moderadamente severa
                             y puede requerir tratamiento urgente para su manejo.</p>
                     </td>
                 @endif
 
-                @if ($test->diagnostic == '"Nivel de estrés: Muy alto estrés percibido."')
+                @if ($test->diagnostic == 'Nivel de estrés: Muy alto estrés percibido.')
                     <td class="border-dark">
                         <p class="">Este diagnóstico indica que la ansiedad del paciente es severa y puede
                             requerir atención inmediata y posiblemente hospitalización o tratamiento intensivo.</p>

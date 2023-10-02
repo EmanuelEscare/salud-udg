@@ -1,8 +1,8 @@
 const beckDepressionInventory = ({ score }) => {
-  if (score <= 13) return 'Depresión mínima'
-  if (score > 13 && score <= 19) return 'Depresión leve'
-  if (score > 19 && score <= 28) return 'Depresión moderada'
-  if (score > 28 && score <= 63) return 'Depresión grave'
+  if (score <= 13) return `Depresión mínima`
+  if (score > 13 && score <= 19) return `Depresión leve`
+  if (score > 19 && score <= 28) return `Depresión moderada`
+  if (score > 28 && score <= 63) return `Depresión grave`
 }
 
 const derogatisSymptomsInventory = ({ score, testResults }) => {
@@ -132,24 +132,24 @@ const derogatisSymptomsInventory = ({ score, testResults }) => {
 }
 
 export const beckAnxietyInventory = ({ score }) => {
-  if (score <= 12) return 'Ansiedad mínima'
-  if (score > 12 && score <= 21) return 'Ansiedad leve'
-  if (score > 21 && score <= 35) return 'Ansiedad moderada'
-  if (score > 35 && score <= 63) return 'Ansiedad severa'
+  if (score <= 12) return `Ansiedad mínima`
+  if (score > 12 && score <= 21) return `Ansiedad leve`
+  if (score > 21 && score <= 35) return `Ansiedad moderada`
+  if (score > 35 && score <= 63) return `Ansiedad severa`
 }
 
 export const PerceivedStressScale = ({ score }) => {
-  if (score >= 0 && score <= 13)  return "Nivel de estrés: Bajo estrés percibido.";
-   if (score >= 14 && score <= 26)  return "Nivel de estrés: Estrés percibido moderado.";
-   if (score >= 27 && score <= 40)  return "Nivel de estrés: Estrés percibido alto.";
-   if (score >= 41 && score <= 56)  return "Nivel de estrés: Muy alto estrés percibido.";
+  if (score >= 0 && score <= 13)  return `Nivel de estrés: Bajo estrés percibido.`;
+   if (score >= 14 && score <= 26)  return `Nivel de estrés: Estrés percibido moderado.`;
+   if (score >= 27 && score <= 40)  return `Nivel de estrés: Estrés percibido alto.`;
+   if (score >= 41 && score <= 56)  return `Nivel de estrés: Muy alto estrés percibido.`;
 }
 
 export const HamiltonAnxietyScale = ({ score }) => {
-  if (score <= 17) return 'Ansiedad Leve'
-  if (score >= 18 && score <= 24) return 'Ansiedad Moderada'
-  if (score >= 25 && score <= 30) return 'Ansiedad Moderadamente Severa'
-  if (score >= 31) return 'Ansiedad Severa'
+  if (score <= 17) return `Ansiedad Leve`
+  if (score >= 18 && score <= 24) return `Ansiedad Moderada`
+  if (score >= 25 && score <= 30) return `Ansiedad Moderadamente Severa`
+  if (score >= 31) return `Ansiedad Severa`
 }
 
 export const qualificatorsService = {

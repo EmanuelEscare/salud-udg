@@ -19,7 +19,6 @@ export const Test = (props) => {
   const [enviado, setEnviado] = useState(false);
 
   const [canSubmit, setCanSubmit] = useState(false)
-  console.log(props.id)
   const id = Number(props.id)
   const test = tests.find(test => test.id === id)
 
@@ -28,7 +27,6 @@ export const Test = (props) => {
   const currentDate = new Date();
   const yearsOld = differenceInYears(currentDate, date);
 
-  console.log(props.user)
 
   const handleName = (e) => {
     if (!e.target.value) {
@@ -145,7 +143,6 @@ export const Test = (props) => {
 
 
 
-    console.log(newResult)
     setCanSubmit(false)
     setEnviado(true)
 
@@ -154,7 +151,7 @@ export const Test = (props) => {
     }).catch((err) => {
       console.error(err)
     })
-
+    console.log(newResult)
     setTimeout(() => {
       window.location.href = props.user ? `/patients/${props.user.id}` : '/patients';
     }, 1000);

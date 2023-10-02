@@ -1,7 +1,7 @@
 <div>
     <!-- Live as if you were to die tomorrow. Learn as if you were to live forever. - Mahatma Gandhi -->
     @php
-        
+        $test->diagnostic = json_decode($test->diagnostic);
         $psychicAnxietyItems = [1, 2, 3, 5, 6];
         $somaticAnxietyItems = [4, 7, 8, 9, 10, 11];
         
@@ -181,52 +181,52 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                @if ($test->diagnostic == '"Ansiedad Leve"')
+                @if ($test->diagnostic == 'Ansiedad Leve')
                     <th class="text-center border-dark bg-success">
-                        {{ preg_replace('/(^[\"\']|[\"\']$)/', '', $test->diagnostic) }}
+                        {{ $test->diagnostic }}
                     </th>
                 @endif
-                @if ($test->diagnostic == '"Ansiedad Moderada"')
+                @if ($test->diagnostic == 'Ansiedad Moderada')
                     <th class="text-center border-dark text-dark bg-light">
-                        {{ preg_replace('/(^[\"\']|[\"\']$)/', '', $test->diagnostic) }}
+                        {{ $test->diagnostic }}
                     </th>
                 @endif
-                @if ($test->diagnostic == '"Ansiedad Moderadamente Severa"')
+                @if ($test->diagnostic == 'Ansiedad Moderadamente Severa')
                     <th class="text-center text-dark border-dark bg-warning">
-                        {{ preg_replace('/(^[\"\']|[\"\']$)/', '', $test->diagnostic) }}
+                        {{ $test->diagnostic }}
                     </th>
                 @endif
-                @if ($test->diagnostic == '"Ansiedad Severa"')
+                @if ($test->diagnostic == 'Ansiedad Severa')
                     <th class="text-center border-dark bg-danger">
-                        {{ preg_replace('/(^[\"\']|[\"\']$)/', '', $test->diagnostic) }}
+                        {{ $test->diagnostic }}
                     </th>
                 @endif
             </tr>
         </thead>
         <tbody>
             <tr>
-                @if ($test->diagnostic == '"Ansiedad Leve"')
+                @if ($test->diagnostic == 'Ansiedad Leve')
                     <td class="border-dark">
                         <p class="">Este diagnóstico indica que la ansiedad del paciente es leve y generalmente
                             manejable sin necesidad de tratamiento intensivo.</p>
                     </td>
                 @endif
 
-                @if ($test->diagnostic == '"Ansiedad Moderada"')
+                @if ($test->diagnostic == 'Ansiedad Moderada')
                     <td class="border-dark">
                         <p class="">Este diagnóstico indica que la ansiedad del paciente es de intensidad
                             moderada y puede requerir intervención terapéutica o tratamiento.</p>
                     </td>
                 @endif
 
-                @if ($test->diagnostic == '"Ansiedad Moderadamente Severa"')
+                @if ($test->diagnostic == 'Ansiedad Moderadamente Severa')
                     <td class="border-dark">
                         <p class="">Este diagnóstico indica que la ansiedad del paciente es moderadamente severa
                             y puede requerir tratamiento urgente para su manejo.</p>
                     </td>
                 @endif
 
-                @if ($test->diagnostic == '"Ansiedad Severa"')
+                @if ($test->diagnostic == 'Ansiedad Severa')
                     <td class="border-dark">
                         <p class="">Este diagnóstico indica que la ansiedad del paciente es severa y puede
                             requerir atención inmediata y posiblemente hospitalización o tratamiento intensivo.</p>

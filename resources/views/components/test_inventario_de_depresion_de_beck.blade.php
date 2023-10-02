@@ -1,6 +1,7 @@
 <div>
     <!-- I have not failed. I've just found 10,000 ways that won't work. - Thomas Edison -->
     @php
+        $test->diagnostic = json_decode($test->diagnostic);
         
         $psychicAnxietyItems = [1, 2, 3, 5, 6];
         $somaticAnxietyItems = [4, 7, 8, 9, 10, 11];
@@ -142,31 +143,31 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                @if ($test->diagnostic == '"Depresión mínima"')
+                @if ($test->diagnostic == 'Depresión mínima')
                     <th class="text-center border-dark bg-success">
-                        {{ preg_replace('/(^[\"\']|[\"\']$)/', '', $test->diagnostic) }}
+                        {{ $test->diagnostic }}
                     </th>
                 @endif
-                @if ($test->diagnostic == '"Depresión leve"')
+                @if ($test->diagnostic == 'Depresión leve')
                     <th class="text-center border-dark text-dark bg-light">
-                        {{ preg_replace('/(^[\"\']|[\"\']$)/', '', $test->diagnostic) }}
+                        {{ $test->diagnostic }}
                     </th>
                 @endif
-                @if ($test->diagnostic == '"Depresión moderada"')
+                @if ($test->diagnostic == 'Depresión moderada')
                     <th class="text-center text-dark border-dark bg-warning">
-                        {{ preg_replace('/(^[\"\']|[\"\']$)/', '', $test->diagnostic) }}
+                        {{ $test->diagnostic }}
                     </th>
                 @endif
-                @if ($test->diagnostic == '"Depresión grave"')
+                @if ($test->diagnostic == 'Depresión grave')
                     <th class="text-center border-dark bg-danger">
-                        {{ preg_replace('/(^[\"\']|[\"\']$)/', '', $test->diagnostic) }}
+                        {{ $test->diagnostic }}
                     </th>
                 @endif
             </tr>
         </thead>
         <tbody>
             <tr>
-                @if ($test->diagnostic == '"Depresión mínima"')
+                @if ($test->diagnostic == 'Depresión mínima')
                     <td class="border-dark">
                         <p>En este rango de puntajes, generalmente se considera que la persona no está experimentando
                             síntomas significativos de depresión o que los síntomas son mínimos. Puede indicar que la
@@ -177,7 +178,7 @@
                     </td>
                 @endif
 
-                @if ($test->diagnostic == '"Depresión leve"')
+                @if ($test->diagnostic == 'Depresión leve')
                     <td class="border-dark">
                         <p>Un puntaje en este rango sugiere la presencia de síntomas de depresión, pero estos suelen ser
                             de intensidad leve. La persona puede estar experimentando cambios en el estado de ánimo,
@@ -188,7 +189,7 @@
                     </td>
                 @endif
 
-                @if ($test->diagnostic == '"Depresión moderada"')
+                @if ($test->diagnostic == 'Depresión moderada')
                     <td class="border-dark">
                         <p>En esta categoría, los síntomas de depresión son más pronunciados y pueden interferir
                             significativamente en la vida diaria de la persona. Los síntomas pueden incluir una tristeza
@@ -200,7 +201,7 @@
                     </td>
                 @endif
 
-                @if ($test->diagnostic == '"Depresión grave"')
+                @if ($test->diagnostic == 'Depresión grave')
                     <td class="border-dark">
                         <p>En esta categoría, la depresión es severa y puede ser incapacitante. Los síntomas son
                             intensos y persistentes, lo que puede poner en peligro la salud física y emocional de la

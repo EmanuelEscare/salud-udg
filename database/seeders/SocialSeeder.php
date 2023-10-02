@@ -44,10 +44,12 @@ class SocialSeeder extends Seeder
         $user->givePermissionTo($patient_update);
         $user->givePermissionTo($patient_delete);
 
+
+
         // ADMIN USER
         $admin = User::create([
-            'name' => 'Desarrollo',
-            'email' => 'desarrollo@cucea.udg.mx',
+            'name' => 'Alfredo Orozco',
+            'email' => 'alfredo.orozco@cucea.udg.mx',
             'password' => bcrypt('asd123'),
         ]);
 
@@ -55,8 +57,8 @@ class SocialSeeder extends Seeder
 
         // ADMIN USER
         $admin = User::create([
-            'name' => 'Alfredo Orozco',
-            'email' => 'alfredo.orozco@cucea.udg.mx',
+            'name' => 'Desarrollo',
+            'email' => 'desarrollo@cucea.udg.mx',
             'password' => bcrypt('asd123'),
         ]);
 

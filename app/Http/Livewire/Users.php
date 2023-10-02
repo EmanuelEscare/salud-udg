@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use App\Models\Patient;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -77,6 +79,19 @@ class Users extends Component
 
     public function delete($id)
     {
+        if(Auth::user()->id == $id){
+            $this->mesage_notification = "Error";
+            $this->dispatchBrowserEvent('notification');
+            $this->dispatchBrowserEvent('closeModalUpdate');
+            return;
+        }
+        $adminUser = User::whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->first();
+        
+        Patient::where("user_id", $id)->update([
+            'user_id' => $adminUser->id
+        ]);
         $this->usersData->find($id)->delete();
         $this->mesage_notification = "El usuario ha sido eliminado";
         $this->dispatchBrowserEvent('notification');
