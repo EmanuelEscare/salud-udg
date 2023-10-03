@@ -258,6 +258,8 @@
                             <br>
                             <p class="m-1">Sexo</p>
                             <select wire:model="patient.sex" class="form-control form-control-lg">
+                                <option value="female">...
+                                </option>
                                 <option value="female">Mujer
                                 </option>
                                 <option value="male">Hombre
