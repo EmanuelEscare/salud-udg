@@ -17,7 +17,7 @@ use App\Http\Controllers\TestController;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('index');
 });
 
 Route::get('/dashboard', function () {
