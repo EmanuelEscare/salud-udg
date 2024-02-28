@@ -32,8 +32,15 @@
     <div class="min-h-screen bg-gray-100 pb-5">
 
         <!-- Page Content -->
+        <div class="py-3 px-5 bg-white shadow-lg">
+            <img class="lg:w-2/12 md:w-6/12 sm:w-full m-auto" src="{{ asset('index/Logo-cucea-colores-icono.png') }}"
+                alt="">
+        </div>
+        <div class="m-5">
             @section('content')
             @show
+        </div>
+
     </div>
     @livewireScripts
 </body>

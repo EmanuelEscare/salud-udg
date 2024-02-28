@@ -20,6 +20,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/citas', function () {
+    return view('appointment');
+});
+
 Route::get('/dashboard', function () {
     return redirect()->route('patients');
 })->middleware(['auth', 'verified'])->name('dashboard');
