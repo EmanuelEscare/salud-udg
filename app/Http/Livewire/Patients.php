@@ -94,7 +94,7 @@ class Patients extends Component
 
     public function test($id, $user_id)
     {
-        return redirect()->route('react', ['id' => $id, 'user_id' => $user_id]);
+        return redirect()->route('test', ['id' => $id, 'user_id' => $user_id]);
     }
 
     public function testsPatient($id)

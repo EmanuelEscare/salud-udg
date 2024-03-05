@@ -11,7 +11,7 @@
             'patients' => 'Pacientes',
             'config' => 'Configuración',
             'backup_instructions' => 'Instrucciones',
-            'react' => 'Prueba',
+            'test' => 'Prueba',
             '' => 'Cultura de la Paz'
         ];
         $route = Route::currentRouteName();

@@ -20,12 +20,17 @@ return new class extends Migration
             $table->string('invoice')->nullable();
             $table->string('code');
             $table->enum('sex', ['female', 'male', 'other']);
-            $table->enum('education', ['Primaria', 'Secundaria', 'Superior'])->nullable();
+            $table->string('career')->nullable();
             $table->enum('civil_status', ['Soltero/a', 'Casado/a'])->nullable();
-            $table->string('occupation')->nullable();
+            $table->integer('average')->nullable();
+            $table->integer('semester')->nullable();
             $table->string('email');
             $table->string('phone');
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->boolean('depression')->nullable();
+            $table->boolean('anxiety')->nullable();
+            $table->boolean('panic_attack')->nullable();
+            $table->boolean('treatment')->nullable();
             $table->timestamps();
         });
     }

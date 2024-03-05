@@ -77,23 +77,23 @@ class SocialSeeder extends Seeder
         // $user->assignRole('user');
 
 
-        $patient = Patient::create([
-            'name' => 'Alumno Prueba',
-            'birth_date' => '2000-02-01',
-            'code' => '2162381722',
-            'sex' => 'male',
-            'email' => 'alumno@alumnos.udg.mx',
-            'phone' => '3317008886',
-            'civil_status' => 'Soltero/a',
-            'education' => 'Secundaria',
-            'occupation' => 'Profesor',
-            'user_id' => $admin->id
-        ]);
+        // $patient = Patient::create([
+        //     'name' => 'Alumno Prueba',
+        //     'birth_date' => '2000-02-01',
+        //     'code' => '2162381722',
+        //     'sex' => 'male',
+        //     'email' => 'alumno@alumnos.udg.mx',
+        //     'phone' => '3317008886',
+        //     'civil_status' => 'Soltero/a',
+        //     'education' => 'Secundaria',
+        //     'occupation' => 'Profesor',
+        //     'user_id' => $admin->id
+        // ]);
 
-        $patient_id = $patient->id;
-        $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
-        $patient->invoice = $invoice . $patientIdFormatted;
-        $patient->save();
+        // $patient_id = $patient->id;
+        // $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
+        // $patient->invoice = $invoice . $patientIdFormatted;
+        // $patient->save();
 
         // $patient = Patient::create([
         //     'name' => 'Ana',

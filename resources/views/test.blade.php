@@ -36,15 +36,15 @@
 
     {{-- <script>
         if (document.getElementById('test')) {
-                const elementReact = document.getElementById('test');
-      const Index = ReactDOM.createRoot(document.getElementById("test"));
-      const idValue = elementReact.getAttribute('data-id');
+                const elementtest = document.getElementById('test');
+      const Index = testDOM.createRoot(document.getElementById("test"));
+      const idValue = elementtest.getAttribute('data-id');
     //   const User = user_data;
 
     Index.render(
-        <React.StrictMode>
+        <test.StrictMode>
           <Test id={idValue} />
-        </React.StrictMode>
+        </test.StrictMode>
       )
             }
         </script> --}}

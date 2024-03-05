@@ -42,10 +42,10 @@ Route::get('/config', function () {
     return view('config');
 })->middleware(['auth', 'verified'])->name('config');
 
-Route::get('/react/{id}/{user_id}', function ($id, $user_id) {
+Route::get('/test/{id}/{user_id}', function ($id, $user_id) {
     $user = Patient::find($user_id);
-    return view('react')->with(['id' => $id, 'user' => $user]);
-})->middleware(['auth', 'verified'])->name('react');
+    return view('test')->with(['id' => $id, 'user' => $user]);
+})->middleware(['auth', 'verified'])->name('test');
 
 Route::get('/backup', [BackupController::class, 'backup'])->name('backup');
 
