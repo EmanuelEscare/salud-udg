@@ -1,5 +1,6 @@
 /node_modules
 /public/build
+/public/roboto
 ./bootstrap/cache
 /bootstrap/cache
 /public/hot
