@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('appointment', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->enum('status',
             ['Pendiente',
             'Asistio', 'No asistio']);
-            $table->date('appointment_date');
+            $table->dateTime('appointment_date');
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appointment');
+        Schema::dropIfExists('appointments');
     }
 };
