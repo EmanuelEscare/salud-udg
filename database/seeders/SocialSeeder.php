@@ -72,7 +72,7 @@ class SocialSeeder extends Seeder
         // ]);
 
         // FOLIO 
-        $invoice = config('socialtest.folio');
+        $invoice = config('psy-config.folio');
 
         // $user->assignRole('user');
 

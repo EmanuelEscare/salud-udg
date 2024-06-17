@@ -16,7 +16,7 @@
                 </h2>
                 <br>
                 <div class="d-grid gap-2 col-6 mx-auto">
-                    <button class="btn btn-success btn-lg" type="button">Agendar cita</button>
+                    <a href="{{route('agendarCita')}}" class="btn btn-success btn-lg" type="button">Agendar cita</a>
                 </div>
             </div>
         </div>

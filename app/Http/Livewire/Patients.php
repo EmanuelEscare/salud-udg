@@ -54,7 +54,7 @@ class Patients extends Component
     public function mount($patient_id)
     {
         // Load invoice
-        $this->invoice = config('socialtest.folio');
+        $this->invoice = config('psy-config.folio');
 
         if (Auth::user()->hasRole('user')){
             if ($this->patient_id != null) {

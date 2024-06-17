@@ -20,9 +20,9 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/citas', function () {
+Route::get('/agendar-cita', function () {
     return view('appointment');
-});
+})->name('agendarCita');
 
 Route::get('/dashboard', function () {
     return redirect()->route('patients');
