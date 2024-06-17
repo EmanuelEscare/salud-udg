@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Mail\AppointmentVerifyMail;
 use App\Models\Appointment as ModelsAppointment;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class Appointment extends Component
@@ -12,6 +14,8 @@ class Appointment extends Component
     public $email;
     public $reason;
     public $selectedSlot, $slots;
+
+    public $sendEmail;
 
     protected $rules = [
         'name' => 'required|string|max:255',
@@ -24,6 +28,10 @@ class Appointment extends Component
         'selectedSlot.required' => 'Debe seleccionar una fecha y hora para la cita.',
         'selectedSlot.date_format' => 'El formato de la fecha y hora seleccionadas es inválido.',
     ];
+
+    public function mount(){
+        $this->sendEmail = false;
+    }
 
     public function schedule()
     {
@@ -40,7 +48,7 @@ class Appointment extends Component
         // Validar la fecha y hora seleccionadas
         $selectedDateTime = Carbon::parse($this->selectedSlot);
         $dayOfWeek = strtolower($selectedDateTime->format('l')); // 'monday', 'tuesday', etc.
-        
+
         if (!$config[$dayOfWeek]) {
             $this->addError('selectedSlot', 'El día seleccionado no está habilitado para agendar citas.');
             return;
@@ -59,7 +67,14 @@ class Appointment extends Component
         )) {
             $this->addError('selectedSlot', 'La hora seleccionada no está dentro del horario de atención.');
             return;
-        }dd(true, $this->selectedSlot, $this->slots, $this->reason);
+        }
+
+        $currentDate = now();
+
+        if ($this->selectedSlot <= $currentDate) {
+            $this->addError('selectedSlot', 'La hora seleccionada no está dentro del horario de atención.');
+            return;
+        }
 
         // Generar un token único para la cita
         $token = bin2hex(random_bytes(16));
@@ -74,7 +89,15 @@ class Appointment extends Component
             'appointment_date' => $this->selectedSlot,
         ]);
 
-        session()->flash('message', 'Cita agendada exitosamente.');
+        //session()->flash('message', 'Cita agendada exitosamente.');
+        $mailData = [
+            'title' => 'Confirmar cita',
+            'body' => 'Programaste una cita a las ('.$this->selectedSlot.') que necesitas confirmar.',
+            'token' => $token
+        ];
+
+        Mail::to($this->email)->send(new AppointmentVerifyMail($mailData));
+        $this->sendEmail = true;
         $this->resetForm();
     }
 
@@ -88,8 +111,8 @@ class Appointment extends Component
 
     public function render()
     {
-         // Definir las horas de trabajo
-         $timeRanges = [
+        // Definir las horas de trabajo
+        $timeRanges = [
             '07:00 - 08:00', '08:00 - 09:00', '09:00 - 10:00', '10:00 - 11:00',
             '11:00 - 12:00', '12:00 - 13:00', '13:00 - 14:00', '14:00 - 15:00',
             '15:00 - 16:00', '16:00 - 17:00', '17:00 - 18:00', '18:00 - 19:00',

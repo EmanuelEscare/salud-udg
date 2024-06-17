@@ -53,4 +53,9 @@ Route::get('/backup_instructions', function () {
     return view('backup_instructions');
 })->middleware(['auth', 'verified'])->name('backup_instructions');
 
+Route::get('/verificar-cita/{token}', function ($token) {
+    dd($token);
+    return view('verificar-cita');
+})->name('verificar-cita');
+
 require __DIR__.'/auth.php';

@@ -3,6 +3,7 @@
     @php
         use Carbon\Carbon;
     @endphp
+    @if (!$sendEmail)
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="card border-0 rounded-2xl shadow-sm container ps-none p-5">
@@ -53,7 +54,7 @@
                                     <br>
                                     <small class="text-secondary">
                                     Del {{ Carbon::parse($slots['Lunes'][0]['datetime'])->isoFormat('D') }}
-                                     al 
+                                     al
                                     {{ Carbon::parse($slots['Domingo'][0]['datetime'])->isoFormat('D [de] MMMM [del] YYYY') }}
                                     </small>
                                     <br>
@@ -102,12 +103,12 @@
             </div>
         </div>
     </div>
-
+    @else
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="card border-0 rounded-2xl shadow-sm container ps-none p-5">
                 <div class="modal-body">
-                    <div class="col-lg-9 m-auto">
+                    <div class="col-lg-12 m-auto">
                         <div class="text-center">
                             <h2 class="text-center">Confirma tu cita</h2>
                             <br>
@@ -121,4 +122,5 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
