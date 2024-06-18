@@ -53,9 +53,9 @@
                                     <label for="appointment_date" class="form-label">Seleccione Fecha y Hora</label>
                                     <br>
                                     <small class="text-secondary">
-                                    Del {{ Carbon::parse($slots['Lunes'][0]['datetime'])->isoFormat('D') }}
+                                    {{--Del {{ Carbon::parse($slots['Lunes'][0]['datetime'])->isoFormat('D') }}
                                      al
-                                    {{ Carbon::parse($slots['Domingo'][0]['datetime'])->isoFormat('D [de] MMMM [del] YYYY') }}
+                                    {{ Carbon::parse($slots['Domingo'][0]['datetime'])->isoFormat('D [de] MMMM [del] YYYY') }}--}}
                                     </small>
                                     <br>
                                     <div class="table-responsive">
@@ -63,13 +63,19 @@
                                             <thead>
                                                 <tr>
                                                     @foreach (array_keys($slots) as $day)
-                                                        <th>{{ $day }}</th>
+                                                        <th>
+                                                            {{ $day }}
+                                                            <br>
+                                                            <small class="text-secondary text-xs">
+                                                                {{ Carbon::parse($slots[$day][0]['datetime'])->isoFormat('D [de] MMMM [del] YYYY') }}
+                                                            </small>
+                                                        </th>
                                                     @endforeach
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @for ($i = 0; $i < count($slots[array_key_first($slots)]); $i++)
-                                                    <tr>
+                                                    <tr class="">
                                                         @foreach ($slots as $dayIndex => $daySlots)
                                                             <td>
                                                                 <div class="form-check">

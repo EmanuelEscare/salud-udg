@@ -29,7 +29,8 @@ class Appointment extends Component
         'selectedSlot.date_format' => 'El formato de la fecha y hora seleccionadas es inválido.',
     ];
 
-    public function mount(){
+    public function mount()
+    {
         $this->sendEmail = false;
     }
 
@@ -92,7 +93,7 @@ class Appointment extends Component
         //session()->flash('message', 'Cita agendada exitosamente.');
         $mailData = [
             'title' => 'Confirmar cita',
-            'body' => 'Programaste una cita a las ('.$this->selectedSlot.') que necesitas confirmar.',
+            'body' => 'Programaste una cita a las (' . $this->selectedSlot . ').',
             'token' => $token
         ];
 
@@ -111,33 +112,67 @@ class Appointment extends Component
 
     public function render()
     {
-        // Definir las horas de trabajo
-        $timeRanges = [
-            '07:00 - 08:00', '08:00 - 09:00', '09:00 - 10:00', '10:00 - 11:00',
-            '11:00 - 12:00', '12:00 - 13:00', '13:00 - 14:00', '14:00 - 15:00',
-            '15:00 - 16:00', '16:00 - 17:00', '17:00 - 18:00', '18:00 - 19:00',
-            '19:00 - 20:00', '20:00 - 21:00'
-        ];
+        // Obtener la configuración de psy-config.php
+        $config = config('psy-config');
 
-        // Definir los días de la semana
+        // Obtener los valores de configuración
+        $startMorning = $config['startMorning'];
+        $endMorning = $config['endMorning'];
+        $startAfternoon = $config['startAfternoon'];
+        $endAfternoon = $config['endAfternoon'];
+
+        // Definir los días de la semana y sus traducciones
         $daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
         $daysOfWeekTranslated = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
         // Generar la estructura de la tabla con fechas y horas
         $slots = [];
+
         foreach ($daysOfWeek as $index => $day) {
+            // Verificar si el día está habilitado en la configuración
+            if (!isset($config[strtolower($day)]) || !$config[strtolower($day)]) {
+                continue; // Saltar el día si no está habilitado
+            }
+
             $dayName = $daysOfWeekTranslated[$index];
-            foreach ($timeRanges as $timeRange) {
-                [$start, $end] = explode('-', $timeRange);
-                $dateTime = Carbon::parse("this $day $start");
+
+            // Generar los rangos de la mañana
+            $currentTime = Carbon::parse("this $day $startMorning");
+            while ($currentTime->lt(Carbon::parse("this $day $endMorning"))) {
+                $nextTime = $currentTime->copy()->addHour();
+                $timeRange = $currentTime->format('H:i') . ' - ' . $nextTime->format('H:i');
                 $slots[$dayName][] = [
-                    'datetime' => $dateTime->format('Y-m-d H:i:s'),
+                    'datetime' => $currentTime->format('Y-m-d H:i:s'),
                     'label' => $timeRange
                 ];
+                $currentTime = $nextTime;
+            }
+
+            // Generar los rangos de la tarde
+            $currentTime = Carbon::parse("this $day $startAfternoon");
+            while ($currentTime->lt(Carbon::parse("this $day $endAfternoon"))) {
+                $nextTime = $currentTime->copy()->addHour();
+                $timeRange = $currentTime->format('H:i') . ' - ' . $nextTime->format('H:i');
+                $slots[$dayName][] = [
+                    'datetime' => $currentTime->format('Y-m-d H:i:s'),
+                    'label' => $timeRange
+                ];
+                $currentTime = $nextTime;
             }
         }
+
+        // Ordenar las ranuras por fecha y hora
+        foreach ($slots as &$slot) {
+            usort($slot, function ($a, $b) {
+                return strtotime($a['datetime']) - strtotime($b['datetime']);
+            });
+        }
+
+        // Asignar los slots a la propiedad de la clase
         $this->slots = $slots;
-        return view('livewire.appointment',[
+
+        // Retornar la vista con los datos
+        return view('livewire.appointment', [
             'slots' => $slots
         ]);
     }

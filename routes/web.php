@@ -4,6 +4,7 @@ use App\Models\Patient;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\TestController;
+use App\Models\Appointment;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,8 +55,15 @@ Route::get('/backup_instructions', function () {
 })->middleware(['auth', 'verified'])->name('backup_instructions');
 
 Route::get('/verificar-cita/{token}', function ($token) {
-    dd($token);
-    return view('verificar-cita');
+    $appointment = Appointment::where('token', $token)->first();
+    if ($appointment) {
+        $appointment->token = null;
+        $appointment->save();
+
+        return view('appointment-verify', $appointment);
+    }else{
+        return view('errors.500');
+    }
 })->name('verificar-cita');
 
 require __DIR__.'/auth.php';

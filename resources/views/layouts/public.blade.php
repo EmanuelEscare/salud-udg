@@ -15,10 +15,15 @@
             'agendarCita' => 'Agendar cita',
             '' => 'Cultura de la Paz',
         ];
-        $route = Route::currentRouteName();
 
+        $route = Route::currentRouteName();
     @endphp
-    <title>Cultura de Paz | {{ $routes[$route] }}</title>
+
+    @if (array_key_exists($route, $routes))
+        <title>Cultura de Paz | {{ $routes[$route] }}</title>
+    @else
+        <title>Cultura de Paz</title>
+    @endif
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">

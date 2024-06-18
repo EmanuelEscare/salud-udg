@@ -47,7 +47,7 @@
     <div class="container">
         <h1>{{ $mailData['title'] }}</h1>
         <p>{{ $mailData['body'] }}</p>
-        <a href="{{ route('verificar-cita',$mailData['token']) }}" class="button">Confirmar</a>
+        <a href="{{ route('verificar-cita',$mailData['token']) }}" class="button">Confirmar cita</a>
         <br>
         <p>Saludos,</p>
         <p>Equipo de Salud Mental Universitaria - UDG</p>
