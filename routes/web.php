@@ -39,6 +39,10 @@ Route::get('/users', function () {
     return view('users');
 })->middleware(['auth', 'verified'])->name('users');
 
+Route::get('/appointments', function () {
+    return view('appointments');
+})->middleware(['auth', 'verified'])->name('appointments');
+
 Route::get('/patients/{patient_id?}', function ($patient_id = null) {
     return view('patients', ['patient_id' => $patient_id]);
 })->middleware(['auth', 'verified'])->name('patients');
