@@ -14,8 +14,9 @@ class Appointment extends Component
     public $email;
     public $reason;
     public $selectedSlot, $slots;
+    public $emailSend;
 
-    public $sendEmail;
+    public $sentEmail, $appointment;
 
     protected $rules = [
         'name' => 'required|string|max:255',
@@ -31,7 +32,7 @@ class Appointment extends Component
 
     public function mount()
     {
-        $this->sendEmail = false;
+        $this->sentEmail = false;
     }
 
     public function schedule()
@@ -81,7 +82,7 @@ class Appointment extends Component
         $token = bin2hex(random_bytes(16));
 
         // Guardar la cita
-        ModelsAppointment::create([
+        $this->appointment = ModelsAppointment::create([
             'name' => $this->name,
             'email' => $this->email,
             'reason' => $this->reason,
@@ -90,15 +91,8 @@ class Appointment extends Component
             'appointment_date' => $this->selectedSlot,
         ]);
 
-        //session()->flash('message', 'Cita agendada exitosamente.');
-        $mailData = [
-            'title' => 'Confirmar cita',
-            'body' => 'Programaste una cita a las (' . $this->selectedSlot . ').',
-            'token' => $token
-        ];
-
-        Mail::to($this->email)->send(new AppointmentVerifyMail($mailData));
-        $this->sendEmail = true;
+        $this->sendEmail();
+        $this->sentEmail = true;
         $this->resetForm();
     }
 
@@ -175,5 +169,39 @@ class Appointment extends Component
         return view('livewire.appointment', [
             'slots' => $slots
         ]);
+    }
+
+    private function sendEmail()
+    {
+        $date = Carbon::parse($this->appointment->appointment_date);
+        $mailData = [
+            'title' => 'Confirmar cita',
+            'body' => 'Programaste una cita el dia ' .$date->isoFormat('DD MMMM YYYY').' a las ' . $date->hour .'.',
+            'token' => $this->appointment->token
+        ];
+
+        Mail::to($this->appointment->email)->send(new AppointmentVerifyMail($mailData));
+    }
+
+    public function resendEmail()
+    {
+        $now = Carbon::now();
+        $this->appointment->fresh();
+        if ($this->appointment->token != null) {
+            if ($now->diffInMinutes($this->appointment->updated_at) >= 5) {
+                $token = bin2hex(random_bytes(16));
+                $this->appointment->token = $token;
+                $this->appointment->save();
+                $this->sendEmail();
+                $this->addError('sendSuccess', 'Se envio de nuevo un correo electronico');
+                $this->addError('sendError', '');
+            } else {
+                $this->addError('sendError', 'Falta ' . (5-$now->diffInMinutes($this->appointment->updated_at)) . ' minutos para volver enviar un correo electronico');
+                $this->addError('sendSuccess', '');
+            }
+        }else{
+            $this->addError('sendSuccess', 'Cita ya confirmada');
+            $this->addError('sendError', '');
+        }
     }
 }
