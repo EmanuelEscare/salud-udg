@@ -7,48 +7,76 @@ use Livewire\Component;
 
 class AdminAppointments extends Component
 {
-
     public $appointments;
     public $nowPage = 1;
     public $pages = 10;
+    public $mesage_notification;
+    public $query;
 
     protected $rules = [
-        'appointments.0.status' => 'required|in:pendiente,confirmado,cancelado',
+        'appointments.*.status' => 'required|in:Pendiente,Asistio,No asistio',
     ];
+
+    public function mount()
+    {
+        $this->loadAppointments();
+    }
+
+    public function loadAppointments()
+    {
+        $this->appointments = Appointment::orderBy('id', 'DESC')->get();
+    }
 
     public function render()
     {
-        $this->appointments = $this->appointments->slice(($this->nowPage - 1) * $this->pages)->take($this->pages);
-        return view('livewire.admin-appointments');
-    }
-
-    public function mount(){
-        $this->appointments = Appointment::orderBy('id', 'DESC')->get();
+        $pagedAppointments = $this->appointments->slice(($this->nowPage - 1) * $this->pages, $this->pages);
+        return view('livewire.admin-appointments', ['appointments' => $pagedAppointments]);
     }
 
     public function search()
     {
         $this->appointments = Appointment::where('name', 'like', '%' . $this->query . '%')
             ->orWhere('email', 'like', '%' . $this->query . '%')
-            ->get()->take($this->pages);
+            ->orderBy('id', 'DESC')
+            ->get();
     }
 
-    public function nextPage()
+     public function nextPage()
     {
-        $this->nowPage++;
-        $this->render();
+        if (($this->nowPage * $this->pages) < $this->appointments->count()) {
+            $this->nowPage++;
+        }
     }
 
-    public function afterPage()
+    public function previousPage()
     {
-        $this->nowPage--;
-        $this->render();
+        if ($this->nowPage > 1) {
+            $this->nowPage--;
+        }
     }
 
-    public function updateStatus($appointmentId, $newStatus)
+    public function updateStatus($appointmentId, $status)
     {
-        $appointment = Appointment::findOrFail($appointmentId);
-        $appointment->status = $newStatus;
-        $appointment->save();
+        $this->validate();
+
+        $appointment = Appointment::find($appointmentId);
+        if ($appointment) {
+            $appointment->status = $status;
+            $appointment->save();
+            $this->mesage_notification = "El estatus de la cita ha cambiado";
+            $this->dispatchBrowserEvent('notification');
+        }
+    }
+
+    public function deleteAppointment($appointmentId)
+    {
+        $appointment = Appointment::find($appointmentId);
+        if ($appointment) {
+            $appointment->delete();
+            $this->mesage_notification = "La cita ha sido eliminada";
+            $this->dispatchBrowserEvent('notification');
+            $this->mount();
+        }
     }
 }
+

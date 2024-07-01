@@ -32,7 +32,7 @@
             display: inline-block;
             padding: 10px 20px;
             font-size: 16px;
-            color: #ffffff;
+            color: #ffffff!important;
             background-color: #0056b3;
             text-decoration: none;
             border-radius: 5px;

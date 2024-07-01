@@ -34,6 +34,12 @@
                     </x-nav-link>
                 </div>
 
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-decoration-none">
+                    <x-nav-link :href="route('appointments')" :active="request()->routeIs('appointments')">
+                        {{ __('Citas') }}
+                    </x-nav-link>
+                </div>
+
                 @if (Auth::user()->hasRole('admin'))
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-decoration-none">
                     <x-nav-link :href="route('config')" :active="request()->routeIs('config')">
@@ -101,6 +107,11 @@
             <x-responsive-nav-link class="text-decoration-none text-center" :href="route('patients')" :active="request()->routeIs('patients')">
                 {{ __('Pacientes') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link class="text-decoration-none text-center" :href="route('appointments')" :active="request()->routeIs('appointments')">
+                {{ __('Citas') }}
+            </x-responsive-nav-link>
+
             @if (Auth::user()->hasRole('admin'))
             <x-responsive-nav-link class="text-decoration-none text-center" :href="route('config')" :active="request()->routeIs('config')">
                 {{ __('Configuración') }}

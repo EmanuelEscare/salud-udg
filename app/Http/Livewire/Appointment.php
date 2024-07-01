@@ -204,4 +204,13 @@ class Appointment extends Component
             $this->addError('sendError', '');
         }
     }
+
+    public function hasAppointment($date)
+    {
+        if (ModelsAppointment::where('appointment_date', $date)->exists()) {
+            return true;
+        }
+        return false;
+    }
+
 }
