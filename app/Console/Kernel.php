@@ -15,7 +15,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('appointments:clear-expired')->everyTenMinutes();
     }
 
     /**
@@ -27,10 +26,6 @@ class Kernel extends ConsoleKernel
     {
         // Cron job php artisan schedule:run
         $this->load(__DIR__.'/Commands');
-
-        $this->commands([
-            \App\Console\Commands\DeleteUnconfirmedAppointments::class,
-        ]);
 
         require base_path('routes/console.php');
     }

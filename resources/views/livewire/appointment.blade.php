@@ -81,6 +81,9 @@
                                                                 <td>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
+                                                                        @if ($this->hasAppointment($daySlots[$i]['datetime']))
+                                                                            disabled
+                                                                        @endif
                                                                             name="selectedSlot"
                                                                             id="slot{{ $dayIndex }}{{ $i }}"
                                                                             wire:model="selectedSlot"
