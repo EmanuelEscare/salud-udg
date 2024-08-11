@@ -6,6 +6,7 @@ use App\Models\Patient;
 use App\Models\Test;
 use Dotenv\Store\File\Paths;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -114,6 +115,7 @@ class Patients extends Component
     public function editPatient($id)
     {
         $this->now_patient = Patient::find($id);
+        
         $this->patient = $this->now_patient;
 
         $this->dispatchBrowserEvent('openModalEdit');
@@ -172,7 +174,15 @@ class Patients extends Component
             $patient->phone = $this->patient['phone'];
             $patient->sex = $this->patient['sex'];
             $patient->birth_date = $this->patient['birth_date'];
-
+            $patient->career = $this->patient['career'];
+            $patient->civil_status = $this->patient['civil_status'];
+            $patient->average = $this->patient['average'];
+            $patient->semester = $this->patient['semester'];
+            $patient->depression = $this->patient['depression'];
+            $patient->anxiety = $this->patient['anxiety'];
+            $patient->panic_attack = $this->patient['panic_attack'];
+            $patient->treatment = $this->patient['treatment'];
+            
             $patient->save();
 
             // Generate Invoice
