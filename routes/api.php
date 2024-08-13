@@ -25,5 +25,7 @@ Route::post('/getAll', [TestController::class, 'getAll']);
 Route::post('/getFiltered', [TestController::class, 'getFiltered']);
 Route::post('/newResult', [TestController::class, 'newResult']);
 
-
+Route::get('/getbytes/{number}', function ($number) {
+    return round($number/1000);
+})->name('getbytes');
 

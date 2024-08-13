@@ -15,10 +15,17 @@ return new class extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            $table->enum('test', ['SCL-90-R', 'Inventario de Depresión de Beck (BDI-2)', 'Escala de ansiedad de Hamilton']);
+            $table->enum('test', 
+            ['Inventario de Depresión de Beck (BDI-2)',
+            'SCL-90-R',
+            'Inventario de Ansiedad de Beck',
+            'Escala de Estrés Percibido (PSS, Perceived Stress Scale)',
+            'Escala de ansiedad de Hamilton']);
             $table->foreignId('patient_id')
                 ->references('id')->on('patients')
                 ->onDelete('cascade');
+            $table->json('diagnostic')->nullable();
+            $table->string('observations',300)->nullable();
             $table->json('result');
             $table->timestamps();
         });

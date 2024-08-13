@@ -1,5 +1,6 @@
 /node_modules
 /public/build
+/public/roboto
 ./bootstrap/cache
 /bootstrap/cache
 /public/hot
@@ -17,3 +18,4 @@ yarn-error.log
 /.idea
 /.vscode
 /calificador-pruebas
+/config/psy-config.php

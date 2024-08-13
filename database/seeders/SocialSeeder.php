@@ -19,89 +19,117 @@ class SocialSeeder extends Seeder
      */
     public function run()
     {
+
         $admin = Role::create(['name' => 'admin']);
-        $doctor = Role::create(['name' => 'usuario']);
+
+        $user = Role::create(['name' => 'user']);
+
+        $user_create = Permission::create(['name' => 'user_create']);
+        $user_update = Permission::create(['name' => 'user_update']);
+        $user_delete = Permission::create(['name' => 'user_delete']);
+
+        $patient_create = Permission::create(['name' => 'patient_create']);
+        $patient_update = Permission::create(['name' => 'patient_update']);
+        $patient_delete = Permission::create(['name' => 'patient_delete']);
+
+        $admin->givePermissionTo($user_create);
+        $admin->givePermissionTo($user_update);
+        $admin->givePermissionTo($user_delete);
+
+        $admin->givePermissionTo($patient_create);
+        $admin->givePermissionTo($patient_update);
+        $admin->givePermissionTo($patient_delete);
+
+        $user->givePermissionTo($patient_create);
+        $user->givePermissionTo($patient_update);
+        $user->givePermissionTo($patient_delete);
+
+
 
         // ADMIN USER
         $admin = User::create([
-            'name' => 'Emanuel',
-            'email' => 'emanuel.escareno@alumnos.udg.mx',
+            'name' => 'Alfredo Orozco',
+            'email' => 'alfredo.orozco@cucea.udg.mx',
             'password' => bcrypt('asd123'),
         ]);
 
         $admin->assignRole('admin');
 
-
-        $patient = Patient::create([
-            'name' => 'Emanuel Esc',
-            'birth_date' => '2000-02-01',
-            'code' => '2162381722',
-            'sex' => 'male',
-            'email' => 'emanuel.escareno@alumnos.udg.mx',
-            'phone' => '3317009646',
-            'civil_status' => 'Soltero/a',
-            'education' => 'Secundaria',
-            'occupation' => 'Profesor'
+        // ADMIN USER
+        $admin = User::create([
+            'name' => 'Desarrollo',
+            'email' => 'desarrollo@cucea.udg.mx',
+            'password' => bcrypt('asd123'),
         ]);
 
-        Test::create([
-            'test' => 'SCL-90-R',
-            'patient_id' => $patient->id,
-            'result' => '{}',
-        ]);
+        $admin->assignRole('admin');
 
-        Test::create([
-            'test' => 'Inventario de Depresión de Beck (BDI-2)',
-            'patient_id' => $patient->id,
-            'result' => '{}',
-        ]);
+        // // USER 
+        // $user = User::create([
+        //     'name' => 'Emanuel User',
+        //     'email' => 'emanuel.user@alumnos.udg.mx',
+        //     'password' => bcrypt('asd123'),
+        // ]);
 
-        Test::create([
-            'test' => 'Escala de ansiedad de Hamilton',
-            'patient_id' => $patient->id,
-            'result' => '{}',
-        ]);
+        // FOLIO 
+        $invoice = config('psy-config.folio');
 
-        $patient = Patient::create([
-            'name' => 'Ana',
-            'birth_date' => '2001-02-01',
-            'code' => '2162382722',
-            'sex' => 'female',
-            'email' => 'ana@alumnos.udg.mx',
-            'phone' => '3317009346',
-            'civil_status' => 'Soltero/a',
-            'education' => 'Secundaria',
-            'occupation' => 'Profesor'
-        ]);
+        // $user->assignRole('user');
 
-        Test::create([
-            'test' => 'Inventario de Depresión de Beck (BDI-2)',
-            'patient_id' => $patient->id,
-            'result' => '{}',
-        ]);
 
-        Test::create([
-            'test' => 'Escala de ansiedad de Hamilton',
-            'patient_id' => $patient->id,
-            'result' => '{}',
-        ]);
+        // $patient = Patient::create([
+        //     'name' => 'Alumno Prueba',
+        //     'birth_date' => '2000-02-01',
+        //     'code' => '2162381722',
+        //     'sex' => 'male',
+        //     'email' => 'alumno@alumnos.udg.mx',
+        //     'phone' => '3317008886',
+        //     'civil_status' => 'Soltero/a',
+        //     'education' => 'Secundaria',
+        //     'occupation' => 'Profesor',
+        //     'user_id' => $admin->id
+        // ]);
 
-        $patient = Patient::create([
-            'name' => 'Pedro',
-            'birth_date' => '2001-02-01',
-            'code' => '2111382722',
-            'sex' => 'other',
-            'email' => 'pedro@alumnos.udg.mx',
-            'phone' => '3317109346',
-            'civil_status' => 'Soltero/a',
-            'education' => 'Secundaria',
-            'occupation' => 'Profesor'
-        ]);
+        // $patient_id = $patient->id;
+        // $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
+        // $patient->invoice = $invoice . $patientIdFormatted;
+        // $patient->save();
 
-        Test::create([
-            'test' => 'SCL-90-R',
-            'patient_id' => $patient->id,
-            'result' => '{}',
-        ]);
+        // $patient = Patient::create([
+        //     'name' => 'Ana',
+        //     'birth_date' => '2001-02-01',
+        //     'code' => '2162382722',
+        //     'sex' => 'female',
+        //     'email' => 'ana@alumnos.udg.mx',
+        //     'phone' => '3317009346',
+        //     'civil_status' => 'Soltero/a',
+        //     'education' => 'Secundaria',
+        //     'occupation' => 'Profesor',
+        //     'user_id' => $user->id
+        // ]);
+
+        // $patient_id = $patient->id;
+        // $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
+        // $patient->invoice = $invoice.$patientIdFormatted;
+        // $patient->save();
+
+        // $patient = Patient::create([
+        //     'name' => 'Pedro',
+        //     'birth_date' => '2001-02-01',
+        //     'code' => '2111382722',
+        //     'sex' => 'other',
+        //     'email' => 'pedro@alumnos.udg.mx',
+        //     'phone' => '3317109346',
+        //     'civil_status' => 'Soltero/a',
+        //     'education' => 'Secundaria',
+        //     'occupation' => 'Profesor',
+        //     'user_id' => $admin->id
+        // ]);
+
+        // $patient_id = $patient->id;
+        // $patientIdFormatted = str_pad($patient_id, 2, '0', STR_PAD_LEFT);
+        // $patient->invoice = $invoice.$patientIdFormatted;
+        // $patient->save();
+
     }
 }

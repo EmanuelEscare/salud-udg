@@ -16,14 +16,14 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-decoration-none">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-decoration-none">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Inicio') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-decoration-none">
-                    <x-nav-link :href="route('usuarios')" :active="request()->routeIs('usuarios')">
+                    <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
                         {{ __('Usuarios') }}
                     </x-nav-link>
                 </div>
@@ -34,6 +34,19 @@
                     </x-nav-link>
                 </div>
 
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-decoration-none">
+                    <x-nav-link :href="route('appointments')" :active="request()->routeIs('appointments')">
+                        {{ __('Citas') }}
+                    </x-nav-link>
+                </div>
+
+                @if (Auth::user()->hasRole('admin'))
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-decoration-none">
+                    <x-nav-link :href="route('config')" :active="request()->routeIs('config')">
+                        {{ __('Configuración') }}
+                    </x-nav-link>
+                </div>
+                @endif
 
 
             </div>
@@ -83,17 +96,27 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link class="text-decoration-none text-center" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            {{-- <x-responsive-nav-link class="text-decoration-none text-center" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Inicio') }}
-            </x-responsive-nav-link>
+            </x-responsive-nav-link> --}}
 
-            <x-responsive-nav-link class="text-decoration-none text-center" :href="route('usuarios')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link class="text-decoration-none text-center" :href="route('users')" :active="request()->routeIs('users')">
                 {{ __('Usuarios') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link class="text-decoration-none text-center" :href="route('patients')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link class="text-decoration-none text-center" :href="route('patients')" :active="request()->routeIs('patients')">
                 {{ __('Pacientes') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link class="text-decoration-none text-center" :href="route('appointments')" :active="request()->routeIs('appointments')">
+                {{ __('Citas') }}
+            </x-responsive-nav-link>
+
+            @if (Auth::user()->hasRole('admin'))
+            <x-responsive-nav-link class="text-decoration-none text-center" :href="route('config')" :active="request()->routeIs('config')">
+                {{ __('Configuración') }}
+            </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

@@ -1,57 +1,139 @@
-<x-app-layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="card border-0 shadow-sm container ps-none">
-                <div>
-                    <div class="container my-5">
-                        <p class="my-4 fs-5">Prueba realizada a Emanuel Esc #2162381722
-                            <p>06/Jun/2023</p>
-                        </p>
-                        <hr>
-                        <br>
-                        <h1 class="my-4 fs-3 text-center fw-bold">Tabla de Puntajes T-SCL-90-R</h1>
-                        <br>
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">SOM</th>
-                                    <th scope="col">OBS</th>
-                                    <th scope="col">SI</th>
-                                    <th scope="col">DEP</th>
-                                    <th scope="col">ANS</th>
-                                    <th scope="col">HOS</th>
-                                    <th scope="col">FOB</th>
-                                    <th scope="col">PAR</th>
-                                    <th scope="col">PSIC</th>
-                                    <th scope="col">IGS</th>
-                                    <th scope="col">TSP</th>
-                                    <th scope="col">IMSP</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1.02</td>
-                                    <td>1.02</td>
-                                    <td>1.02/td>
-                                    <td>1.02</td>
-                                    <td>1.02</td>
-                                    <td>1.02</td>
-                                    <td>1.02</td>
-                                    <td>1.02</td>
-                                    <td>1.02C</td>
-                                    <td>1.02</td>
-                                    <td>1.02</td>
-                                    <td>1.02</td>
-                                </tr>
+<!doctype html>
+<html lang="en">
 
-                                <!-- Agrega más filas según sea necesario -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+<head>
+    <!-- Required meta tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+        @page {
+            margin: 0cm 0cm;
+        }
+
+        @font-face {
+            font-family: 'roboto';
+            font-weight: 400;
+            font-style: normal;
+            src: url('./roboto/Roboto-Light.ttf') format("truetype");
+        }
+
+        @font-face {
+            font-family: 'robotoBold';
+            font-weight: bold;
+            font-style: normal;
+            src: url('./roboto/Roboto-Bold.ttf') format("truetype");
+        }
+
+        /** Defina ahora los márgenes reales de cada página en el PDF **/
+        body {
+            font-family: 'robotoBold', 'roboto' !important;
+            margin-top: 5cm;
+            margin-left: 2cm;
+            margin-right: 2cm;
+            margin-bottom: 2cm;
+        }
+
+        /** Definir las reglas del encabezado **/
+        header {
+            position: fixed;
+            top: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 3cm;
+
+            /** Estilos extra personales **/
+            color: white;
+            text-align: center;
+            line-height: 1.5cm;
+        }
+
+        /** Definir las reglas del pie de página **/
+        footer {
+            position: fixed;
+            bottom: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 2cm;
+
+            /** Estilos extra personales **/
+            background-color: #03a9f4;
+            color: white;
+            text-align: center;
+            line-height: 1.5cm;
+        }
+
+        /* aaaaaaaaa */
+        .info-left {
+            float: left;
+            width: 50%;
+            display: inline-block;
+        }
+
+        .info-right {
+            float: right;
+            width: 50%;
+        }
+
+        .img-header {
+            /* background-image: url('./header.png'); */
+            width: 100% !important;
+        }
+    </style>
+
+    <title>{{$test->filename}}</title>
+</head>
+
+<body>
+    <header>
+        <img class="img-header" src="./header.png" alt="">
+        <br>
+    </header>
+
+    <main>
+        <div>
+            <div class="float-parent-element">
+                <span class="info-left">
+                    <p><b>Nombre</b>: {{ $test->patient->name }}</p>
+                </span>
+                <span class="info-right">
+                    <p style="padding-left: 40%;">{{ $test->date }}</p>
+                </span>
             </div>
         </div>
-    </div>
 
-    
-</x-app-layout>
+        <br>
+        <br>
+        <div>
+            <div class="float-parent-element">
+                <span class="info-left">
+                    <p><b>Programa Integral de Cultura de Paz</b></p>
+                </span>
+                <span class="info-right">
+                    <p style="padding-left: 40%;"><b>Folio</b>: {{ $test->patient->invoice }}</p>
+                </span>
+            </div>
+        </div>
+        @if ($test->test == 'Inventario de Depresión de Beck (BDI-2)')
+        <x-test_inventario_de_depresion_de_beck :test="$test"></x-test_inventario_de_depresion_de_beck>
+        @endif
+        @if ($test->test == 'SCL-90-R')
+        <x-test_inventario_de_sintomas_scl90 :test="$test"></x-test_inventario_de_sintomas_scl90>
+        @endif
+        @if ($test->test == 'Inventario de Ansiedad de Beck')
+        <x-test_inventario_de_ansiedad_de_beck :test="$test"></x-test_inventario_de_ansiedad_de_beck>
+        @endif
+        @if ($test->test == 'Escala de Estrés Percibido (PSS, Perceived Stress Scale)')
+            <x-test_escala_de_estres_percibido :test="$test"></x-test_escala_de_estres_percibido>
+        @endif
+        @if ($test->test == 'Escala de ansiedad de Hamilton')
+            <x-test_escala_de_ansiedad_de_hamilton :test="$test"></x-test_escala_de_ansiedad_de_hamilton>
+        @endif
+    </main>
+</body>
+
+</html>

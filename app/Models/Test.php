@@ -9,8 +9,10 @@ class Test extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['test', 'patient_id', 'observations', 'diagnostic', 'result'];
+
     public function patient()
     {
-        return $this->hasOne(Patient::class);
+        return $this->belongsTo(Patient::class);
     }
 }

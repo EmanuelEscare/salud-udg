@@ -5,18 +5,20 @@ import ReactDOM from 'react-dom/client'
 import styles from './Test.module.scss'
 import { differenceInYears, parse } from 'date-fns';
 import { resultsService, qualificatorsService } from '../services_new/index'
+import { Alert } from 'bootstrap'
 
 export const Test = (props) => {
   const [patientName, setPatientName] = useState({ value: '', error: '' })
   const [patientEmail, setPatientEmail] = useState({ value: '', error: '' })
   const [patientAge, setPatientAge] = useState({ value: '', error: '' })
   const [answers, setAnswers] = useState([])
+  const [observations, setObservations] = useState('');
+
 
   //Boton disable
   const [enviado, setEnviado] = useState(false);
 
   const [canSubmit, setCanSubmit] = useState(false)
-  console.log(props.id)
   const id = Number(props.id)
   const test = tests.find(test => test.id === id)
 
@@ -25,7 +27,6 @@ export const Test = (props) => {
   const currentDate = new Date();
   const yearsOld = differenceInYears(currentDate, date);
 
-  console.log(props.user)
 
   const handleName = (e) => {
     if (!e.target.value) {
@@ -73,13 +74,47 @@ export const Test = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const score = answers.reduce((acc, curr) => acc + curr.value, 0)
+    let score = answers.reduce((acc, curr) => acc + curr.value, 0)
+
+    if (id === 4) {
+    try {
+    // Filter responses for the "Perceived Stress" group (items 1, 2, 3, 8, 11, 12, and 14)
+      const perceivedStressItems = answers.filter((answer) =>
+      [1, 2, 3, 8, 11, 12, 14].includes(answer.index)
+    );
+
+    // Filter responses for the "Coping with Perceived Stress" group (items 4, 5, 6, 7, 9, 10, and 13)
+    const copingItems = answers.filter((answer) =>
+      [4, 5, 6, 7, 9, 10, 13].includes(answer.index)
+    );
+
+    // Calculate the score for the "Perceived Stress" group
+    const perceivedStressScore = perceivedStressItems.reduce(
+      (acc, curr) => acc + curr.value,
+      0
+    );
+
+    // Calculate the score for the "Coping with Perceived Stress" group
+    const copingScore = copingItems.reduce(
+      (acc, curr) => acc + (4-curr.value),
+      0
+    );
+
+    score = perceivedStressScore+copingScore
+    } catch (error) {
+      console.log(error)
+      alert(error)
+    }
+  }
+
+
     const testResults = answers.sort((a, b) => a.index - b.index)
 
     const newResult = {
       data: {
-        user_id: props.user.id,
+        patient_id: props.user.id,
         score: score,
+        observations: observations,
         testResults: testResults,
         appliedTest: id,
       }
@@ -87,19 +122,27 @@ export const Test = (props) => {
 
     if (id === 1) {
       const status = qualificatorsService.beckDepressionInventory({ score })
-      newResult.data.status = status
+      newResult.data.diagnostic = status
     }
     if (id === 2) {
       const indicators = qualificatorsService.derogatisSymptomsInventory({ score, testResults })
-      newResult.data.indicators = indicators
+      newResult.data.diagnostic = indicators
     }
     if (id === 3) {
       const status = qualificatorsService.beckAnxietyInventory({ score })
-      newResult.data.status = status
+      newResult.data.diagnostic = status
+    }
+    if (id === 4) {
+      const status = qualificatorsService.PerceivedStressScale({ score })
+      newResult.data.diagnostic = status
+    }
+    if (id === 5) {
+      const status = qualificatorsService.HamiltonAnxietyScale({ score })
+      newResult.data.diagnostic = status
     }
 
 
-    console.log(newResult)
+
     setCanSubmit(false)
     setEnviado(true)
 
@@ -108,7 +151,7 @@ export const Test = (props) => {
     }).catch((err) => {
       console.error(err)
     })
-
+    console.log(newResult)
     setTimeout(() => {
       window.location.href = props.user ? `/patients/${props.user.id}` : '/patients';
     }, 1000);
@@ -120,9 +163,9 @@ export const Test = (props) => {
 
   return (
     <section className={styles.test}>
-      <h1 className={styles.test_title}>Calificador: {test.name}</h1>
+      <h1 className={styles.test_title}>Prueba: {test.name}</h1>
       <br />
-      <form className={styles.test_form} onSubmit={handleSubmit}>
+      <form acceptCharset="UTF-8" className={styles.test_form} onSubmit={handleSubmit}>
         <div className={styles.test_form_input}>
           <label htmlFor='patientName'>Nombre del paciente: </label>
           <input disabled
@@ -168,10 +211,13 @@ export const Test = (props) => {
           />
           {patientAge.error && <p className={styles.test_form_input_error}>{patientAge.error}</p>}
         </div>
+        <br />
+        <hr />
+        <br />
         {test.questions && test.questions.map((question) => {
           return (
             <div className={styles.test__form_question} key={question.question}>
-              <h3 className={styles.test_form_question_title}>{question.question}</h3>
+              <h3 className={styles.test_form_question_title} dangerouslySetInnerHTML={{__html: question.question}}></h3>
               <div className={styles.test_form_question_answers}>
                 {question.answers.map((answer) => {
                   return (
@@ -192,6 +238,18 @@ export const Test = (props) => {
             </div>
           )
         })}
+        <br />
+        <h3 className={styles.test_form_question_title} dangerouslySetInnerHTML={{__html: 'Observaciones'}}></h3>
+        <textarea
+          className="form-control form-control-lg"
+          rows={4}
+          cols={50}
+          value={observations} // Enlaza el valor con el estado
+          onChange={(e) => setObservations(e.target.value)} // Maneja los cambios en el estado
+          name='observations'
+          id='observations'
+        />
+        <br />
         <button className="btn btn-lg btn-primary" disabled={!canSubmit}>
           {enviado ? 'Formulario enviado' : 'Calificar prueba'}
         </button>
