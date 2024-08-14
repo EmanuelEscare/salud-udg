@@ -273,51 +273,57 @@
                             <p class="m-1">Teléfono</p>
                             <input wire:model="patient.phone" class="form-control form-control-lg" type="text">
                             <br>
-                            <p class="m-1">Carrera</p>
-                                <input type="text" wire:model="patient.career" class="form-control form-control-lg"
-                                    id="career">
-                            <br>
                             <p class="m-1">Estado Civil</p>
-                            <select wire:model="patient.civil_status" class="form-control form-control-lg" id="civil_status">
+                            <select wire:model="patient.civil_status" class="form-control form-control-lg"
+                                id="civil_status">
                                 <option value="">Seleccione...</option>
                                 <option value="Soltero/a">Soltero/a</option>
                                 <option value="Casado/a">Casado/a</option>
                             </select>
                             <br>
+                            <p class="m-1">Carrera</p>
+                            <input type="text" wire:model="patient.career" class="form-control form-control-lg"
+                                id="career">
+                            <br>
                             <p class="m-1">Promedio</p>
-                            <input type="number" wire:model="patient.average" class="form-control form-control-lg" id="average">
+                            <input type="number" wire:model="patient.average" class="form-control form-control-lg"
+                                id="average">
                             <br>
                             <p class="m-1">Semestre</p>
-                            <select wire:model="patient.semester" class="form-control form-control-lg" id="semester">
+                            <select wire:model="patient.semester" class="form-control form-control-lg"
+                                id="semester">
                                 <option value="">Seleccione...</option>
                                 <option value="1">1-3</option>
                                 <option value="2">4-6</option>
                                 <option value="3">7+</option>
                             </select>
                             <br>
-                            <p class="m-1">depression</p>
-                            <select wire:model="patient.depression" class="form-control form-control-lg" id="depression">
+                            <p class="m-1">¿Tienes depresión?</p>
+                            <select wire:model="patient.depression" class="form-control form-control-lg"
+                                id="depression">
                                 <option value="">Seleccione...</option>
                                 <option value="0">NO</option>
                                 <option value="1">SI</option>
                             </select>
                             <br>
-                            <p class="m-1">anxiety</p>
+                            <p class="m-1">¿Tienes ansiedad?</p>
                             <select wire:model="patient.anxiety" class="form-control form-control-lg" id="anxiety">
                                 <option value="">Seleccione...</option>
                                 <option value="0">NO</option>
                                 <option value="1">SI</option>
                             </select>
                             <br>
-                            <p class="m-1">panic_attack</p>
-                            <select wire:model="patient.panic_attack" class="form-control form-control-lg" id="panic_attack">
+                            <p class="m-1">¿Tienes ataques de pánico?</p>
+                            <select wire:model="patient.panic_attack" class="form-control form-control-lg"
+                                id="panic_attack">
                                 <option value="">Seleccione...</option>
                                 <option value="0">NO</option>
                                 <option value="1">SI</option>
                             </select>
                             <br>
-                            <p class="m-1">treatment</p>
-                            <select wire:model="patient.treatment" class="form-control form-control-lg" id="treatment">
+                            <p class="m-1">¿Has buscado tratamiento con algún especialista?</p>
+                            <select wire:model="patient.treatment" class="form-control form-control-lg"
+                                id="treatment">
                                 <option value="">Seleccione...</option>
                                 <option value="0">NO</option>
                                 <option value="1">SI</option>
@@ -386,6 +392,76 @@
                                 <p class="m-1">Teléfono</p>
                                 <input wire:model="patient.phone" class="form-control form-control-lg"
                                     type="text">
+                                <br>
+                                <br>
+                                <p class="m-1">Estado Civil</p>
+                                <select wire:model="patient.civil_status" class="form-control form-control-lg"
+                                    id="civil_status">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Soltero/a">Soltero/a</option>
+                                    <option value="Casado/a">Casado/a</option>
+                                </select>
+                                <br>
+                                <p class="m-1">Carrera</p>
+                                <input type="text" wire:model="patient.career"
+                                    class="form-control form-control-lg" id="career">
+                                <br>
+                                <p class="m-1">Promedio</p>
+                                <input type="number" wire:model="patient.average"
+                                    class="form-control form-control-lg" id="average">
+                                <br>
+                                <p class="m-1">Semestre</p>
+                                <select wire:model="patient.semester" class="form-control form-control-lg"
+                                    id="semester">
+                                    <option value="">Seleccione...</option>
+                                    <option value="1">1-3</option>
+                                    <option value="2">4-6</option>
+                                    <option value="3">7+</option>
+                                </select>
+                                <br>
+                                <p class="m-1">¿Tienes depresión?</p>
+                                <select wire:model="patient.depression" class="form-control form-control-lg"
+                                    id="depression">
+                                    <option value="">Seleccione...</option>
+                                    <option value="0">NO</option>
+                                    <option value="1">SI</option>
+                                </select>
+                                <br>
+                                <p class="m-1">¿Tienes ansiedad?</p>
+                                <select wire:model="patient.anxiety" class="form-control form-control-lg"
+                                    id="anxiety">
+                                    <option value="">Seleccione...</option>
+                                    <option value="0">NO</option>
+                                    <option value="1">SI</option>
+                                </select>
+                                <br>
+                                <p class="m-1">¿Tienes ataques de pánico?</p>
+                                <select wire:model="patient.panic_attack" class="form-control form-control-lg"
+                                    id="panic_attack">
+                                    <option value="">Seleccione...</option>
+                                    <option value="0">NO</option>
+                                    <option value="1">SI</option>
+                                </select>
+                                <br>
+                                <p class="m-1">¿Has buscado tratamiento con algún especialista?</p>
+                                <select wire:model="patient.treatment" class="form-control form-control-lg"
+                                    id="treatment">
+                                    <option value="">Seleccione...</option>
+                                    <option value="0">NO</option>
+                                    <option value="1">SI</option>
+                                </select>
+                                <br>
+                                @if ($errors->any())
+                                    <div class="my-3">
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @endif
                                 <br>
                                 <div class="d-grid gap-2">
                                     <button type="submit" class="btn btn-lg btn-primary">Guardar cambios</button>
