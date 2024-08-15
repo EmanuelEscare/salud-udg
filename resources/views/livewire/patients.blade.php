@@ -183,6 +183,15 @@
                             <p><span class="fw-bold">Email</span>: {{ $now_patient->email }}</p>
                             <p><span class="fw-bold">Teléfono</span>: {{ $now_patient->phone }}</p>
                             <p><span class="fw-bold">Estado civil</span>: {{ $now_patient->civil_status }}</p>
+
+                            <p><span class="fw-bold">Carrera</span>: {{ $now_patient->career }}</p>
+                            <p><span class="fw-bold">Promedio</span>: {{ $now_patient->average }}</p>
+                            <p><span class="fw-bold">Semestre</span>: {{ $now_patient->semester }}</p>
+                            <p><span class="fw-bold">¿Tienes depresión?</span>: {{ $now_patient->depression }}</p>
+                            <p><span class="fw-bold">¿Tienes ansiedad?</span>: {{ $now_patient->anxiety }}</p>
+                            <p><span class="fw-bold">¿Tienes ataques de pánico?</span>: {{ $now_patient->panic_attack }}</p>
+                            <p><span class="fw-bold">¿Has buscado tratamiento con algún especialista?</span>: {{ $now_patient->treatment }}</p>
+
                         </div>
                     </div>
                 </div>

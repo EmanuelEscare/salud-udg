@@ -84,10 +84,10 @@ class Patients extends Component
 
     public function search()
     {
-        $this->patientsData = Patient::where('name', 'like', '%' . $this->query . '%')
-            ->orWhere('email', 'like', '%' . $this->query . '%')
-            ->orWhere('invoice', 'like', '%' . $this->query . '%')
-            ->get()->take($this->pages);
+        $query = $this->query;
+        $this->patientsData = Patient::all()->filter(function($record) use ($query) {
+            return stripos($record->email, $query) !== false;
+        })->take($this->pages);
     }
 
     public function nextPage()
