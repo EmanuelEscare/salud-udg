@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Salud Mental Universitaria - UDG</title>
+    <title>Cultura de la paz - UDG</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -50,7 +50,7 @@
         <a href="{{ route('verificar-cita',$mailData['token']) }}" class="button">Confirmar cita</a>
         <br>
         <p>Saludos,</p>
-        <p>Equipo de Salud Mental Universitaria - UDG</p>
+        <p>Equipo de Cultura de la paz - UDG</p>
     </div>
 </body>
 </html>
