@@ -28,7 +28,7 @@ class ConfirmVerifyMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Tu cita fue confirmada - Universidad de Guadalajara | CUCEI')
+        return $this->subject('Tu cita fue confirmada - Universidad de Guadalajara | CUCEA')
                     ->view('emails.confirm_verify');
     }
 }

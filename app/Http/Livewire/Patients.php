@@ -33,6 +33,15 @@ class Patients extends Component
             'patient.sex' => 'required',
             'patient.email' => 'required',
             'patient.phone' => 'required',
+            'patient.civil_status' => 'nullable',
+            'patient.career' => 'nullable',
+            'patient.civil_status' => 'nullable',
+            'patient.average' => 'nullable',
+            'patient.semester' => 'nullable',
+            'patient.depression' => 'nullable',
+            'patient.anxiety' => 'nullable',
+            'patient.panic_attack' => 'nullable',
+            'patient.treatment' => 'nullable',
         ];
     }
     
@@ -75,10 +84,10 @@ class Patients extends Component
 
     public function search()
     {
-        $this->patientsData = Patient::where('name', 'like', '%' . $this->query . '%')
-            ->orWhere('email', 'like', '%' . $this->query . '%')
-            ->orWhere('invoice', 'like', '%' . $this->query . '%')
-            ->get()->take($this->pages);
+        $query = $this->query;
+        $this->patientsData = Patient::all()->filter(function($record) use ($query) {
+            return stripos($record->email, $query) !== false;
+        })->take($this->pages);
     }
 
     public function nextPage()
@@ -114,6 +123,7 @@ class Patients extends Component
 
     public function editPatient($id)
     {
+        $this->clean();
         $this->now_patient = Patient::find($id);
         
         $this->patient = $this->now_patient;
@@ -128,11 +138,21 @@ class Patients extends Component
         try {
             $patient = Patient::find($this->patient->id);
             $patient->name = $this->patient['name'];
-            $patient->birth_date = $this->patient['birth_date'];
+            $patient->code = $this->patient['code'];
+            $patient->user_id = Auth::user()->id;
             $patient->email = $this->patient['email'];
             $patient->phone = $this->patient['phone'];
-            $patient->code = $this->patient['code'];
             $patient->sex = $this->patient['sex'];
+            $patient->birth_date = $this->patient['birth_date'];
+            $patient->career = $this->patient['career'];
+            $patient->civil_status = $this->patient['civil_status'];
+            $patient->average = $this->patient['average'];
+            $patient->semester = $this->patient['semester'];
+            $patient->depression = $this->patient['depression'];
+            $patient->anxiety = $this->patient['anxiety'];
+            $patient->panic_attack = $this->patient['panic_attack'];
+            $patient->treatment = $this->patient['treatment'];
+            
 
             $patient->save();
 
@@ -212,12 +232,7 @@ class Patients extends Component
 
     public function clean()
     {
-        $this->patient['name'] = null;
-        $this->patient['code'] = null;
-        $this->patient['birth_date'] = null;
-        $this->patient['email'] = null;
-        $this->patient['phone'] = null;
-        $this->patient['sex'] = null;
+        $this->patient = new Patient();
         return;
     }
 
