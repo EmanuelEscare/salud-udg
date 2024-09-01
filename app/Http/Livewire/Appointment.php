@@ -20,15 +20,29 @@ class Appointment extends Component
 
     protected $rules = [
         'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
+        'email' => 'required|email|max:255|ends_with:@alumnos.udg.mx',
         'reason' => 'required|string|max:500',
         'selectedSlot' => 'required|date_format:Y-m-d H:i:s',
     ];
 
     protected $messages = [
+        'name.required' => 'El nombre es obligatorio.',
+        'name.string' => 'El nombre debe ser una cadena de texto.',
+        'name.max' => 'El nombre no puede exceder de 255 caracteres.',
+    
+        'email.required' => 'El correo electrónico es obligatorio.',
+        'email.email' => 'Debe proporcionar una dirección de correo válida.',
+        'email.max' => 'El correo electrónico no puede exceder de 255 caracteres.',
+        'email.ends_with' => 'El correo electrónico debe pertenecer al dominio (@alumnos.udg.mx).',
+    
+        'reason.required' => 'Debe proporcionar un motivo.',
+        'reason.string' => 'La razón debe ser una cadena de texto.',
+        'reason.max' => 'La razón no puede exceder de 500 caracteres.',
+    
         'selectedSlot.required' => 'Debe seleccionar una fecha y hora para la cita.',
-        'selectedSlot.date_format' => 'El formato de la fecha y hora seleccionadas es inválido.',
+        'selectedSlot.date_format' => 'El formato de la fecha y hora seleccionadas es inválido. Debe ser en el formato Y-m-d H:i:s.',
     ];
+    
 
     public function mount()
     {

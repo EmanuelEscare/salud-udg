@@ -80,9 +80,9 @@
                             @foreach ($days as $day => $isActive)
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" role="switch"
-                                        id="flexSwitchCheck{{ ucfirst($day) }}" wire:model="days.{{ $day }}">
+                                        id="flexSwitchCheck{{ ucfirst($translateDays[$day]) }}" wire:model="days.{{ $day }}">
                                     <label class="form-check-label"
-                                        for="flexSwitchCheckDefault">{{ ucfirst($day) }}</label>
+                                        for="flexSwitchCheckDefault">{{ ucfirst($translateDays[$day]) }}</label>
                                 </div>
                             @endforeach
                         </div>
