@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\YesNoEnum;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
