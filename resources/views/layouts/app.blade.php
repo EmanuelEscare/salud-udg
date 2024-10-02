@@ -27,7 +27,7 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-    <link rel="icon" href="{{ asset('paz-udg.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('cucei-logo.jpeg') }}" type="image/png">
     <!-- Scripts -->
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
     @livewireStyles
@@ -39,7 +39,7 @@
         <div class="mx-auto my-auto">
 
             <div class="text-center">
-                <img class="logo-loader" src="{{ asset('paz-udg.png') }}" alt="">
+                <img class="logo-loader" src="{{ asset('cucei-logo-simple.png') }}" alt="">
             </div>
             <br>
             <h1 class="text-center">

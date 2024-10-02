@@ -6,12 +6,12 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a class="text-decoration-none text-success fs-2" href="{{ route('dashboard') }}">
-                        <img class="logo" src="{{asset('paz-udg.png')}}" alt="">
+                        <img class="logo" src="{{asset('cucei-logo-simple.png')}}" alt="">
                     </a>
                 </div>
                 <div class="shrink-0 flex items-center ms-3">
                     <a class="text-decoration-none text-success fs-2" href="{{ route('dashboard') }}">
-                        <img class="logo-cucea" src="{{asset('cucea.png')}}" alt="">
+                        <img class="logo-cucea" src="{{asset('cucei-logo-letras.png')}}" alt="">
                     </a>
                 </div>
 

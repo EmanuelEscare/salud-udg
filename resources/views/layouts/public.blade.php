@@ -27,7 +27,7 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-    <link rel="icon" href="{{ asset('paz-udg.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('cucei-logo.jpeg') }}" type="image/png">
     <!-- Scripts -->
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
     @livewireStyles
@@ -39,8 +39,10 @@
 
         <!-- Page Content -->
         <div class="py-3 px-5 bg-white shadow-lg">
-            <img class="lg:w-2/12 md:w-6/12 sm:w-full m-auto" src="{{ asset('index/Logo-cucea-colores-icono.png') }}"
+            <a href="/">
+                <img class="lg:w-2/12 md:w-6/12 sm:w-full m-auto" src="{{ asset('horizontal-logo.png') }}"
                 alt="">
+            </a>
         </div>
         <div class="m-5">
             @section('content')

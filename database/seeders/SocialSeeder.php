@@ -48,8 +48,8 @@ class SocialSeeder extends Seeder
 
         // ADMIN USER
         $admin = User::create([
-            'name' => 'Alfredo Orozco',
-            'email' => 'alfredo.orozco@cucea.udg.mx',
+            'name' => 'Emanuel Escareño',
+            'email' => 'coordinador@cucei.udg.mx',
             'password' => bcrypt('asd123'),
         ]);
 
@@ -58,7 +58,7 @@ class SocialSeeder extends Seeder
         // ADMIN USER
         $admin = User::create([
             'name' => 'Desarrollo',
-            'email' => 'desarrollo@cucea.udg.mx',
+            'email' => 'desarrollo@cucei.udg.mx',
             'password' => bcrypt('asd123'),
         ]);
 
