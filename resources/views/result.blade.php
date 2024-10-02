@@ -111,7 +111,7 @@
         <div>
             <div class="float-parent-element">
                 <span class="info-left">
-                    <p><b>Programa Integral de Cultura de Paz</b></p>
+                    <p><b>Programa Salud Mental Universitaria</b></p>
                 </span>
                 <span class="info-right">
                     <p style="padding-left: 40%;"><b>Folio</b>: {{ $test->patient->invoice }}</p>
