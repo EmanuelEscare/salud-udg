@@ -28,7 +28,7 @@ class AppointmentVerifyMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Confirmar cita - Universidad de Guadalajara | CUCEA')
+        return $this->subject('Confirmar cita - Universidad de Guadalajara | CUCEI')
                     ->view('emails.verify_appointment');
     }
 }
