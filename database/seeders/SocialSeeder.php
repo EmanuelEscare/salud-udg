@@ -49,7 +49,7 @@ class SocialSeeder extends Seeder
         // ADMIN USER
         $admin = User::create([
             'name' => 'Emanuel Escareño',
-            'email' => 'coordinador@cucei.udg.mx',
+            'email' => 'developer@cucei.udg.mx',
             'password' => bcrypt('asd123'),
         ]);
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Enums\Degree;
+use App\Enums\Semester;
 use App\Models\Patient;
 use App\Models\Test;
 use Dotenv\Store\File\Paths;
@@ -248,5 +250,22 @@ class Patients extends Component
     public function confirmDelete($id)
     {
         $this->confirming = $id;
+    }
+
+    /**
+     * @return array<string, string>
+     * Example: ['physics' => 'Licenciatura en Física', ...]
+     */
+    public function getDegreesProperty(): array
+    {
+        return Degree::toArray();
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function getSemesterProperty(): array
+    {
+        return Semester::toArray();
     }
 }

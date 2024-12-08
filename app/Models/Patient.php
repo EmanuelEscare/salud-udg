@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\Degree;
+use App\Enums\Semester;
 use App\Enums\YesNoEnum;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -57,6 +59,16 @@ class Patient extends Model
     public function getCareerAttribute($value)
     {
         return $value ? Crypt::decryptString($value) : null;
+    }
+
+    public function getCareerNameAttribute()
+    {
+        return Degree::toArray()[$this->career];
+    }
+
+    public function getSemesterTextAttribute()
+    {
+        return Semester::toArray()[$this->semester];
     }
     
     public function tests()
