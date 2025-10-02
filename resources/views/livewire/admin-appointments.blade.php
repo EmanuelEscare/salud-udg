@@ -40,7 +40,7 @@
                         <tr>
                             <td colspan="5" class="text-center">
                                 <div class="my-5">
-                                    No hay citas disponibles
+                                    No hay citas
                                 </div>
                             </td>
                         </tr>
