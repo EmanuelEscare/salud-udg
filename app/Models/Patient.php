@@ -68,7 +68,7 @@ class Patient extends Model
 
     public function getSemesterTextAttribute()
     {
-        return Semester::toArray()[$this->semester];
+        return $this->semester? Semester::toArray()[$this->semester] : 2;
     }
     
     public function tests()

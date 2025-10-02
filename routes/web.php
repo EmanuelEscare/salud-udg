@@ -56,6 +56,8 @@ Route::get('/test/{id}/{user_id}', function ($id, $user_id) {
     return view('test')->with(['id' => $id, 'user' => $user]);
 })->middleware(['auth', 'verified'])->name('test');
 
+Route::get('/diagnose', fn () => view('cbr'))->middleware(['auth', 'verified'])->name('diagnose');
+
 Route::get('/backup', [BackupController::class, 'backup'])->name('backup');
 
 Route::get('/backup_instructions', function () {

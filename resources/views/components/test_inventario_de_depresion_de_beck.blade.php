@@ -3,9 +3,6 @@
     @php
         $test->diagnostic = json_decode($test->diagnostic);
         
-        $psychicAnxietyItems = [1, 2, 3, 5, 6];
-        $somaticAnxietyItems = [4, 7, 8, 9, 10, 11];
-        
         $psychicAnxietyTotal = 0;
         $somaticAnxietyTotal = 0;
         $totalScore = 0;

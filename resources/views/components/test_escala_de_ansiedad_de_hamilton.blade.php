@@ -2,8 +2,8 @@
     <!-- Live as if you were to die tomorrow. Learn as if you were to live forever. - Mahatma Gandhi -->
     @php
         $test->diagnostic = json_decode($test->diagnostic);
-        $psychicAnxietyItems = [1, 2, 3, 5, 6];
-        $somaticAnxietyItems = [4, 7, 8, 9, 10, 11];
+        $psychicAnxietyItems = [1, 2, 3, 4, 5, 6, 14];
+        $somaticAnxietyItems = [7, 8, 9, 10, 11, 12, 13];
         
         $psychicAnxietyTotal = 0;
         $somaticAnxietyTotal = 0;
