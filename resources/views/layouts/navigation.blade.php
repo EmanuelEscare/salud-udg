@@ -48,6 +48,11 @@
                 </div>
                 @endif
 
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-decoration-none">
+                    <x-nav-link :href="route('diagnose')" :active="request()->routeIs('diagnose')">
+                        {{ __('Diagnóstico CBR') }}
+                    </x-nav-link>
+                </div>
 
             </div>
 
@@ -117,6 +122,10 @@
                 {{ __('Configuración') }}
             </x-responsive-nav-link>
             @endif
+
+            <x-responsive-nav-link class="text-decoration-none text-center" :href="route('diagnose')" :active="request()->routeIs('diagnose')">
+                {{ __('Diagnóstico CBR') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

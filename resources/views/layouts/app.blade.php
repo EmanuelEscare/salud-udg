@@ -10,6 +10,7 @@
             'users' => 'Usuarios',
             'patients' => 'Pacientes',
             'config' => 'Configuración',
+            'diagnose' => 'Diagnóstico',
             'backup_instructions' => 'Instrucciones',
             'test' => 'Prueba',
             'agendarCita' => 'Agendar cita',
