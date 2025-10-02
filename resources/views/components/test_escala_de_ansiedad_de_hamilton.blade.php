@@ -68,6 +68,10 @@
         .content-table{
             font-size: .8rem;
         }
+
+        .bg-orange-200 {
+            background-color: #ffcc80 !important;
+        }
     </style>
     <h3 class="font-weight-normal"><b>ESCALA DE ANSIEDAD DE HAMILTON</b></h3>
     <br>
@@ -187,7 +191,7 @@
                     </th>
                 @endif
                 @if ($test->diagnostic == 'Ansiedad Moderada')
-                    <th class="text-center border-dark text-dark bg-light">
+                    <th class="text-center border-dark text-dark bg-orange-200">
                         {{ $test->diagnostic }}
                     </th>
                 @endif

@@ -61,6 +61,10 @@
             white-space: pre-wrap;
             line-height: 0.8;
         }
+
+        .bg-orange-200 {
+            background-color: #ffcc80 !important;
+        }
     </style>
     <h3 class="font-weight-normal text-justify"><b>ESCALA DE ESTRÉS PERCIBIDO <br>(PSS, PERCEIVED STRESS SCALE)</b></h3>
     <br>
@@ -169,7 +173,7 @@
                     </th>
                 @endif
                 @if ($test->diagnostic == 'Nivel de estrés: Estrés percibido moderado.')
-                    <th class="text-center border-dark text-dark bg-light">
+                    <th class="text-center border-dark text-dark bg-orange-200">
                         {{ $test->diagnostic }}
                     </th>
                 @endif

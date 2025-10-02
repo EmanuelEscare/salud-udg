@@ -18,7 +18,7 @@
                         </tr>
                       </thead>
                       <tbody class="table-group-divider">
-                        @foreach ($appointments as $appointment)
+                        @forelse ($appointments as $appointment)
                         <tr>
                             <td>{{ $appointment->name }}</td>
                             <td>{{ $appointment->email }}</td>
@@ -36,7 +36,15 @@
                               </button>
                             </td>
                           </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <div class="my-5">
+                                    No hay citas disponibles
+                                </div>
+                            </td>
+                        </tr>
+                        @endforelse
                       </tbody>
                 </table>
               </div>
