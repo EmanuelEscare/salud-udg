@@ -36,4 +36,9 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => 'http://example.com/callback-url',
     ],
+
+    'psych_cbr' => [
+        'base' => env('PSYCH_CBR_BASE', 'http://localhost:8001/api1'),
+        'timeout' => env('PSYCH_CBR_TIMEOUT', 10),
+    ],
 ];

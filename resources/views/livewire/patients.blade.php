@@ -40,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    @foreach ($patients as $patient)
+                    @forelse ($patients as $patient)
                         <tr>
                             <th class="align-middle text-center" scope="row">
                                 <p>
@@ -138,7 +138,15 @@
 
                             </td>
                         </tr>
-                    @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="5">
+                               <div class="text-center m-5">
+                                No hay registros disponibles
+                               </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -184,9 +192,9 @@
                             <p><span class="fw-bold">Teléfono</span>: {{ $now_patient->phone }}</p>
                             <p><span class="fw-bold">Estado civil</span>: {{ $now_patient->civil_status }}</p>
 
-                            <p><span class="fw-bold">Carrera</span>: {{ $now_patient->career }}</p>
+                            <p><span class="fw-bold">Carrera</span>: {{ $now_patient->career_name }}</p>
                             <p><span class="fw-bold">Promedio</span>: {{ $now_patient->average }}</p>
-                            <p><span class="fw-bold">Semestre</span>: {{ $now_patient->semester }}</p>
+                            <p><span class="fw-bold">Semestre</span>: {{ $now_patient->semester_text }}</p>
                             <p><span class="fw-bold">¿Tienes depresión?</span>: {{ yesOrNo($now_patient->depression) }}</p>
                             <p><span class="fw-bold">¿Tienes ansiedad?</span>: {{ yesOrNo($now_patient->anxiety) }}</p>
                             <p><span class="fw-bold">¿Tienes ataques de pánico?</span>: {{ yesOrNo($now_patient->panic_attack) }}</p>
@@ -291,8 +299,12 @@
                             </select>
                             <br>
                             <p class="m-1">Carrera</p>
-                            <input type="text" wire:model="patient.career" class="form-control form-control-lg"
-                                id="career">
+                            <select wire:model="patient.career" class="form-control form-control-lg" id="career">
+                                <option value="">Seleccione una carrera</option>
+                                @foreach($this->degrees as $key => $label)
+                                    <option value="{{ $key }}">{{ $label }}</option>
+                                @endforeach
+                            </select>
                             <br>
                             <p class="m-1">Promedio</p>
                             <input type="number" wire:model="patient.average" class="form-control form-control-lg"
@@ -412,8 +424,12 @@
                                 </select>
                                 <br>
                                 <p class="m-1">Carrera</p>
-                                <input type="text" wire:model="patient.career"
-                                    class="form-control form-control-lg" id="career">
+                                    <select wire:model="patient.career" class="form-control form-control-lg" id="career">
+                                        <option value="">Seleccione una carrera</option>
+                                        @foreach($this->degrees as $key => $label)
+                                            <option value="{{ $key }}">{{ $label }}</option>
+                                        @endforeach
+                                    </select>
                                 <br>
                                 <p class="m-1">Promedio</p>
                                 <input type="number" wire:model="patient.average"
@@ -483,7 +499,6 @@
         </div>
     </div>
 
-    {{-- Notification --}}
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="notification" class="toast align-items-center text-bg-success border-0" role="alert"
             aria-live="assertive" aria-atomic="true">

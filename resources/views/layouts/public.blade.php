@@ -13,7 +13,7 @@
             'backup_instructions' => 'Instrucciones',
             'test' => 'Prueba',
             'agendarCita' => 'Agendar cita',
-            '' => 'Cultura de la Paz',
+            '' => 'Salud Mental Universitaria',
         ];
 
         $route = Route::currentRouteName();

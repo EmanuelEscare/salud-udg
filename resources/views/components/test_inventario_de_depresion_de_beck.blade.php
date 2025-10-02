@@ -3,9 +3,6 @@
     @php
         $test->diagnostic = json_decode($test->diagnostic);
         
-        $psychicAnxietyItems = [1, 2, 3, 5, 6];
-        $somaticAnxietyItems = [4, 7, 8, 9, 10, 11];
-        
         $psychicAnxietyTotal = 0;
         $somaticAnxietyTotal = 0;
         $totalScore = 0;
@@ -51,6 +48,10 @@
             padding-top: 1rem;
             white-space: pre-wrap;
             line-height: 0.8;
+        }
+
+        .bg-orange-200 {
+            background-color: #ffcc80 !important;
         }
     </style>
     <h3 class="font-weight-normal"><b>INVENTARIO DE DEPRESIÓN DE BECK (BDI-II)</b></h3>
@@ -149,7 +150,7 @@
                     </th>
                 @endif
                 @if ($test->diagnostic == 'Depresión leve')
-                    <th class="text-center border-dark text-dark bg-light">
+                    <th class="text-center border-dark text-dark bg-orange-200">
                         {{ $test->diagnostic }}
                     </th>
                 @endif
