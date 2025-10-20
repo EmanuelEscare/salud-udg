@@ -24,12 +24,15 @@ class DiagnoseForm extends Component
 
     protected $updatesQueryString = ['query'];
 
+    public $symptoms = [];
+
     public function mount()
     {
-        $this->cargarIndices();
+        $this->loadIndexes();
+        $this->getSymtoms();
     }
 
-    protected function cargarIndices(): void
+    protected function loadIndexes(): void
     {
         try {
             $base = config('services.psych_cbr.base');
@@ -54,6 +57,15 @@ class DiagnoseForm extends Component
         } catch (\Throwable $e) {
             // no rompemos el flujo si falla, solo seguimos sin índices
         }
+    }
+
+    public function getSymtoms()
+    {
+        $base = config('services.psych_cbr.base');
+        $timeout = config('services.psych_cbr.timeout');
+
+        $request = Http::timeout($timeout)->baseUrl($base)->get('/v1/symptoms');
+        $this->symptoms = $request->json();
     }
 
     public function updatedQuery()
@@ -141,7 +153,7 @@ class DiagnoseForm extends Component
                     $this->errorMsg = "No hubo propuestas. Ajusta los síntomas e intenta de nuevo.";
                 }
             } else {
-                $this->errorMsg = "Diagnóstico falló (" . $resp->status() . "): " . $resp->body();
+                $this->errorMsg = "Sugerencia falló (" . $resp->status() . "): " . $resp->body();
             }
         } catch (\Throwable $e) {
             $this->errorMsg = "Error de red: " . $e->getMessage();

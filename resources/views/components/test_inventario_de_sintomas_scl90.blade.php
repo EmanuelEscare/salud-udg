@@ -185,14 +185,14 @@ responder el SCL-90. Es aplicable a personas entre 13 y 65 años de edad.
     <br>
     <br>
     <br>
-    <h5><b>Diagnóstico</b></h5>
+    <h5><b>Sugerencia</b></h5>
     <br>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Índice</th>
                 <th>Puntaje</th>
-                <th>Diagnóstico</th>
+                <th>Sugerencia</th>
             </tr>
         </thead>
         <tbody>

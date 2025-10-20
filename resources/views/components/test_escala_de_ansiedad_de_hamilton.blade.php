@@ -180,7 +180,7 @@
         </tbody>
     </table>
     <br>
-    <h5><b>Diagnóstico</b></h5>
+    <h5><b>Sugerencia</b></h5>
     <br>
     <table class="table table-bordered">
         <thead>
@@ -211,28 +211,28 @@
             <tr>
                 @if ($test->diagnostic == 'Ansiedad Leve')
                     <td class="border-dark">
-                        <p class="">Este diagnóstico indica que la ansiedad del paciente es leve y generalmente
+                        <p class="">Este Sugerencia indica que la ansiedad del paciente es leve y generalmente
                             manejable sin necesidad de tratamiento intensivo.</p>
                     </td>
                 @endif
 
                 @if ($test->diagnostic == 'Ansiedad Moderada')
                     <td class="border-dark">
-                        <p class="">Este diagnóstico indica que la ansiedad del paciente es de intensidad
+                        <p class="">Este Sugerencia indica que la ansiedad del paciente es de intensidad
                             moderada y puede requerir intervención terapéutica o tratamiento.</p>
                     </td>
                 @endif
 
                 @if ($test->diagnostic == 'Ansiedad Moderadamente Severa')
                     <td class="border-dark">
-                        <p class="">Este diagnóstico indica que la ansiedad del paciente es moderadamente severa
+                        <p class="">Este Sugerencia indica que la ansiedad del paciente es moderadamente severa
                             y puede requerir tratamiento urgente para su manejo.</p>
                     </td>
                 @endif
 
                 @if ($test->diagnostic == 'Ansiedad Severa')
                     <td class="border-dark">
-                        <p class="">Este diagnóstico indica que la ansiedad del paciente es severa y puede
+                        <p class="">Este Sugerencia indica que la ansiedad del paciente es severa y puede
                             requerir atención inmediata y posiblemente hospitalización o tratamiento intensivo.</p>
                     </td>
                 @endif

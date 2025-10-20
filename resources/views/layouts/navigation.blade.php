@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow-sm position-fixed w-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow-sm position-fixed w-100 z-40">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -50,7 +50,7 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-decoration-none">
                     <x-nav-link :href="route('diagnose')" :active="request()->routeIs('diagnose')">
-                        {{ __('Diagnóstico CBR') }}
+                        {{ __('Prueba CBR') }}
                     </x-nav-link>
                 </div>
 
@@ -124,7 +124,7 @@
             @endif
 
             <x-responsive-nav-link class="text-decoration-none text-center" :href="route('diagnose')" :active="request()->routeIs('diagnose')">
-                {{ __('Diagnóstico CBR') }}
+                {{ __('Prueba CBR') }}
             </x-responsive-nav-link>
         </div>
 

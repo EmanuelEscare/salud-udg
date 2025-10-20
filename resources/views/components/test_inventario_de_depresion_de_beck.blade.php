@@ -139,7 +139,7 @@
         </tbody>
     </table>
     <br>
-    <h5><b>Diagnóstico</b></h5>
+    <h5><b>Sugerencia</b></h5>
     <br>
     <table class="table table-bordered">
         <thead>
