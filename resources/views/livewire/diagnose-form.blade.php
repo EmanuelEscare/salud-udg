@@ -7,13 +7,19 @@
             
                 {{-- Search symptoms --}}
                 <div class="position-relative">
-                    <input type="text"
+                    <div wire:ignore>
+                        <select class="select-symptom form-select form-select-lg" style="width: 100%  height: 44px;" data-placeholder="Busca síntomas ...">
+                        </select>
+                    </div>
+
+                    {{-- LEGACY --}}
+                    {{-- <input type="text"
                            class="form-control"
                            placeholder="Busca síntomas (ej. insomnio)…"
-                           wire:model.debounce.400ms="query" />
+                           wire:model.debounce.400ms="query" /> --}}
             
                     {{-- Suggestions (dropdown) --}}
-                    @if(!empty($suggestions))
+                    {{-- @if(!empty($suggestions))
                         <ul class="list-group position-absolute w-100 mt-1 shadow rounded-2"
                             style="max-height: 280px; overflow:auto; z-index:1080;">
                             @foreach($suggestions as $s)
@@ -28,7 +34,7 @@
                                 </li>
                             @endforeach
                         </ul>
-                    @endif
+                    @endif --}}
                 </div>
             
                 {{-- Selects --}}
@@ -186,4 +192,45 @@
         </div>
     </div>
 
+    @push('scripts')
+    <script type="module">
+        document.addEventListener("DOMContentLoaded", () => {
+            $(document).ready(function() {
+                $('.select-symptom').select2({
+                    theme: 'bootstrap-5',
+                    ajax: {
+                        delay: 250,
+                        transport: function (params, success, failure) {
+                            const q = (params.data && params.data.q) ? params.data.q : '';
+
+                            @this.call('loadSymptoms', q)
+                                .then(function (data) { success(data); })
+                                .catch(function (e) { failure(e); });
+
+                            return { abort: function () {} };
+                        },
+                        processResults: function (data) {
+                            return data;
+                        }
+                    }
+                });
+                
+                // SELECT SYMPTOM
+                $('.select-symptom').on('change', function () {
+                    const val = $(this).val();
+                    if (val) {
+                        @this.call('addSymptom', val);
+                        $('.select-symptom').val(null).trigger('change');
+                    }
+                });
+
+                // CLEAR SELECT SYMPTOM
+                // Livewire.on('addSymptom', function () {
+                //     alert('clear');
+                //     $('.select-symptom').val(null).trigger('change');
+                // });
+        });
+    });
+    </script>
+    @endpush
 </div>

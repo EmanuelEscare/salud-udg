@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 class DiagnoseForm extends Component
 {
     public $query = '';
-    public $suggestions = [];
+    // public $suggestions = [];
     /** @var array<int, array{code:string,name:string,category_code:string}> */
     public $selectedSymptoms = []; // ahora guardamos code + name + category_code
     public $weights = [];          // opcional: pesos por síntoma (por ahora default 1.0)
@@ -61,42 +61,22 @@ class DiagnoseForm extends Component
 
     public function getSymtoms()
     {
-        $base = config('services.psych_cbr.base');
-        $timeout = config('services.psych_cbr.timeout');
-
-        $request = Http::timeout($timeout)->baseUrl($base)->get('/v1/symptoms');
-        $this->symptoms = $request->json();
-    }
-
-    public function updatedQuery()
-    {
-        $this->suggestions = [];
-        $this->errorMsg = null;
-
-        if (mb_strlen($this->query) < 2) return;
-
         try {
-            $resp = Http::timeout(config('services.psych_cbr.timeout'))
-                ->baseUrl(config('services.psych_cbr.base'))
-                ->get('/v1/symptoms', ['q' => $this->query]);
-
-            if ($resp->successful()) {
-                $this->suggestions = $resp->json(); // trae code, name, category_code
-            } else {
-                $this->errorMsg = "No se pudieron cargar síntomas (" . $resp->status() . ")";
-            }
-        } catch (\Throwable $e) {
-            $this->errorMsg = "Error de red: " . $e->getMessage();
+            $base = config('services.psych_cbr.base');
+            $timeout = config('services.psych_cbr.timeout');
+    
+            $request = Http::timeout($timeout)->baseUrl($base)->get('/v1/symptoms');
+            $this->symptoms = $request->json();
+        } catch (\Throwable $th) {
+            $this->symptoms = [];
         }
     }
 
     public function addSymptom(string $code)
     {
-        // buscar el síntoma en suggestions
-        $found = collect($this->suggestions)->firstWhere('code', $code);
+        $found = collect($this->symptoms)->firstWhere('code', $code);
         if (!$found) return;
 
-        // evitar duplicados
         $exists = collect($this->selectedSymptoms)->contains(fn ($s) => $s['code'] === $code);
         if (!$exists) {
             $this->selectedSymptoms[] = [
@@ -106,10 +86,6 @@ class DiagnoseForm extends Component
             ];
             $this->weights[$found['code']] = $this->weights[$found['code']] ?? 1.0;
         }
-
-        // limpiar buscador
-        $this->query = '';
-        $this->suggestions = [];
     }
 
     public function removeSymptom(string $code)
@@ -215,4 +191,48 @@ class DiagnoseForm extends Component
     {
         return view('livewire.diagnose-form');
     }
+
+    public function loadSymptoms($search = null)
+    {
+        $data = collect($this->symptoms);
+
+        $data = $data->filter(function ($item) use ($search) {
+            if (!$search) return true;
+            $searchLower = mb_strtolower($search);
+            return mb_stripos($item['name'], $searchLower) !== false ||
+                   mb_stripos($item['code'], $searchLower) !== false;
+        });
+
+        $items = $data->map(fn ($p) => [
+            'id'   => $p['code'],
+            'text' => "[{$p['code']}] {$p['name']}",
+        ])->values();
+    
+        return [
+            'results'    => $items,
+            'pagination' => ['more' => false],
+        ];
+    }
+
+    // public function updatedQuery()
+    // {
+    //     $this->suggestions = [];
+    //     $this->errorMsg = null;
+
+    //     if (mb_strlen($this->query) < 2) return;
+
+    //     try {
+    //         $resp = Http::timeout(config('services.psych_cbr.timeout'))
+    //             ->baseUrl(config('services.psych_cbr.base'))
+    //             ->get('/v1/symptoms', ['q' => $this->query]);
+
+    //         if ($resp->successful()) {
+    //             $this->suggestions = $resp->json(); // trae code, name, category_code
+    //         } else {
+    //             $this->errorMsg = "No se pudieron cargar síntomas (" . $resp->status() . ")";
+    //         }
+    //     } catch (\Throwable $e) {
+    //         $this->errorMsg = "Error de red: " . $e->getMessage();
+    //     }
+    // }
 }

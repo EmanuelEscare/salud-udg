@@ -25,7 +25,6 @@
     @else
         <title>Cultura de Paz</title>
     @endif
-
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
     <link rel="icon" href="{{ asset('cucei-logo.jpeg') }}" type="image/png">
@@ -69,8 +68,6 @@
     </div>
     @livewireScripts
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script>
         window.addEventListener("DOMContentLoaded", function() {
             const loader = document.querySelector(".loader");
@@ -95,6 +92,7 @@
             });
         });
     </script>
-</body>
 
+    @stack('scripts')
+</body>
 </html>
