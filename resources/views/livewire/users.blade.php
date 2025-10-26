@@ -216,12 +216,16 @@
     </div>
 
     <script>
+
+    </script>
+
+    <script type="module">
+        document.addEventListener("DOMContentLoaded", () => {
+
         window.addEventListener('notification', event => {
             $("#notification").toast('show');
         })
-    </script>
 
-    <script>
         window.addEventListener('openModal', event => {
             $("#openModal").modal('show');
         })
@@ -237,5 +241,6 @@
         window.addEventListener('closeModalUpdate', event => {
             $("#openModalUpdate").modal('hide');
         })
+    });
     </script>
 </div>

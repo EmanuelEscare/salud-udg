@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class DiagnoseForm extends Component
 {
+    public $mesage_notification;
     public $query = '';
     // public $suggestions = [];
     /** @var array<int, array{code:string,name:string,category_code:string}> */
@@ -17,6 +18,7 @@ class DiagnoseForm extends Component
     public $errorMsg = null;
     public $successMsg = null;
     public $notes = '';            // notas para POST /v1/cases
+    public $retainCaseSelectedIdx = null; // índice de propuesta seleccionada para retener
 
     /** índices auxiliares */
     public $solutionsByName = [];  // "nombre" => "code" (para convertir al guardar)
@@ -28,6 +30,7 @@ class DiagnoseForm extends Component
 
     public function mount()
     {
+        $this->retainCaseSelectedIdx = null;
         $this->loadIndexes();
         $this->getSymtoms();
     }
@@ -136,6 +139,11 @@ class DiagnoseForm extends Component
         }
     }
 
+    public function openModalRetainCase($idx)
+    {
+        $this->retainCaseSelectedIdx = $idx;
+    }
+
     public function retainCase(int $idx)
     {
         $this->errorMsg = null;
@@ -179,6 +187,10 @@ class DiagnoseForm extends Component
                 $this->successMsg = "Caso guardado (ID ".$resp->json('id').") ✅";
                 // si quieres, limpiar notas:
                 // $this->notes = '';
+
+                $this->mesage_notification = "Caso guardado correctamente.";
+                $this->dispatchBrowserEvent('notification');
+                $this->dispatchBrowserEvent('closeRetainCaseModal');
             } else {
                 $this->errorMsg = "No se pudo guardar el caso (" . $resp->status() . "): " . $resp->body();
             }
