@@ -151,7 +151,11 @@
                                 <div class="col-md-6">
                                     <div class="small text-muted mb-1">Faltantes</div>
                                     <div class="bg-light p-2 rounded-2 small">
-                                        {{ implode(', ', $p['missing_from_query'] ?? []) ?: '—' }}
+                                        @foreach ($p['missing_from_query'] as $code)
+                                            <b>{{$code}}</b>
+                                            {{$this->symptoms->where('code', $code)->first()['name'] ?? ''}}                                        
+                                            <br>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
