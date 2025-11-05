@@ -144,7 +144,6 @@
                                         @foreach ($p['matched_symptoms'] as $code)
                                             <b>{{$code}}</b>
                                             {{$this->symptoms->where('code', $code)->first()['name'] ?? ''}}
-                                            <hr>                                 
                                             <br>
                                         @endforeach
                                     </div>
@@ -155,7 +154,6 @@
                                         @foreach ($p['missing_from_query'] as $code)
                                             <b>{{$code}}</b>
                                             {{$this->symptoms->where('code', $code)->first()['name'] ?? ''}}
-                                            <hr>                                       
                                             <br>
                                         @endforeach
                                     </div>
