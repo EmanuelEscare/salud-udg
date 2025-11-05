@@ -134,7 +134,7 @@ class Users extends Component
             $user = new User;
             $user->name = $this->user['nombre'];
             $user->email = $this->user['email'];
-            $user->password = $this->user['contraseña'];
+            $user->password = bcrypt($this->user['contraseña']);
 
             $user->save();
             $user->assignRole($this->rol);
@@ -174,7 +174,7 @@ class Users extends Component
         try {
             $this->user_model->name = $this->user['nombre'];
             $this->user_model->email = $this->user['email'];
-            $this->user_model->password = $this->user['contraseña'];
+            $this->user_model->password = bcrypt($this->user['contraseña']);
 
             $this->user_model->save();
 
