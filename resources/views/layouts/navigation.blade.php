@@ -50,7 +50,7 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-decoration-none">
                     <x-nav-link :href="route('diagnose')" :active="request()->routeIs('diagnose')">
-                        {{ __('Prueba CBR') }}
+                        <i class="fas fa-brain m-1 me-2"></i> {{ __('CBR') }}
                     </x-nav-link>
                 </div>
 
@@ -124,7 +124,7 @@
             @endif
 
             <x-responsive-nav-link class="text-decoration-none text-center" :href="route('diagnose')" :active="request()->routeIs('diagnose')">
-                {{ __('Prueba CBR') }}
+                <i class="fas fa-brain m-1 me-2"></i> {{ __('CBR') }}
             </x-responsive-nav-link>
         </div>
 

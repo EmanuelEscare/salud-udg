@@ -143,7 +143,8 @@
                                     <div class="bg-light p-2 rounded-2 small">
                                         @foreach ($p['matched_symptoms'] as $code)
                                             <b>{{$code}}</b>
-                                            {{$this->symptoms->where('code', $code)->first()['name'] ?? ''}}                                        
+                                            {{$this->symptoms->where('code', $code)->first()['name'] ?? ''}}
+                                            <hr>                                 
                                             <br>
                                         @endforeach
                                     </div>
@@ -153,7 +154,8 @@
                                     <div class="bg-light p-2 rounded-2 small">
                                         @foreach ($p['missing_from_query'] as $code)
                                             <b>{{$code}}</b>
-                                            {{$this->symptoms->where('code', $code)->first()['name'] ?? ''}}                                        
+                                            {{$this->symptoms->where('code', $code)->first()['name'] ?? ''}}
+                                            <hr>                                       
                                             <br>
                                         @endforeach
                                     </div>
