@@ -141,7 +141,11 @@
                                 <div class="col-md-6">
                                     <div class="small text-muted mb-1">Coinciden</div>
                                     <div class="bg-light p-2 rounded-2 small">
-                                        {{ implode(', ', $p['matched_symptoms'] ?? []) ?: '—' }}
+                                        @foreach ($p['matched_symptoms'] as $code)
+                                            <b>{{$code}}</b>
+                                            {{$this->symptoms->where('code', $code)->first()['name'] ?? ''}}                                        
+                                            <br>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="col-md-6">

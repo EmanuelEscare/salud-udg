@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Cases;
+use App\Models\Symptom;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
 
@@ -26,13 +28,30 @@ class DiagnoseForm extends Component
 
     protected $updatesQueryString = ['query'];
 
-    public $symptoms = [];
+    public $symptoms;
 
     public function mount()
     {
         $this->retainCaseSelectedIdx = null;
         $this->loadIndexes();
         $this->getSymtoms();
+        // $this->testApi();
+    }
+
+    protected function testApi(): void
+    {
+        try {
+            $base = config('services.psych_cbr.base');
+            $timeout = config('services.psych_cbr.timeout');
+
+            $resp = Http::timeout($timeout)->baseUrl($base)->get('/v1/solutions');
+            dd($resp->body());
+            if (!$resp->successful()) {
+                $this->errorMsg = "Error de conexión con el servicio CBR (" . $resp->status() . ")";
+            }
+        } catch (\Throwable $e) {
+            $this->errorMsg = "Error de conexión con el servicio CBR: " . $e->getMessage();
+        }
     }
 
     protected function loadIndexes(): void
@@ -69,7 +88,7 @@ class DiagnoseForm extends Component
             $timeout = config('services.psych_cbr.timeout');
     
             $request = Http::timeout($timeout)->baseUrl($base)->get('/v1/symptoms');
-            $this->symptoms = $request->json();
+            $this->symptoms = collect($request->json());
         } catch (\Throwable $th) {
             $this->symptoms = [];
         }
@@ -77,7 +96,7 @@ class DiagnoseForm extends Component
 
     public function addSymptom(string $code)
     {
-        $found = collect($this->symptoms)->firstWhere('code', $code);
+        $found = $this->symptoms->firstWhere('code', $code);
         if (!$found) return;
 
         $exists = collect($this->selectedSymptoms)->contains(fn ($s) => $s['code'] === $code);
@@ -206,7 +225,7 @@ class DiagnoseForm extends Component
 
     public function loadSymptoms($search = null)
     {
-        $data = collect($this->symptoms);
+        $data = $this->symptoms;
 
         $data = $data->filter(function ($item) use ($search) {
             if (!$search) return true;
